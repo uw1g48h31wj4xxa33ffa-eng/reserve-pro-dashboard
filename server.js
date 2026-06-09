@@ -2,7 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase-key.json');
+let serviceAccount;
+try {
+    serviceAccount = require('./firebase-key.json');
+} catch (e) {
+    serviceAccount = { project_id: "test-mock" }; // CIテスト用のダミー
+}
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
@@ -95,6 +100,20 @@ async function saveHolidaysData(data) {
     }
 }
 
+// 監査ログ（オペレーション履歴）を記録する
+async function saveAuditLog(username, action, details) {
+    try {
+        await db.collection('audit_logs').add({
+            username: username || 'system',
+            action: action,
+            details: details,
+            timestamp: admin.firestore.FieldValue.serverTimestamp()
+        });
+    } catch (e) {
+        console.error("Error writing audit log:", e);
+    }
+}
+
 // API: 全件取得 (全権限アクセス可能)
 app.get('/api/holidays', authenticateToken, async (req, res) => {
     const data = await getHolidaysData();
@@ -116,11 +135,13 @@ app.post('/api/holidays', authenticateToken, requireAdmin, async (req, res) => {
     if (action === 'addHoliday') {
         data.holidays[date] = { memo };
         await saveHolidaysData(data);
+        await saveAuditLog(req.user.username, 'ADD_HOLIDAY', { date, memo });
         res.json({ success: true });
     } else if (action === 'deleteHoliday') {
         if (data.holidays[date]) {
             delete data.holidays[date];
             await saveHolidaysData(data);
+            await saveAuditLog(req.user.username, 'DELETE_HOLIDAY', { date });
         }
         res.json({ success: true });
     } else {
@@ -143,11 +164,13 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
         if (!data.blockedSlots.includes(slotKey)) {
             data.blockedSlots.push(slotKey);
             await saveHolidaysData(data);
+            await saveAuditLog(req.user.username, 'ADD_BLOCKED_SLOT', { slotKey });
         }
         res.json({ success: true });
     } else if (action === 'delete') {
         data.blockedSlots = data.blockedSlots.filter(s => s !== slotKey);
         await saveHolidaysData(data);
+        await saveAuditLog(req.user.username, 'DELETE_BLOCKED_SLOT', { slotKey });
         res.json({ success: true });
     } else {
         res.status(400).json({ error: "Unknown action" });
@@ -178,11 +201,16 @@ cron.schedule('0 0 * * *', async () => {
     timezone: "Asia/Tokyo"
 });
 
-app.listen(PORT, () => {
-    console.log(`=========================================`);
-    console.log(` 予約システム用 ローカルサーバー 稼働中...`);
-    console.log(` ポート: ${PORT}`);
-    console.log(` データベース: Firebase Firestore`);
-    console.log(` 終了する場合はこのウィンドウを閉じるか Ctrl+C を押してください`);
-    console.log(`=========================================`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`=========================================`);
+        console.log(` 予約システム用 ローカルサーバー 稼働中...`);
+        console.log(` ポート: ${PORT}`);
+        console.log(` データベース: Firebase Firestore`);
+        console.log(` 終了する場合はこのウィンドウを閉じるか Ctrl+C を押してください`);
+        console.log(`=========================================`);
+    });
+}
+
+// テスト用にappをエクスポート
+module.exports = app;

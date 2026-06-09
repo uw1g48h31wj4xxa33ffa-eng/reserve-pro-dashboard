@@ -4,7 +4,8 @@
   "description": "Local server for holiday management",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest tests/"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,5 +18,9 @@
     "jsonwebtoken": "^9.0.3",
     "node-cron": "^4.2.1",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }
