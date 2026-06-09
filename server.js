@@ -114,8 +114,8 @@ async function saveAuditLog(username, action, details) {
     }
 }
 
-// API: 全件取得 (全権限アクセス可能)
-app.get('/api/holidays', authenticateToken, async (req, res) => {
+// API: 全件取得 (全権限・一般公開アクセス可能)
+app.get('/api/holidays', async (req, res) => {
     const data = await getHolidaysData();
     res.json(data);
 });
