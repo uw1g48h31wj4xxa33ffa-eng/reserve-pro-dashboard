@@ -129,7 +129,7 @@
 
         .desc-text {
             text-align: center;
-            color: var(--text-light);
+            color: #718096;
             margin-bottom: 25px;
             font-size: 0.95rem;
         }
@@ -629,6 +629,21 @@
         }
     
 /* --- CHANGE SPECIFIC --- */
+
+        .policy-card:hover {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+
+        .policy-card.active {
+            border-color: #3a7bd5;
+            background: rgba(58, 123, 213, 0.1);
+        }
+
+        .policy-card.active .policy-main-text {
+            color: #3a7bd5;
+        }
+
 .app-container {
             width: 100%;
             max-width: 480px;
@@ -663,7 +678,7 @@
 
 .policy-card {
             background: #fff;
-            border: 2px solid var(--border);
+            border: 2px solid #e2e8f0;
             border-radius: 20px;
             padding: 24px;
             display: flex;
@@ -672,7 +687,7 @@
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             width: 100%;
         }
