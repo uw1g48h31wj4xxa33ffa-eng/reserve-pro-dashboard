@@ -156,24 +156,27 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
 
     if (!slotKey) return res.status(400).json({ error: "SlotKey is required" });
 
-    const data = await getHolidaysData();
-    if (!data.holidays) data.holidays = {};
-    if (!data.blockedSlots) data.blockedSlots = [];
-
-    if (action === 'add') {
-        if (!data.blockedSlots.includes(slotKey)) {
-            data.blockedSlots.push(slotKey);
-            await saveHolidaysData(data);
+    try {
+        const docRef = db.collection('settings').doc('holidaysData');
+        
+        if (action === 'add') {
+            await docRef.set({
+                blockedSlots: admin.firestore.FieldValue.arrayUnion(slotKey)
+            }, { merge: true });
             await saveAuditLog(req.user.username, 'ADD_BLOCKED_SLOT', { slotKey });
+            res.json({ success: true });
+        } else if (action === 'delete') {
+            await docRef.set({
+                blockedSlots: admin.firestore.FieldValue.arrayRemove(slotKey)
+            }, { merge: true });
+            await saveAuditLog(req.user.username, 'DELETE_BLOCKED_SLOT', { slotKey });
+            res.json({ success: true });
+        } else {
+            res.status(400).json({ error: "Unknown action" });
         }
-        res.json({ success: true });
-    } else if (action === 'delete') {
-        data.blockedSlots = data.blockedSlots.filter(s => s !== slotKey);
-        await saveHolidaysData(data);
-        await saveAuditLog(req.user.username, 'DELETE_BLOCKED_SLOT', { slotKey });
-        res.json({ success: true });
-    } else {
-        res.status(400).json({ error: "Unknown action" });
+    } catch (error) {
+        console.error("Error updating blocked slots:", error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 
