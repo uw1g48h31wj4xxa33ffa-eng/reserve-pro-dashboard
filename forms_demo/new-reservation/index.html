@@ -1405,6 +1405,12 @@
                     selectTimeSlotButton(val);
                 }
             }
+            setTimeout(() => {
+                const minGroup = document.getElementById('minute-group');
+                if (minGroup && minGroup.style.display !== 'none') {
+                    minGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
         }
 
 
@@ -1424,6 +1430,12 @@
                 confirmArea.style.display = "block";
                 currentSelectedTimeSlot = "";
                 updateTimeSlotActiveState();
+                setTimeout(() => {
+                    const hourContainer = document.getElementById('hour-buttons-container');
+                    if (hourContainer) {
+                        hourContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 100);
             } else {
                 detailedGroup.style.display = "none";
                 confirmArea.style.display = "block";
