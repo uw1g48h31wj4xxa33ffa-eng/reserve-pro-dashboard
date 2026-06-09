@@ -128,8 +128,8 @@
   <div id="login-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
     <div style="background:var(--surface); padding:32px; border-radius:16px; width:100%; max-width:400px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
       <h2 style="margin-bottom:24px; color:var(--text-main); font-size:1.5rem; text-align:center;">🔒 Reserve Pro Login</h2>
-      <input type="text" id="login-user" placeholder="ユーザー名" style="width:100%; padding:12px; margin-bottom:16px; background:#f9fafb; border:1px solid #d1d5db; border-radius:8px; color:#111827; font-size:1rem;">
-      <input type="password" id="login-pass" placeholder="パスワード" style="width:100%; padding:12px; margin-bottom:24px; background:#f9fafb; border:1px solid #d1d5db; border-radius:8px; color:#111827; font-size:1rem; letter-spacing:2px;">
+      <input type="text" id="login-user" placeholder="ユーザー名" autocomplete="off" style="width:100%; padding:12px; margin-bottom:16px; background:#f9fafb; border:1px solid #d1d5db; border-radius:8px; color:#111827; font-size:1rem;">
+      <input type="password" id="login-pass" placeholder="パスワード" autocomplete="new-password" style="width:100%; padding:12px; margin-bottom:24px; background:#f9fafb; border:1px solid #d1d5db; border-radius:8px; color:#111827; font-size:1rem; letter-spacing:2px;">
       <button onclick="handleLogin()" class="btn-primary" style="width:100%; padding:12px; font-size:1.1rem;">ログイン</button>
     </div>
   </div>

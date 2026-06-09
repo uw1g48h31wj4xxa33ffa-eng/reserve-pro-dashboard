@@ -66,6 +66,8 @@ function logout() {
 }
 
 function showLoginModal() {
+    document.getElementById('login-user').value = '';
+    document.getElementById('login-pass').value = '';
     document.getElementById('login-modal').style.display = 'flex';
 }
 
