@@ -4,7 +4,7 @@
 
 // ── CONFIGURATION ──
 const CONFIG = {
-    GAS_URL: "http://localhost:3001/api/holidays", // ローカルサーバー連携用URL
+    GAS_URL: "/api/holidays", // デプロイ・ローカル両対応の相対パス
     DOW_JA: ["日", "月", "火", "水", "木", "金", "土"]
 };
 
@@ -41,7 +41,7 @@ async function handleLogin() {
     const u = document.getElementById('login-user').value;
     const p = document.getElementById('login-pass').value;
     try {
-        const res = await fetch('http://localhost:3001/api/login', {
+        const res = await fetch('/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: u, password: p })

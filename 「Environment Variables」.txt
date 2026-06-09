@@ -1,0 +1,8 @@
+「Environment Variables」の部分がまだ空欄になっていますので、以下のように文字を入力してください。
+
+左側の入力欄（NAME_OF_VARIABLE と薄く書かれている所）に、 JWT_SECRET と入力します。（すべて大文字です）
+右側の入力欄（value と薄く書かれている所）に、reserve-pro-secret-2026.june 適当な文字列を入力します（これが暗号化の鍵になります）
+
+
+
+
