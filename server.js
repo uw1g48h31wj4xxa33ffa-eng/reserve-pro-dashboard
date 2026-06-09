@@ -12,6 +12,7 @@ const db = admin.firestore();
 const path = require('path');
 const helmet = require('helmet');
 const jwt = require('jsonwebtoken');
+const cron = require('node-cron');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-2026';
 
@@ -151,6 +152,30 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
     } else {
         res.status(400).json({ error: "Unknown action" });
     }
+});
+
+// 深夜0時にデモ用データにリセットする定期実行タスク (毎日00:00 JST)
+cron.schedule('0 0 * * *', async () => {
+    console.log('[Cron] 深夜0時: データベースを初期状態（デモ用データ）にリセットします');
+    const demoData = {
+        holidays: {
+            "2026-06-15": { memo: "定期健診" },
+            "2026-06-25": { memo: "学会出席" }
+        },
+        blockedSlots: [
+            "2026-06-20_10:00",
+            "2026-06-20_10:15"
+        ]
+    };
+    try {
+        await saveHolidaysData(demoData);
+        console.log('[Cron] リセット完了');
+    } catch (e) {
+        console.error('[Cron] リセット失敗:', e);
+    }
+}, {
+    scheduled: true,
+    timezone: "Asia/Tokyo"
 });
 
 app.listen(PORT, () => {
