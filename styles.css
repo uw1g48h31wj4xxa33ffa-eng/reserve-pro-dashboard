@@ -823,3 +823,93 @@ header {
 .time-matrix td:hover { border-color: var(--primary); background: var(--surface-lt); }
 .time-matrix td.blocked { background: var(--rose); color: white; border-color: var(--rose); }
 .time-matrix td.holiday-mode { opacity: 0.4; pointer-events: none; text-decoration: line-through; }
+
+/* --- MOBILE RESPONSIVE --- */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-main);
+  padding: 8px;
+  margin-right: 8px;
+}
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 90;
+  backdrop-filter: blur(2px);
+}
+.mobile-overlay.active {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+  
+  .app-container {
+    flex-direction: column;
+  }
+  
+  aside {
+    position: fixed;
+    top: 0; left: -300px;
+    height: 100vh;
+    width: 280px;
+    z-index: 100;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.1);
+  }
+  aside.open {
+    left: 0;
+  }
+  
+  header {
+    height: 60px;
+    padding: 0 16px;
+    justify-content: flex-start;
+  }
+  .page-title {
+    font-size: 1.1rem;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .header-actions button, .stat-pill {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  .stat-pill span#sync-status {
+    display: none; /* スマホでは丸いインジケーターのみ表示 */
+  }
+  
+  .content-body {
+    padding: 16px;
+  }
+  
+  .calendar-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 12px;
+  }
+  .stat-value {
+    font-size: 1.6rem;
+  }
+  .search-bar {
+    width: 100%;
+  }
+}

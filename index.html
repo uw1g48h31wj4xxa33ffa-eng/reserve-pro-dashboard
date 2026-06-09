@@ -15,8 +15,11 @@
 <body>
 
   <div class="app-container">
+    <!-- スマホ用オーバーレイ -->
+    <div class="mobile-overlay" id="mobile-overlay" onclick="toggleMenu()"></div>
+    
     <!-- サイドバー -->
-    <aside>
+    <aside id="sidebar">
       <div class="brand">
         <div class="logo-icon">UR</div>
         <div class="brand-name">Reserve Pro</div>
@@ -57,8 +60,20 @@
     </aside>
 
     <!-- メインコンテンツ -->
+    <script>
+    // --- モバイル用メニュー開閉 ---
+    function toggleMenu() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('mobile-overlay');
+      if (sidebar && overlay) {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+      }
+    }
+    </script>
     <main>
       <header>
+        <button id="mobile-menu-btn" class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
         <div class="page-title" id="page-title">不定休・予約枠カレンダー設定</div>
         <div class="header-actions">
           <button class="btn-primary" style="background: var(--surface-lt); color: var(--text-main);" onclick="logout()">🚪 ログアウト</button>
