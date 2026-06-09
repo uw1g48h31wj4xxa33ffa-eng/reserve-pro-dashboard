@@ -1,0 +1,10 @@
+# 依存パッケージ（GitHubにはアップロードせず、Render側で自動インストールさせます）
+node_modules/
+
+# 秘匿情報（絶対にGitHubにアップロードしてはいけないファイル）
+.env
+firebase-key.json
+
+# ログファイル等
+*.log
+.DS_Store

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Pro | 不定休・予約枠管理カレンダー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260606">
+</head>
+
+<body>
+
+  <div class="app-container">
+    <!-- サイドバー -->
+    <aside>
+      <div class="brand">
+        <div class="logo-icon">UR</div>
+        <div class="brand-name">Reserve Pro</div>
+      </div>
+
+      <div class="nav-section">
+        <span class="section-label">メイン</span>
+        <div class="nav-item active">
+          <i>📅</i> カレンダー管理
+        </div>
+      </div>
+
+      <div class="nav-section" style="margin-top: 32px; flex: 1; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="section-label" style="margin-bottom: 0;">登録済み一覧</span>
+          <span class="tag tag-blue" id="h-count-badge" style="font-size: 0.7rem;">0 件</span>
+        </div>
+        <div class="h-list-items" id="h-list-items" style="flex: 1; overflow-y: auto;">
+          <!-- JSで描画 -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- メインコンテンツ -->
+    <main>
+      <header>
+        <div class="page-title" id="page-title">不定休・予約枠カレンダー設定</div>
+        <div class="header-actions">
+          <div class="stat-pill" id="sync-status-pill" onclick="loadData()" style="cursor: pointer;" title="クリックして再同期">
+            <span class="dot" style="background: var(--emerald)"></span>
+            <span id="sync-status">同期完了</span>
+          </div>
+          <button class="btn-primary" onclick="loadData()">↺ 更新</button>
+        </div>
+      </header>
+
+      <!-- 同期エラー警告バナー -->
+      <div id="sync-error-banner" class="sync-error-banner" style="display: none;" onclick="loadData()">
+        ⚠️ 同期に失敗しました。再接続を試みています。
+      </div>
+
+      <div class="content-body">
+
+        <!-- ════ 不定休カレンダービュー ════ -->
+        <div id="view-calendar" class="view-container active">
+          <div class="calendar-layout" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 24px; align-items: start; ">
+            <div class="calendar-card" style="width: 100%;">
+              <div class="calendar-nav">
+                <div class="month-title" id="cal-month-title">--</div>
+                <div class="nav-btns">
+                  <button class="nav-btn" onclick="moveMonth(-1)">‹</button>
+                  <button class="nav-btn" onclick="moveMonth(1)">›</button>
+                </div>
+              </div>
+              <div class="calendar-grid" id="calendar-grid">
+                <!-- JSで描画 -->
+              </div>
+            </div>
+
+            <div class="holiday-panel" style="display: flex; flex-direction: column; gap: 16px;  overflow-y: auto; overflow-x: hidden; padding-right: 8px;">
+              <div class="h-panel-card" style="flex: 1; display: flex; flex-direction: column; gap: 16px;">
+                <div style="flex: 1; min-width: 250px;">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 4px;">不定休の設定</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
+                  ※カレンダーの日付を押して不定休の登録・解除
+
+                </p>
+                <div id="selected-date-info">
+                  <span class="section-label">選択中の日付</span>
+                  <div id="h-date-label"
+                    style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; color: var(--primary);">--</div>
+                  <input type="text" id="h-memo-input" class="search-bar" style="width: 100%; margin-bottom: 4px;"
+                    placeholder="メモ（例：院長不在）">
+                  <button class="btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="toggleHoliday()">この日を休診にする/解除</button>
+                  
+                  <div style="border-top: 1px solid var(--border-light); padding-top: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                      <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">時間帯ブロック設定</h4>
+                      <span style="font-size: 0.7rem; color: var(--text-muted);">範囲指定 ＆ マトリクス</span>
+                    </div>
+
+                    <!-- 範囲指定 -->
+                    <div style="display: flex; gap: 4px; margin-bottom: 4px; align-items: center; background: var(--surface-lt); padding: 6px; border-radius: 8px;">
+                      <select id="range-start" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
+                      <span style="font-size: 0.75rem; color: var(--text-muted);">〜</span>
+                      <select id="range-end" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
+                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--primary); color: white; border: none; font-weight: bold;" onclick="blockSelectedRange()">追加</button>
+                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--surface); color: var(--rose); border: 1px solid var(--border);" onclick="clearAllBlocks()">全解除</button>
+                    </div>
+
+                    <!-- マトリクス -->
+                    <div id="time-matrix-container" style="margin-bottom: 2px;">
+                      <!-- JSでマトリクスを描画 -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js?v=20260616"></script>
+</body>
+
+</html>

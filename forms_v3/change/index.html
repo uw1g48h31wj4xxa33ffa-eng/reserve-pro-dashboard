@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>予約変更フォーム</title>
+    <meta name="description" content="予約変更フォームです。LINEで簡単に予約の変更・キャンセル希望を送信いただけます。">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Settings -->
+    <script src="config.js"></script>
+    <style>
+        :root {
+            /* Colors */
+            --primary: #3a7bd5;
+            --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --primary-soft: rgba(58, 123, 213, 0.1);
+            --secondary: #2d3748;
+            --text-main: #1a202c;
+            --text-light: #718096;
+            --bg-app: #f8fafc;
+            --bg-card: #ffffff;
+            --line-green: #06C755;
+            --accent-red: #e53e3e;
+            --border: #e2e8f0;
+            
+            /* Utility */
+            --highlight: #e53e3e;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            /* Transitions */
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background-color: var(--bg-app);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-card);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            height: 6px;
+            background: #edf2f7;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+            width: 25%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 24px 24px;
+            text-align: center;
+        }
+
+        .logo {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+        }
+
+        /* Form Layout */
+        .form-wrapper {
+            padding: 0 24px 48px;
+        }
+
+        .step {
+            display: none;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+
+        .step-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Policy Cards */
+        .policy-card-group {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .policy-card {
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+        }
+
+        .policy-card:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+
+        .policy-card.active {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Policy Content */
+        .policy-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .policy-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .policy-main-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .policy-main-text.highlight {
+            color: var(--accent-red);
+        }
+
+        .info-note {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            margin-bottom: 25px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid #edf2f7;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .calendar-header button {
+            background: white;
+            border: 1px solid #e2e8f0;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .calendar-day-header {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #94a3b8;
+            padding: 5px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            background: #e2e8f0;
+        }
+
+        .calendar-day.active {
+            background-color: #3a7bd5 !important;
+            color: white !important;
+            font-weight: bold;
+        }
+
+        .calendar-day.disabled {
+            color: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.sunday {
+            color: #f87171;
+        }
+
+        .calendar-day-label {
+            position: absolute;
+            bottom: 2px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            background: white;
+            color: #3a7bd5;
+            padding: 1px 4px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .calendar-day.active .calendar-day-label {
+            background: white;
+            color: #3a7bd5;
+        }
+
+        /* Slot Selection */
+        .slot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .slot-btn {
+            padding: 15px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #2d3748;
+        }
+
+        .slot-btn.active {
+            background: #3a7bd5;
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Selected Choices */
+        .selected-list {
+            margin-top: 30px;
+            border-top: 2px solid #f1f5f9;
+            padding-top: 20px;
+        }
+
+        .choice-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin-bottom: 10px;
+            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0.6;
+        }
+
+        .choice-item.active {
+            background: #fff;
+            border-color: #3a7bd5;
+            box-shadow: 0 10px 15px -3px rgba(58, 123, 213, 0.1);
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .choice-item.filled {
+            background: #fff;
+            border-color: #e2e8f0;
+            opacity: 1;
+        }
+
+        .choice-badge {
+            width: 24px;
+            height: 24px;
+            background: #cbd5e1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-right: 12px;
+            flex-shrink: 0;
+            transition: background 0.3s;
+        }
+
+        .choice-item.active .choice-badge,
+        .choice-item.filled .choice-badge {
+            background: #3a7bd5;
+        }
+
+        .choice-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .choice-label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+
+        .choice-value {
+            font-size: 1.05rem;
+            color: #1a202c;
+            font-weight: 800;
+            flex-grow: 1;
+        }
+
+        .remove-btn {
+            color: #fca5a5;
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1.0rem;
+            font-weight: 900;
+            -webkit-text-stroke: 0.5px #fca5a5;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+
+        .remove-btn:hover {
+            color: #ef4444;
+            -webkit-text-stroke: 0.5px #ef4444;
+        }
+
+        /* Buttons & Actions */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #3a7bd5;
+            color: #fff;
+            box-shadow: 0 10px 15px -3px rgba(58, 123, 213, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background: #2d62ac;
+            box-shadow: 0 20px 30px -5px rgba(58, 123, 213, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #e2e8f0;
+            color: #94a3b8;
+            box-shadow: none;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .btn-ghost:hover {
+            color: var(--text-main);
+            text-decoration: underline;
+        }
+
+        .btn-line {
+            background-color: var(--line-green);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            padding: 20px;
+            box-shadow: 0 10px 20px -5px rgba(6, 199, 85, 0.3);
+        }
+
+        .line-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Warning & Confirmation */
+        .warning-box {
+            background: #fff5f5;
+            border: 2px solid #feb2b2;
+            border-radius: 20px;
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .warning-box.compact {
+            padding: 32px 20px;
+            text-align: center;
+            background: #fffcfc; /* より薄い背景色 */
+            border: 1px solid #fee2e2; /* より薄い境界線 */
+            border-radius: 24px;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .warning-box.compact .warning-content p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .warning-icon {
+            font-size: 1.5rem;
+        }
+
+        .warning-content h3 {
+            color: var(--accent-red);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            font-weight: 900;
+        }
+
+        .warning-content p {
+            color: #c53030;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .agreement-text {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin: 24px 0;
+        }
+
+        .confirm-warning {
+            text-align: center;
+            background: #fff1f2;
+            border: 2px solid #f43f5e;
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+
+        .summary-card {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #edf2f7;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .line-guide {
+            background: #f8fafc;
+            padding: 24px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        .guide-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #fff;
+            padding: 16px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .guide-logo-container {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .guide-logo {
+            width: 28px;
+            height: 28px;
+        }
+
+        .guide-text {
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        .guide-arrow {
+            text-align: center;
+            padding: 8px 0;
+            color: #cbd5e1;
+        }
+
+        .wait-note {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 700;
+            margin-top: 16px;
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 400px) {
+            .app-container {
+                border-radius: 0;
+            }
+            body {
+                padding: 0;
+            }
+        }
+
+        .highlight {
+            color: var(--highlight);
+            font-weight: 900;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Inputs */
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 0.95rem; color: var(--text-main); }
+        .input-group input { width: 100%; padding: 14px; border: 2px solid var(--border); border-radius: 12px; font-family: inherit; font-size: 1rem; outline: none; transition: var(--transition); background: #f8fafc; }
+        .input-group input:focus { border-color: var(--primary); background: #fff; }
+        .error-msg { color: var(--accent-red); font-size: 0.8rem; margin-top: 5px; display: none; font-weight: 700; }
+    </style>
+</head>
+
+<body>
+    <main class="app-container">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <!-- Header -->
+        <header class="header">
+            <img src="logo.png" alt="クリニック ロゴ" class="logo">
+        </header>
+
+        <!-- Form Sections -->
+        <div class="form-wrapper">
+            <!-- Step 1: Policy Selection -->
+            <section class="step active" id="step-policy">
+                <div class="step-header">
+                    <h2>ご予約変更前の確認</h2>
+                    <p class="step-desc">ご希望に添えない場合についてお選びください</p>
+                </div>
+
+                <div class="policy-card-group">
+                    <button class="policy-card" id="policy-cancel" onclick="selectPolicy('cancel')">
+                        <div class="policy-content">
+                            <span class="policy-label">希望日時が空いていない場合は</span>
+                            <span class="policy-main-text highlight">キャンセルする</span>
+                        </div>
+                    </button>
+
+                    <button class="policy-card" id="policy-keep" onclick="selectPolicy('keep')">
+                        <div class="policy-content">
+                            <span class="policy-label">希望日時が空いていない場合は</span>
+                            <span class="policy-main-text">変更しない</span>
+                        </div>
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- Step 2: Calendar & Slot Selection -->
+            <section class="step" id="step-calendar">
+                <h2>ご希望日時の選択</h2>
+
+                <!-- Calendar Component -->
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button type="button" onclick="changeMonth(-1)" id="prevMonth">←</button>
+                        <span id="currentMonthYear" style="font-weight: 700; font-size: 1.1rem;"></span>
+                        <button type="button" onclick="changeMonth(1)" id="nextMonth">→</button>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Days will be injected here -->
+                    </div>
+                </div>
+
+                <!-- Time Slot Selector (Hidden initially) -->
+                <div id="timeSlots" style="display: none; background: #f8fafc; padding: 20px; border-radius: 20px; margin-top: 20px; animation: slideUp 0.3s ease-out;">
+                    <p style="text-align: center; font-weight: 900; margin-bottom: 15px; color: var(--text-main); font-size: 0.95rem;">
+                        ご希望の時間帯を選択してください
+                    </p>
+
+                    <div class="input-group" style="margin-bottom: 15px; text-align: left;">
+                        <label style="font-size: 0.75rem; color: #64748b; font-weight: 900; display: block; margin-bottom: 8px;">時間帯の目安</label>
+                        <div class="slot-grid" id="period-buttons-container">
+                            <button type="button" class="slot-btn" data-value="午前" onclick="selectPeriodButton('午前')">午前</button>
+                            <button type="button" class="slot-btn" data-value="午後" onclick="selectPeriodButton('午後')">午後</button>
+                            <button type="button" class="slot-btn" data-value="終日" onclick="selectPeriodButton('終日')">終日</button>
+                            <button type="button" class="slot-btn" data-value="detailed" onclick="selectPeriodButton('detailed')">時間帯を選択する</button>
+                        </div>
+                    </div>
+
+                    <div id="detailed-time-group" style="display: none; margin-bottom: 15px; text-align: left;">
+                        <label style="font-size: 0.75rem; color: #64748b; font-weight: 900; display: block; margin-bottom: 8px;">時間を選択</label>
+                        <div class="slot-grid" id="hour-buttons-container">
+                            <!-- 時間ボタン -->
+                        </div>
+                        <div id="minute-group" style="display: none; margin-top: 15px;">
+                            <label style="font-size: 0.75rem; color: #64748b; font-weight: 900; display: block; margin-bottom: 8px;">開始時間（分）を選択</label>
+                            <div class="slot-grid" id="minute-buttons-container">
+                                <!-- 分ボタン -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="period-confirm-area" style="display: none; margin-top: 10px;">
+                        <button type="button" class="btn btn-primary" id="confirmPeriodBtn" onclick="confirmPeriodSelection()"
+                            style="width: 100%; padding: 12px; font-size: 0.9rem;">この時間帯で決定する</button>
+                    </div>
+                </div>
+
+                <!-- Selection Summary List -->
+                <div class="selected-list">
+                    <div class="choice-item active" id="choice1" onclick="setActiveChoice(0)">
+                        <div class="choice-badge">1</div>
+                        <div class="choice-info">
+                            <span class="choice-label">第1希望</span>
+                            <span class="choice-value" id="val1">日付を選択する</span>
+                        </div>
+                        <span class="remove-btn" onclick="event.stopPropagation(); clearChoice(1)">×</span>
+                    </div>
+                    <div class="choice-item" id="choice2" onclick="setActiveChoice(1)">
+                        <div class="choice-badge">2</div>
+                        <div class="choice-info">
+                            <span class="choice-label">第2希望</span>
+                            <span class="choice-value" id="val2">未選択</span>
+                        </div>
+                        <span class="remove-btn" onclick="event.stopPropagation(); clearChoice(2)">×</span>
+                    </div>
+                    <div class="choice-item" id="choice3" onclick="setActiveChoice(2)">
+                        <div class="choice-badge">3</div>
+                        <div class="choice-info">
+                            <span class="choice-label">第3希望</span>
+                            <span class="choice-value" id="val3">未選択</span>
+                        </div>
+                        <span class="remove-btn" onclick="event.stopPropagation(); clearChoice(3)">×</span>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" id="nextToAgreement"
+                        onclick="goToStep('step-agreement')" style="opacity: 0.5;" disabled>次へ進む</button>
+                </div>
+                <button type="button" class="btn btn-back" onclick="goToStep('step-policy')">戻る</button>
+            </section>
+
+            <!-- Step 3: Agreement -->
+            <section class="step" id="step-agreement">
+                <div class="step-header">
+                    <h2>今後のご予約変更などについて</h2>
+                </div>
+
+                <div class="warning-box compact">
+                    <div class="warning-content">
+                        <p style="font-size: 0.95rem; line-height: 1.8; margin-bottom: 12px;">今後も変更やキャンセルが続く場合<br><span
+                                class="highlight" style="font-size: 1.1rem;">事前のご予約はできません</span></p>
+                        <p style="font-size: 0.85rem; color: var(--text-light); font-weight: 700;">何卒ご理解賜りますようお願い申し上げます
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 2px solid #edf2f7; padding-top: 25px;">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 15px; text-align: center;">ご本人様確認</h3>
+                    <div class="input-group">
+                        <label for="name">お名前 <span style="color: #e53e3e; font-size: 0.8rem;">*必須</span></label>
+                        <input type="text" id="name" placeholder="例：山田 太郎" oninput="checkInputs()">
+                        <div class="error-msg" id="name-error">お名前を入力してください</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tel">電話番号 <span style="color: #e53e3e; font-size: 0.8rem;">*必須</span></label>
+                        <input type="tel" id="tel" placeholder="例：090-1234-5678" oninput="checkInputs()">
+                        <div class="error-msg" id="tel-error">電話番号を入力してください</div>
+                    </div>
+                </div>
+
+                <div class="actions" style="margin-top: 30px;">
+                    <button type="button" class="btn btn-primary" id="nextToConfirm" onclick="confirmAgreement()"
+                        style="opacity:0.5;" disabled>確認して最終画面へ進む</button>
+                    <button type="button" class="btn btn-ghost" onclick="goToStep('step-calendar')">修正する</button>
+                </div>
+            </section>
+
+            <!-- Step 4: Confirmation -->
+            <section class="step" id="step-confirm">
+                <div class="confirm-warning">
+                    ⚠️ <span class="highlight" style="font-size: 1.1rem;">変更の受付は確定しておりません</span>
+                </div>
+
+                <div class="summary-card" id="summary-display">
+                    <!-- Summary content will be injected here -->
+                </div>
+
+                <p style="font-size: 0.95rem; text-align: center; margin-bottom: 20px; color: #4a5568;">
+                    下記の手順で変更希望を送信してください<br>
+                    <span style="font-weight: 700;">トーク送信後に変更希望の受付完了となります</span>
+                </p>
+
+                <div class="line-guide">
+                    <div class="guide-step">
+                        <div class="guide-logo-container">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE"
+                                class="guide-logo">
+                        </div>
+                        <div class="guide-text">ステップ ①<br>下の「LINEへ送信する」を押す</div>
+                    </div>
+
+                    <div class="guide-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                        </svg>
+                    </div>
+
+                    <div class="guide-step">
+                        <div class="guide-logo-container">
+                            <svg class="guide-logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L2 9L11 13L22 2Z" fill="#3a7bd5" />
+                                <path d="M22 2L15 22L11 13L22 2Z" fill="#3a7bd5" />
+                                <path d="M22 2L11 13" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <div class="guide-text">ステップ ②<br>そのままLINEでトークを送信</div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-line" onclick="sendToLine()">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE"
+                            class="line-logo">
+                        LINEへ送信する
+                    </button>
+                    <p class="wait-note">
+                        ※送信時点では変更は確定しておりません<br>
+                        <span class="highlight"
+                            style="font-size: 1.0rem; display: block; margin-top: 4px;">当院公式LINEからの返信をお待ちください</span>
+                    </p>
+                    <button type="button" class="btn btn-ghost" onclick="goToStep('step-agreement')">修正する（戻る）</button>
+                </div>
+            </section>
+
+            <!-- Step: Reject (Phone induction) -->
+            <section class="step" id="step-reject-user" style="text-align: center; padding: 40px 15px;">
+                <div style="color: #2d3748; font-size: 1.3rem; font-weight: 900; margin-bottom: 25px;">誠に申し訳ございません</div>
+                
+                <div style="background: #fff5f5; border: 1px solid #feb2b2; padding: 30px 20px; border-radius: 20px; margin-bottom: 25px;">
+                    <p style="font-weight: 800; color: #c53030; font-size: 1.15rem; line-height: 1.8; margin: 0;">
+                        <span style="text-decoration: underline; text-underline-offset: 4px;">直接お電話でご連絡をお願いいたします</span>
+                    </p>
+                    <p style="color: #c53030; font-size: 0.85rem; font-weight: 700; margin-top: 10px;">
+                        キャンセルや変更が続く方は事前のご予約はできません
+                    </p>
+                </div>
+                
+                <p style="color: #718096; font-size: 0.85rem; font-weight: 500; margin-bottom: 40px;">
+                    何卒ご理解賜りますようお願い申し上げます
+                </p>
+
+                <div class="actions">
+                    <button type="button" class="btn btn-ghost" onclick="location.reload()" style="font-weight: bold; border: 1px solid #ccc; width: 100%; height: 50px; border-radius: 12px; cursor: pointer;">最初に戻る</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        window.onerror = function(msg, url, lineNo, columnNo, error) { alert("Error: " + msg + "\nLine: " + lineNo); return false; };
+        // --- Settings (Dynamic Multi-Account) ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeClinicName = urlParams.get('account') || urlParams.get('name') || (typeof CLINIC_NAME !== 'undefined' ? CLINIC_NAME : "");
+        const activeLineId = urlParams.get('id') || (typeof CLINIC_LINE_ID !== 'undefined' ? CLINIC_LINE_ID : "");
+        const activePhone = urlParams.get('tel') || (typeof CLINIC_PHONE !== 'undefined' ? CLINIC_PHONE : "");
+
+        let currentSelectedSlots = [];
+        let currentSelectedTimeSlot = "";
+
+        // --- State Management ---
+        let currentState = {
+            step: 'step-policy',
+            cancelPolicy: '', // 'cancel' or 'keep'
+            choices: [null, null, null], // { date: "YYYY/MM/DD (Day)", time: "HH:00～HH:00" }
+            viewingDate: new Date(),
+            selectedDate: null,
+            activeChoiceIndex: 0, // 現在入力中のインデックス (0, 1, 2)
+            agreed: false
+        };
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCalendar();
+            updateProgress();
+            refreshBookedSlots();
+
+            // 電話番号の初期化
+            if (activePhone) {
+                document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+                    link.href = `tel:${activePhone}`;
+                });
+            }
+        });
+
+        // --- Navigation ---
+        function goToStep(stepId) {
+            const steps = ['step-policy', 'step-calendar', 'step-agreement', 'step-confirm', 'step-reject-user'];
+            const index = steps.indexOf(stepId);
+
+            if (index === -1) return;
+
+            // Hide all steps and show target
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(stepId).classList.add('active');
+
+            currentState.step = stepId;
+            updateProgress();
+
+            if (stepId === 'step-confirm') {
+                updateSummary();
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (stepId === 'step-agreement') {
+                checkInputs();
+            }
+        }
+
+        function updateProgress() {
+            const steps = ['step-policy', 'step-calendar', 'step-agreement', 'step-confirm'];
+            const index = steps.indexOf(currentState.step);
+            const progress = ((index + 1) / steps.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        // --- Step 1: Policy Selection ---
+        function selectPolicy(policy) {
+            currentState.cancelPolicy = policy;
+
+            // Update UI
+            document.getElementById('policy-cancel').classList.remove('active');
+            document.getElementById('policy-keep').classList.remove('active');
+            document.getElementById(`policy-${policy}`).classList.add('active');
+
+            // Auto proceed with slight delay for visual feedback
+            setTimeout(() => {
+                goToStep('step-calendar');
+            }, 400);
+        }
+
+        // --- Step 2: Calendar & Slots ---
+        let holidaysList = [];
+        let blockedSlotsList = [];
+
+        function fmtDateLocal(d) {
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function isBooked(date, timeStr) {
+            const dateStr = fmtDateLocal(date);
+            const slotKey = `${dateStr}_${timeStr}`;
+            return blockedSlotsList.includes(slotKey);
+        }
+
+        async function refreshBookedSlots() {
+            try {
+                const res = await fetch('/api/holidays?t=' + new Date().getTime(), { cache: 'no-store' });
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data.holidays) {
+                        holidaysList = Object.keys(data.holidays);
+                    }
+                    if (data.blockedSlots) {
+                        blockedSlotsList = data.blockedSlots;
+                    }
+                }
+                const stat = document.getElementById('sync-status-display');
+                    if (stat) stat.innerText = `System Version: v1.1 (Auto-Sync) - 最終同期: ${new Date().toLocaleTimeString()} (ブロック: ${blockedSlotsList.length}件)`;
+            } catch (e) {
+                console.error("ローカルサーバーとの通信エラー:", e);
+                const stat = document.getElementById('sync-status-display');
+                if (stat) stat.innerText = `System Version: v1.1 (Auto-Sync) - 通信エラー: ${e.message}`;
+            }
+            renderCalendar();
+            
+            // 状態を保持しながら時間枠を再描画
+            if (currentState.selectedDate && document.getElementById('timeSlots') && document.getElementById('timeSlots').style.display === 'block') {
+                const savedPeriod = currentSelectedPeriod;
+                const savedHour = currentSelectedHour;
+                const savedSlots = [...currentSelectedSlots];
+
+                renderSlots();
+
+                currentSelectedPeriod = savedPeriod;
+                currentSelectedSlots = savedSlots.filter(slot => {
+                        if (slot === "午前" || slot === "午後" || slot === "終日") return true;
+                        // It's a time string like "16:15"
+                        return !isBooked(currentState.selectedDate, slot);
+                    });
+                currentSelectedHour = savedHour;
+                    updatePeriodActiveState();
+
+                if (savedPeriod === 'detailed') {
+                        document.getElementById('detailed-time-group').style.display = "block";
+                        document.getElementById('period-confirm-area').style.display = "block";
+                        
+                        // If the hour button no longer exists, it was fully blocked
+                        if (savedHour) {
+                            const stillExists = Array.from(document.getElementById('hour-buttons-container').querySelectorAll('.slot-btn'))
+                                .some(btn => parseInt(btn.getAttribute('data-value')) === parseInt(savedHour));
+                            if (stillExists) {
+                                selectHourButton(savedHour);
+                            } else {
+                                currentSelectedHour = "";
+                                document.getElementById('minute-group').style.display = "none";
+                            }
+                        }
+                    } else if (savedPeriod !== "") {
+                    document.getElementById('detailed-time-group').style.display = "none";
+                    document.getElementById('period-confirm-area').style.display = "block";
+                }
+
+                updatePeriodActiveState();
+                if (typeof updateTimeSlotActiveState === 'function') updateTimeSlotActiveState();
+                if (typeof updateConfirmButtonState === 'function') updateConfirmButtonState();
+            }
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const header = document.getElementById('currentMonthYear');
+            grid.innerHTML = "";
+
+            const year = currentState.viewingDate.getFullYear();
+            const month = currentState.viewingDate.getMonth();
+            header.textContent = `${year}年 ${month + 1}月`;
+
+            // Weekday Headers
+            ['日', '月', '火', '水', '木', '金', '土'].forEach((day, i) => {
+                const div = document.createElement('div');
+                div.className = 'calendar-day-header';
+                if (i === 0) div.style.color = '#f87171';
+                div.textContent = day;
+                grid.appendChild(div);
+            });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // One month limit
+            const oneMonthLater = new Date();
+            oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+
+            // Padding for empty days
+            for (let i = 0; i < firstDay; i++) {
+                grid.appendChild(document.createElement('div'));
+            }
+
+            const minDate = new Date(today);
+            minDate.setDate(today.getDate() + 2);
+
+            // Days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const d = new Date(year, month, i);
+                const div = document.createElement('div');
+                div.className = 'calendar-day';
+                div.textContent = i;
+
+                const dateStr = formatDate(d);
+                const isSelectedInChoices = currentState.choices.some(c => c && c.date.split(' ')[0] === dateStr);
+
+                if (d.getDay() === 0) div.classList.add('sunday');
+
+                // 不定休キーの作成 (例: "2026-05-20")
+                const yearKey = d.getFullYear();
+                const monthKey = String(d.getMonth() + 1).padStart(2, '0');
+                const dayKey = String(d.getDate()).padStart(2, '0');
+                const dateKey = `${yearKey}-${monthKey}-${dayKey}`;
+                const isHoliday = holidaysList.includes(dateKey);
+
+                // Disabled logic: Less than 2 days away, More than 1 month ahead, Sunday, or Holiday
+                if (d < minDate || d > oneMonthLater || d.getDay() === 0 || isHoliday) {
+                    div.classList.add('disabled');
+                } else {
+                    div.onclick = () => selectDate(d);
+                    div.style.position = "relative";
+                    if (isSelectedInChoices) div.classList.add('active');
+                }
+
+                grid.appendChild(div);
+            }
+        }
+
+        function changeMonth(delta) {
+            currentState.viewingDate.setMonth(currentState.viewingDate.getMonth() + delta);
+            renderCalendar();
+        }
+
+        function selectDate(date) {
+            currentState.selectedDate = date;
+
+            // Check if this date is already chosen in other slots
+            const dateStr = formatDate(date);
+            const isAlreadyChosen = currentState.choices.some(c => c && c.date.split(' ')[0] === dateStr);
+
+            if (isAlreadyChosen) {
+                alert("その日付は既に選択されています。");
+                return;
+            }
+
+            renderCalendar(); // Refresh to show visual selection if needed
+            renderSlots();
+
+            const slotArea = document.getElementById('timeSlots');
+            slotArea.style.display = 'block';
+
+            setTimeout(() => {
+                slotArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        let currentSelectedHour = "";
+
+        function renderSlots() {
+            const hourContainer = document.getElementById('hour-buttons-container');
+            const minGroup = document.getElementById('minute-group');
+            if (!hourContainer) return;
+            hourContainer.innerHTML = "";
+            minGroup.style.display = "none";
+
+            const dateStr = currentState.selectedDate.toLocaleDateString('ja-JP');
+            const alreadyUsed = currentState.choices.some(c => c && c.date.split(' ')[0] === dateStr);
+
+            if (alreadyUsed) {
+                alert("その日付は既に選択されています。別の日にちを選択してください。");
+                currentSelectedPeriod = "";
+                currentSelectedTimeSlot = "";
+                currentSelectedHour = "";
+                updatePeriodActiveState();
+                
+                document.getElementById('detailed-time-group').style.display = "none";
+                document.getElementById('period-confirm-area').style.display = "none";
+                document.getElementById('timeSlots').style.display = 'none';
+                return;
+            }
+
+            currentSelectedSlots = [];
+            currentSelectedHour = "";
+            updateConfirmButtonState();
+
+            // 午前・午後の判定
+            const allAmSlots = [];
+            for (let h = 10; h <= 12; h++) {
+                for (let m = 0; m < 60; m += 15) {
+                    allAmSlots.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+                }
+            }
+            const allPmSlots = [];
+            for (let h = 13; h <= 20; h++) {
+                let mins = [0, 15, 30, 45];
+                if (parseInt(h) === 20) mins = [0];
+                mins.forEach(m => {
+                    allPmSlots.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+                });
+            }
+
+            const isAmBlocked = allAmSlots.every(timeStr => isBooked(currentState.selectedDate, timeStr));
+            const isPmBlocked = allPmSlots.every(timeStr => isBooked(currentState.selectedDate, timeStr));
+            
+            const amBtn = document.querySelector('#period-buttons-container button[data-value="午前"]');
+            const pmBtn = document.querySelector('#period-buttons-container button[data-value="午後"]');
+            const allDayBtn = document.querySelector('#period-buttons-container button[data-value="終日"]');
+            
+            if (amBtn) amBtn.style.display = isAmBlocked ? 'none' : 'inline-block';
+            if (pmBtn) pmBtn.style.display = isPmBlocked ? 'none' : 'inline-block';
+            if (allDayBtn) allDayBtn.style.display = (isAmBlocked || isPmBlocked) ? 'none' : 'inline-block';
+
+            for (let h = 10; h <= 20; h++) {
+                let mins = [0, 15, 30, 45];
+                if (parseInt(h) === 20) mins = [0];
+                const isHourBlocked = mins.every(m => {
+                    const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                    return isBooked(currentState.selectedDate, timeStr);
+                });
+                if (isHourBlocked) continue;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'slot-btn';
+                btn.setAttribute('data-value', h);
+                btn.textContent = `${h}時台`;
+                btn.onclick = () => selectHourButton(h);
+                hourContainer.appendChild(btn);
+            }
+
+            currentSelectedPeriod = "";
+            currentSelectedTimeSlot = "";
+            updatePeriodActiveState();
+
+            document.getElementById('detailed-time-group').style.display = "none";
+            document.getElementById('period-confirm-area').style.display = "none";
+        }
+
+        function selectHourButton(h) {
+            currentSelectedHour = h;
+            const minGroup = document.getElementById('minute-group');
+            const minContainer = document.getElementById('minute-buttons-container');
+            minGroup.style.display = "block";
+            minContainer.innerHTML = "";
+            
+            const hourBtns = document.getElementById('hour-buttons-container').querySelectorAll('.slot-btn');
+            hourBtns.forEach(btn => {
+                if (parseInt(btn.getAttribute('data-value')) === parseInt(h)) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            let mins = [0, 15, 30, 45];
+            if (parseInt(h) === 20) mins = [0];
+            mins.forEach(m => {
+                const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'slot-btn';
+                btn.setAttribute('data-value', timeStr);
+                
+                if (isBooked(currentState.selectedDate, timeStr)) {
+                    btn.textContent = `${timeStr} (×)`;
+                    btn.disabled = true;
+                    btn.style.opacity = "0.5";
+                    btn.style.cursor = "not-allowed";
+                } else {
+                    btn.textContent = timeStr;
+                    btn.onclick = () => selectTimeSlotButton(timeStr);
+                }
+                minContainer.appendChild(btn);
+            });
+            updateTimeSlotActiveState();
+        }
+
+
+        function selectPeriodButton(value) {
+            currentSelectedPeriod = value;
+
+            const detailedGroup = document.getElementById('detailed-time-group');
+            const confirmArea = document.getElementById('period-confirm-area');
+
+            if (value === "") {
+                detailedGroup.style.display = "none";
+                confirmArea.style.display = "none";
+                currentSelectedSlots = [];
+            } else if (value === "detailed") {
+                currentSelectedSlots = [];
+                detailedGroup.style.display = "block";
+                confirmArea.style.display = "block";
+                currentSelectedTimeSlot = "";
+                updateTimeSlotActiveState();
+            } else {
+                detailedGroup.style.display = "none";
+                confirmArea.style.display = "block";
+                
+                if (value === "終日") {
+                    if (currentSelectedSlots.includes("終日")) {
+                        currentSelectedSlots = [];
+                    } else {
+                        currentSelectedSlots = ["終日"];
+                    }
+                } else {
+                    const allDayIdx = currentSelectedSlots.indexOf("終日");
+                    if (allDayIdx !== -1) {
+                        currentSelectedSlots.splice(allDayIdx, 1);
+                    }
+                    const idx = currentSelectedSlots.indexOf(value);
+                    if (idx !== -1) {
+                        currentSelectedSlots.splice(idx, 1);
+                    } else {
+                        currentSelectedSlots.push(value);
+                    }
+                }
+            }
+            updatePeriodActiveState();
+            updateConfirmButtonState();
+        }
+
+        function updatePeriodActiveState() {
+            const container = document.getElementById('period-buttons-container');
+            if (container) {
+                const buttons = container.querySelectorAll('.slot-btn');
+                buttons.forEach(btn => {
+                    const val = btn.getAttribute('data-value');
+                    if (val === "detailed") {
+                        if (currentSelectedPeriod === "detailed") {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    } else {
+                        if (currentSelectedSlots.includes(val)) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    }
+                });
+            }
+        }
+
+        function selectTimeSlotButton(value) {
+            const idx = currentSelectedSlots.indexOf(value);
+            if (idx !== -1) {
+                currentSelectedSlots.splice(idx, 1);
+            } else {
+                currentSelectedSlots.push(value);
+            }
+            updateTimeSlotActiveState();
+            updateConfirmButtonState();
+        }
+
+        function updateTimeSlotActiveState() {
+            const container = document.getElementById('minute-buttons-container');
+            if (container) {
+                const buttons = container.querySelectorAll('.slot-btn');
+                buttons.forEach(btn => {
+                    const val = btn.getAttribute('data-value');
+                    if (currentSelectedSlots.includes(val)) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        function confirmPeriodSelection() {
+            if (currentSelectedSlots.length > 0) {
+                const order = ["午前", "午後", "終日", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00"];
+                currentSelectedSlots.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+                const joined = currentSelectedSlots.join('、');
+                selectTime(joined);
+            }
+        }
+
+        function updateConfirmButtonState() {
+            const btn = document.getElementById('confirmPeriodBtn');
+            if (btn) {
+                const hasSelection = currentSelectedSlots.length > 0;
+                btn.disabled = !hasSelection;
+            }
+        }
+
+        function setActiveChoice(index) {
+            currentState.activeChoiceIndex = index;
+            currentState.selectedDate = null;
+            document.getElementById('timeSlots').style.display = 'none';
+            updateChoiceDisplay();
+            renderCalendar();
+
+            // カレンダーへスクロール
+            document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function selectTime(time) {
+            if (currentState.activeChoiceIndex === -1) return;
+
+            const dateStr = formatDate(currentState.selectedDate);
+            const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+            const formattedDate = `${dateStr} (${dayNames[currentState.selectedDate.getDay()]})`;
+
+            // 指定したインデックスに保存
+            currentState.choices[currentState.activeChoiceIndex] = { date: formattedDate, time: time };
+
+            // Reset selection state
+            currentState.selectedDate = null;
+            document.getElementById('timeSlots').style.display = 'none';
+
+            // 次の空きスロットを自動的に探してフォーカスする
+            const nextEmpty = currentState.choices.indexOf(null);
+            if (nextEmpty !== -1) {
+                currentState.activeChoiceIndex = nextEmpty;
+            }
+
+            updateChoiceDisplay();
+            renderCalendar();
+
+            // 全て埋まった場合は確認ボタンへスクロール、まだ空きがある場合はカレンダーへ
+            if (currentState.choices.includes(null)) {
+                setTimeout(() => {
+                    document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                setTimeout(() => {
+                    const btn = document.getElementById('nextToAgreement');
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        }
+
+        function clearChoice(index) {
+            const idx = index - 1;
+            currentState.choices[idx] = null;
+            currentState.activeChoiceIndex = idx; // 削除したところを再度入力状態にする
+            currentState.selectedDate = null;
+            document.getElementById('timeSlots').style.display = 'none';
+
+            updateChoiceDisplay();
+            renderCalendar();
+
+            // カレンダーへ自動スクロールして再選択を促す
+            setTimeout(() => {
+                document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        function updateChoiceDisplay() {
+            const nextBtn = document.getElementById('nextToAgreement');
+
+            for (let i = 1; i <= 3; i++) {
+                const choice = currentState.choices[i - 1];
+                const el = document.getElementById(`choice${i}`);
+                const valEl = document.getElementById(`val${i}`);
+
+                el.classList.remove('active', 'filled');
+
+                if (choice) {
+                    valEl.textContent = `${choice.date} ${choice.time}`;
+                    el.classList.add('filled');
+                } else {
+                    const activeIndex = currentState.choices.findIndex(c => c === null);
+                    valEl.textContent = (i === activeIndex + 1) ? "日付を選択する" : "未選択";
+                    if (i === activeIndex + 1) el.classList.add('active');
+                }
+            }
+
+            const allSelected = currentState.choices.every(c => c !== null);
+            if (nextBtn) {
+                nextBtn.disabled = !allSelected;
+                nextBtn.style.opacity = allSelected ? "1" : "0.5";
+            }
+        }
+
+        // --- Step 3: Agreement ---
+        function confirmAgreement() {
+            const nameInput = document.getElementById('name');
+            const telInput = document.getElementById('tel');
+            const nameErr = document.getElementById('name-error');
+            const telErr = document.getElementById('tel-error');
+            
+            let isValid = true;
+            
+            if (!nameInput.value.trim()) {
+                nameErr.style.display = 'block';
+                isValid = false;
+            } else {
+                nameErr.style.display = 'none';
+            }
+            
+            if (!telInput.value.trim()) {
+                telErr.style.display = 'block';
+                isValid = false;
+            } else {
+                telErr.style.display = 'none';
+            }
+            
+            if (!isValid) {
+                if (!nameInput.value.trim()) nameInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+                else telInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+                return;
+            }
+
+            // 履歴チェックを実行（お名前のスペース除去と電話番号のクレンジングを事前適用）
+            const cleanedName = nameInput.value.replace(/\s+/g, "");
+            const cleanedTel = telInput.value.replace(/[^\d]/g, "");
+            checkUserHistory(cleanedName, cleanedTel);
+        }
+
+        function checkUserHistory(name, tel) {
+            currentState.agreed = true;
+            goToStep('step-confirm');
+        }
+
+        // --- Step 4: Summary & LINE ---
+        function updateSummary() {
+            const policyLabel = currentState.cancelPolicy === 'cancel' ? 'キャンセルする' : '変更しない';
+            const container = document.getElementById('summary-display');
+
+            let html = `
+                <div class="summary-card">
+                    <div><strong>空きがない場合の希望：</strong> ${policyLabel}</div>
+                    <div style="margin-top: 10px; border-top: 1px solid #edf2f7; padding-top: 10px;">
+            `;
+
+            currentState.choices.forEach((c, i) => {
+                html += `
+                    <div><strong>第${i + 1}希望：</strong> ${c.date} ${c.time}</div>
+                `;
+            });
+
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+
+        function sendToLine() {
+            const policyLabel = currentState.cancelPolicy === 'cancel' ? 'キャンセルする' : '変更しない';
+
+            const message = `【予約変更希望】
+
+■希望日時
+第1希望：${currentState.choices[0].date} ${currentState.choices[0].time}
+第2希望：${currentState.choices[1].date} ${currentState.choices[1].time}
+第3希望：${currentState.choices[2].date} ${currentState.choices[2].time}
+
+■空きがない場合の希望
+${policyLabel}
+
+■変更・キャンセルに関する注意事項
+同意済み
+
+※このメッセージを送信し、当院からの返信をお待ちください`;
+
+            const dynamicId = activeLineId;
+
+            const encodedMsg = encodeURIComponent(message);
+            
+            window.location.href = `https://line.me/R/oaMessage/${dynamicId}/?${encodedMsg}`;
+        }
+
+        // --- Utils ---
+        function formatDate(date) {
+            const y = date.getFullYear();
+            const m = date.getMonth() + 1;
+            const d = date.getDate();
+            return `${y}/${m}/${d}`;
+        }
+        function checkInputs() {
+            const nameEl = document.getElementById('name');
+            const telEl = document.getElementById('tel');
+            const btn = document.getElementById('nextToConfirm');
+
+            if (nameEl && telEl && btn) {
+                // 電話番号からハイフンを削除（数字以外を削除）
+                let telVal = telEl.value.replace(/[ー－-]/g, '').trim();
+                telEl.value = telVal; // 入力欄自体を数字のみに書き換え
+
+                const n = nameEl.value.trim();
+                const t = telVal;
+                
+                const isValid = n !== '' && t !== '';
+                btn.disabled = !isValid;
+                btn.style.opacity = isValid ? "1" : "0.5";
+                btn.style.cursor = isValid ? "pointer" : "not-allowed";
+            }
+        }
+    setInterval(refreshBookedSlots, 3000);
+    </script>
+</body>
+
+</html>
