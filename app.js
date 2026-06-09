@@ -423,10 +423,10 @@ async function toggleHoliday() {
     // 成功時のみローカル状態を更新
     if (state.holidays[key] && !memo) {
         delete state.holidays[key];
-        showToast("不定休を解除しました");
+        showToast("解除しました");
     } else {
         state.holidays[key] = { memo };
-        showToast("不定休を登録しました");
+        showToast("登録しました");
     }
 
     btn.disabled = false;
