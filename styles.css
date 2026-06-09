@@ -431,8 +431,8 @@ header {
 /* ── CALENDAR VIEW ── */
 .calendar-layout {
   display: grid;
-  grid-template-columns: 1fr 340px;
-  gap: 16px;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 24px;
   align-items: start;
   height: 100%;
 }
