@@ -884,8 +884,8 @@ header {
     gap: 8px;
   }
   .header-actions button, .stat-pill {
-    padding: 6px 10px;
-    font-size: 0.75rem;
+    padding: 6px 8px;
+    font-size: 0.63rem; /* タイトル(0.95rem)の約2/3 */
   }
   .stat-pill span#sync-status {
     display: none; /* スマホでは丸いインジケーターのみ表示 */
