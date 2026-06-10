@@ -520,8 +520,5 @@ function showToast(msg, color = "var(--emerald)") {
 
 // ── DUMMY DATA ──
 function simulateDummyData() {
-    state.holidays = {
-        "2026-06-15": { memo: "定期健診" },
-        "2026-06-25": { memo: "学会出席" }
-    };
+    state.holidays = {};
 }
