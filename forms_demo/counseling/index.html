@@ -1284,16 +1284,6 @@
             });
 
             updateTimeSlotActiveState();
-            
-            // Auto-select the first available detailed time slot if none is selected in this hour
-            const firstAvailableBtn = Array.from(minContainer.querySelectorAll('button:not([disabled])'))[0];
-            if (firstAvailableBtn) {
-                const val = firstAvailableBtn.getAttribute('data-value');
-                const hasSlotInThisHour = currentSelectedSlots.some(s => s.startsWith(String(h).padStart(2, '0') + ':'));
-                if (!hasSlotInThisHour) {
-                    selectTimeSlotButton(val);
-                }
-            }
             setTimeout(() => {
                 const minGroup = document.getElementById('minute-group');
                 if (minGroup && minGroup.style.display !== 'none') {
