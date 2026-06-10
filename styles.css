@@ -521,8 +521,8 @@ header {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
-  flex: 1;
+  gap: 6px;
+  align-content: start;
 }
 
 .dow-cell {
@@ -538,7 +538,7 @@ header {
 .dow-cell.sun { color: var(--rose); }
 
 .day-cell {
-  aspect-ratio: 1.2;
+  aspect-ratio: 1;
   border-radius: 12px;
   border: 1px solid var(--border);
   background: var(--surface-lt);
