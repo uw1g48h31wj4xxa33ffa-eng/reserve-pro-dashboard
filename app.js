@@ -240,7 +240,7 @@ function showView(viewId) {
         if (navItems.length > 1) navItems[1].classList.add('active');
         const mobileCalBtn = document.getElementById('mobile-nav-calendar');
         if (mobileCalBtn) mobileCalBtn.classList.add('active');
-        document.getElementById('page-title').textContent = '不定休・予約枠カレンダー設定';
+        document.getElementById('page-title').textContent = '不定休・予約枠管理';
     } else if (viewId === 'customers') {
         if (navItems.length > 2) navItems[2].classList.add('active');
         const mobileCustBtn = document.getElementById('mobile-nav-customers');

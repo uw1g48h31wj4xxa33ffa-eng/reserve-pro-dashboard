@@ -930,11 +930,14 @@ header {
   }
 
   .page-title {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .header-actions {
-    gap: 10px;
+    gap: 6px;
   }
 
   .mobile-account-select-wrapper {
@@ -957,6 +960,12 @@ header {
   
   .header-actions .btn-primary {
     display: none; /* スマホでは更新ボタンを隠し、同期ピルタップで代用 */
+  }
+
+  .header-actions .btn-secondary {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    border-radius: 99px;
   }
 
   .content-body {
