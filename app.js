@@ -4,7 +4,7 @@
 
 // ── CONFIGURATION ──
 const CONFIG = {
-    GAS_URL: "", // デモ環境のため空にする
+    GAS_URL: "https://reserve-pro-dashboard.onrender.com/api/holidays", // RenderのAPIエンドポイント
     DOW_JA: ["日", "月", "火", "水", "木", "金", "土"]
 };
 
@@ -41,7 +41,7 @@ async function handleLogin() {
     const u = document.getElementById('login-user').value;
     const p = document.getElementById('login-pass').value;
     try {
-        const res = await fetch('/api/login', {
+        const res = await fetch('https://reserve-pro-dashboard.onrender.com/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: u, password: p })
@@ -116,7 +116,7 @@ async function loadData() {
     }
 
     try {
-        const res = await apiFetch(`${CONFIG.GAS_URL}?action=getAll`);
+        const res = await apiFetch(`${CONFIG.GAS_URL}`);
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         const data = await res.json();
         
@@ -306,7 +306,7 @@ async function toggleBlockedSlot(slotKey) {
     renderTimeSlotsBlocker(slotKey.split('_')[0]);
 
     try {
-        const res = await apiFetch(`${CONFIG.GAS_URL.replace('/api/holidays', '/api/blocked-slots')}`, {
+        const res = await apiFetch('https://reserve-pro-dashboard.onrender.com/api/blocked-slots', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action, slotKey })
@@ -335,7 +335,7 @@ async function bulkToggleBlocks(slotsToToggle, action) {
     // API同期
     try {
         const promises = slotsToToggle.map(slotKey => {
-            return apiFetch(`${CONFIG.GAS_URL.replace('/api/holidays', '/api/blocked-slots')}`, {
+            return apiFetch('https://reserve-pro-dashboard.onrender.com/api/blocked-slots', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ slotKey, action })
