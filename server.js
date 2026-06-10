@@ -57,7 +57,7 @@ function authenticateToken(req, res, next) {
     if (token == null) return res.status(401).json({ error: '認証トークンが必要です。' });
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ error: 'トークンが無効または期限切れです。' });
+        if (err) return res.status(401).json({ error: 'トークンが無効または期限切れです。' });
         req.user = user;
         next();
     });

@@ -32,7 +32,7 @@ async function apiFetch(url, options = {}) {
     if (!options.headers) options.headers = {};
     Object.assign(options.headers, getAuthHeader());
     const res = await fetch(url, options);
-    if (res.status === 401) { showLoginModal(); throw new Error('Unauthorized'); }
+    if (res.status === 401) { logout(); throw new Error('Unauthorized'); }
     if (res.status === 403) { showToast('権限がありません。', 'var(--rose)'); throw new Error('Forbidden'); }
     return res;
 }
