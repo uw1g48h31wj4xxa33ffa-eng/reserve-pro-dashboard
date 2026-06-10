@@ -73,8 +73,11 @@ async function handleLogin() {
         if (res.ok) {
             localStorage.setItem('jwtToken', data.token);
             localStorage.setItem('userRole', data.role);
-            document.getElementById('login-modal').style.display = 'none';
+            // ログイン成功：モーダルを隠してダッシュボードを初期化
+            const lm = document.getElementById('login-modal');
+            if (lm) lm.style.cssText = 'display:none !important;';
             applyRBAC();
+            renderCalendar();
             loadData();
         } else {
             alert(data.error);
@@ -112,14 +115,19 @@ function applyRBAC() {
 
 // ── INITIALIZATION ──
 window.onload = () => {
-    if (!localStorage.getItem('jwtToken')) {
-        showLoginModal();
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+        // 未ログインの場合：モーダルを強制表示
+        const lm = document.getElementById('login-modal');
+        if (lm) {
+            lm.style.cssText = 'display:flex !important; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;';
+        }
     } else {
+        // ログイン済み：画面を初期化
         applyRBAC();
+        renderCalendar();
         loadData();
     }
-    renderCalendar();
-
     // 定期的な更新 (1分ごと)
     setInterval(() => { if(localStorage.getItem('jwtToken')) loadData(); }, 1 * 60 * 1000);
 };
