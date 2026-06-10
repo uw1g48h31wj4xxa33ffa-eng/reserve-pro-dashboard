@@ -8,7 +8,7 @@ const CONFIG = {
     API_URL_STATUS: "https://reserve-pro-dashboard.onrender.com/api/appointments/status",
     API_URL_CUSTOMERS: "https://reserve-pro-dashboard.onrender.com/api/customers",
     API_URL_HOLIDAYS: "https://reserve-pro-dashboard.onrender.com/api/holidays",
-    DOW_JA: ["日", "月", "火", "水", "木", "金", "土"],
+    DOW_JA: ["日", "朁E, "火", "水", "木", "釁E, "圁E],
     HOURS: { start: 10, end: 20 }
 };
 
@@ -16,8 +16,7 @@ const CONFIG = {
 let state = {
     appts: [],
     holidays: {},
-    customers: [], // 顧客管理リスト
-    currentView: 'requests',
+    customers: [], // 顧客管琁E��スチE    currentView: 'requests',
     filterAccount: 'all',
     searchQuery: '',
     searchCustomerQuery: '', // 顧客検索用
@@ -26,6 +25,7 @@ let state = {
     curYear: new Date().getFullYear(),
     curMonth: new Date().getMonth(),
     selectedCalDate: null,
+    blockedSlots: [],
 
     // Modal State
     selectedAppt: null,
@@ -56,7 +56,7 @@ async function apiFetch(url, options = {}) {
     Object.assign(options.headers, getAuthHeader());
     const res = await fetch(url, options);
     if (res.status === 401) { logout(); throw new Error('Unauthorized'); }
-    if (res.status === 403) { showToast('権限がありません。', 'var(--rose)'); throw new Error('Forbidden'); }
+    if (res.status === 403) { showToast('権限がありません、E, 'var(--rose)'); throw new Error('Forbidden'); }
     return res;
 }
 
@@ -73,8 +73,7 @@ async function handleLogin() {
         if (res.ok) {
             localStorage.setItem('jwtToken', data.token);
             localStorage.setItem('userRole', data.role);
-            // ログイン成功：モーダルを隠してダッシュボードを初期化
-            const lm = document.getElementById('login-modal');
+            // ログイン成功�E�モーダルを隠してダチE��ュボ�Eドを初期匁E            const lm = document.getElementById('login-modal');
             if (lm) lm.style.cssText = 'display:none !important;';
             applyRBAC();
             renderCalendar();
@@ -105,8 +104,7 @@ function applyRBAC() {
     const isAdmin = role === 'admin';
     const lockBtn = (btn) => { if(btn) { btn.disabled = !isAdmin; btn.style.opacity = isAdmin ? '1' : '0.5'; } };
     
-    // スタッフ権限の場合は編集ボタンを無効化（UIマスキング）
-    lockBtn(document.querySelector("#selected-date-info button"));
+    // スタチE��権限�E場合�E編雁E�Eタンを無効化！EIマスキング�E�E    lockBtn(document.querySelector("#selected-date-info button"));
     document.querySelectorAll('.btn-delete-h').forEach(lockBtn);
     document.querySelectorAll('.btn-danger').forEach(lockBtn);
     const cb = document.getElementById('btn-submit-confirm');
@@ -123,21 +121,21 @@ window.onload = () => {
             lm.style.cssText = 'display:flex !important; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;';
         }
     } else {
-        // ログイン済み：画面を初期化
+        // ログイン済み�E�画面を�E期化
         applyRBAC();
         renderCalendar();
         loadData();
     }
-    // 定期的な更新 (1分ごと)
+    // 定期皁E��更新 (1刁E��と)
     setInterval(() => { if(localStorage.getItem('jwtToken')) loadData(); }, 1 * 60 * 1000);
 };
 
 function renderAccountList() {
-    // 複数アカウントUI削除により無効化
-}
+    // 褁E��アカウンチEI削除により無効匁E}
 
 // ── DATA LOADING ──
 async function loadData() {
+    initRangeSelectors();
     if (state.retryTimer) {
         clearTimeout(state.retryTimer);
         state.retryTimer = null;
@@ -146,11 +144,11 @@ async function loadData() {
     setSyncStatus('同期中...', 'var(--amber)');
 
     if (!CONFIG.API_URL_ALL) {
-        // デモ用ダミーデータ
+        // チE��用ダミ�EチE�Eタ
         console.warn("GAS_URL is not set. Loading dummy data.");
         simulateDummyData();
         renderAll();
-        setSyncStatus('デモモード', 'var(--primary)');
+        setSyncStatus('チE��モーチE, 'var(--primary)');
         return;
     }
 
@@ -172,18 +170,19 @@ async function loadData() {
             return appt;
         });
         state.holidays = data.holidays || {};
+        state.blockedSlots = data.blockedSlots || [];
         state.customers = (data.customers || []).map(cust => {
             cust.tel = formatPhoneNumber(cust.tel);
             return cust;
         });
         renderAll();
-        setSyncStatus('同期完了', 'var(--emerald)');
-        state.retryCount = 0; // 成功したのでリセット
+        setSyncStatus('同期完亁E, 'var(--emerald)');
+        state.retryCount = 0; // 成功したのでリセチE��
     } catch (e) {
         console.error("Fetch error:", e);
         setSyncStatus('同期エラー', 'var(--rose)');
 
-        // 自動指数バックオフリトライ (10秒、20秒、40秒、最大60秒)
+        // 自動指数バックオフリトライ (10秒、E0秒、E0秒、最大60私E
         state.retryCount++;
         const delay = Math.min(10000 * Math.pow(2, state.retryCount - 1), 60000);
         console.log(`Sync failed. Retrying in ${delay / 1000}s (Attempt ${state.retryCount})...`);
@@ -198,19 +197,19 @@ function setSyncStatus(text, color) {
         el.previousElementSibling.style.background = color;
     }
 
-    // 同期エラー警告バナーの制御
+    // 同期エラー警告バナ�Eの制御
     const banner = document.getElementById('sync-error-banner');
     if (banner) {
         if (text === '同期エラー') {
             banner.style.display = 'flex';
             banner.style.background = 'linear-gradient(135deg, var(--rose), #e11d48)';
             banner.style.boxShadow = '0 4px 12px rgba(244, 63, 94, 0.2)';
-            banner.textContent = `⚠️ スプレッドシートとの同期に失敗しました。接続を確認し、ここをクリックして再試行してください（自動リトライ中...）。`;
+            banner.textContent = `⚠�E�EスプレチE��シートとの同期に失敗しました。接続を確認し、ここをクリチE��して再試行してください�E��E動リトライ中...�E�。`;
         } else if (text === '同期中...') {
             banner.style.display = 'flex';
             banner.style.background = 'linear-gradient(135deg, var(--amber), #d97706)';
             banner.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.2)';
-            banner.textContent = `⚡ スプレッドシートと同期しています...`;
+            banner.textContent = `⚡ スプレチE��シートと同期してぁE��ぁE..`;
         } else {
             banner.style.display = 'none';
         }
@@ -229,32 +228,31 @@ function renderAll() {
 function showView(viewId) {
     state.currentView = viewId;
 
-    // UIの切り替え
-    document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
+    // UIの刁E��替ぁE    document.querySelectorAll('.view-container').forEach(el => el.classList.remove('active'));
     document.getElementById(`view-${viewId}`).classList.add('active');
 
-    // サイドバーの切り替え (PC用)
+    // サイドバーの刁E��替ぁE(PC用)
     document.querySelectorAll('aside .nav-item').forEach(el => el.classList.remove('active'));
     const navItems = document.querySelectorAll('aside .nav-section:first-of-type .nav-item');
     
-    // ボトムナビの切り替え (スマホ用)
+    // ボトムナビの刁E��替ぁE(スマ�E用)
     document.querySelectorAll('.mobile-nav-item').forEach(el => el.classList.remove('active'));
 
     if (viewId === 'requests') {
         if (navItems.length > 0) navItems[0].classList.add('active');
         const mobileReqBtn = document.getElementById('mobile-nav-requests');
         if (mobileReqBtn) mobileReqBtn.classList.add('active');
-        document.getElementById('page-title').textContent = '予約申請一覧';
+        document.getElementById('page-title').textContent = '予紁E��請一覧';
     } else if (viewId === 'calendar') {
         if (navItems.length > 1) navItems[1].classList.add('active');
         const mobileCalBtn = document.getElementById('mobile-nav-calendar');
         if (mobileCalBtn) mobileCalBtn.classList.add('active');
-        document.getElementById('page-title').textContent = '不定休・予約枠カレンダー設定';
+        document.getElementById('page-title').textContent = '不定休�E予紁E��カレンダー設宁E;
     } else if (viewId === 'customers') {
         if (navItems.length > 2) navItems[2].classList.add('active');
         const mobileCustBtn = document.getElementById('mobile-nav-customers');
         if (mobileCustBtn) mobileCustBtn.classList.add('active');
-        document.getElementById('page-title').textContent = '顧客・ブロック管理';
+        document.getElementById('page-title').textContent = '顧客・ブロチE��管琁E;
         renderCustomers();
     }
 
@@ -264,7 +262,7 @@ function showView(viewId) {
 function renderStats() {
     const pending = state.appts.filter(a => a.status === 'pending').length;
     const phone = state.appts.filter(a => a.status === 'phone').length;
-    const doneToday = state.appts.filter(a => a.status === 'done').length; // 本来は日付チェック
+    const doneToday = state.appts.filter(a => a.status === 'done').length; // 本来は日付チェチE��
     const hols = Object.keys(state.holidays).length;
 
     document.getElementById('stat-pending').textContent = pending;
@@ -286,13 +284,13 @@ function renderTable() {
     document.getElementById('request-count').textContent = `${list.length} 件`;
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する申請はありません</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する申請�Eありません</td></tr>`;
         return;
     }
 
     tbody.innerHTML = list.map(a => {
         const statusClass = a.status === 'pending' ? 'tag-blue' : (a.status === 'phone' ? 'tag-amber' : 'tag-emerald');
-        const statusText = a.status === 'pending' ? '⌛ 未処理' : (a.status === 'phone' ? '📞 要電話' : '✓ 確定済');
+        const statusText = a.status === 'pending' ? '⌁E未処琁E : (a.status === 'phone' ? '📞 要E��話' : '✁E確定渁E);
 
         return `
             <tr class="request-row fade-in" onclick="handleRowClick('${a.id}')">
@@ -303,9 +301,9 @@ function renderTable() {
                             <div class="p-name">
                                 ${a.name}
                                 ${a.displayCount === 2 ? '<span style="color:var(--amber); font-size:0.6rem; font-weight:bold;">[2回目]</span>' : ''}
-                                ${a.displayCount >= 3 ? '<span style="color:var(--rose); font-size:0.6rem; font-weight:bold;">[3回目(要電話)]</span>' : ''}
+                                ${a.displayCount >= 3 ? '<span style="color:var(--rose); font-size:0.6rem; font-weight:bold;">[3回目(要E��話)]</span>' : ''}
                             </div>
-                            <div class="p-meta">${a.lineAccount} / ${a.tel || '--'}${a.referral ? ` / 紹介: ${a.referral}` : ''}</div>
+                            <div class="p-meta">${a.lineAccount} / ${a.tel || '--'}${a.referral ? ` / 紹仁E ${a.referral}` : ''}</div>
                         </div>
                     </div>
                 </td>
@@ -317,7 +315,7 @@ function renderTable() {
                         ${a.choices.slice(0, 1).map(c => `
                             <div><span style="color:var(--primary); font-weight:700;">第1:</span> ${c.date} ${c.rangeLabel}</div>
                         `).join('')}
-                        ${a.choices.length > 1 ? `<div style="color:var(--text-dim); font-size:0.75rem;">+ 他 ${a.choices.length - 1} つの希望</div>` : ''}
+                        ${a.choices.length > 1 ? `<div style="color:var(--text-dim); font-size:0.75rem;">+ 仁E${a.choices.length - 1} つの希望</div>` : ''}
                     </div>
                 </td>
                 <td>
@@ -325,7 +323,7 @@ function renderTable() {
                 </td>
                 <td>
                     <button class="btn-primary" style="padding: 8px 16px; font-size: 0.75rem;">
-                        ${a.status === 'done' ? '詳細' : '処理を開始'}
+                        ${a.status === 'done' ? '詳細' : '処琁E��開姁E}
                     </button>
                 </td>
             </tr>
@@ -359,22 +357,20 @@ function openConfirmModal(a) {
     state.timeStep = 30;
 
     document.getElementById('modal-p-name').textContent = `${a.name} 様`;
-    let metaText = `${a.lineAccount} / 申請受付: ${a.receivedFull}`;
+    let metaText = `${a.lineAccount} / 申請受仁E ${a.receivedFull}`;
     if (a.referral) {
-        metaText += ` / 紹介: ${a.referral}`;
+        metaText += ` / 紹仁E ${a.referral}`;
     }
     document.getElementById('modal-p-meta').textContent = metaText;
 
-    // 自由選択エリアの初期化
-    document.getElementById('manual-date-container').style.display = 'none';
+    // 自由選択エリアの初期匁E    document.getElementById('manual-date-container').style.display = 'none';
     document.getElementById('manual-date-input').value = '';
 
-    // 時間ステップトグルの初期化
-    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
+    // 時間スチE��プトグルの初期匁E    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
     const step30Btn = document.getElementById('step-30-btn');
     if (step30Btn) step30Btn.classList.add('active');
     const pickerLabel = document.getElementById('slot-picker-label');
-    if (pickerLabel) pickerLabel.textContent = '確定時間 (30分単位)';
+    if (pickerLabel) pickerLabel.textContent = '確定時閁E(30刁E��佁E';
 
     renderChoiceTabs(a);
     renderSlotPicker();
@@ -384,16 +380,15 @@ function openConfirmModal(a) {
     const isDone = a.status === 'done';
     validateConfirmForm();
     
-    // 「未処理に戻す」ボタンの表示制御
+    // 「未処琁E��戻す」�Eタンの表示制御
     const revertBtn = document.getElementById('btn-revert-confirm');
     if (revertBtn) {
         revertBtn.style.display = isDone ? 'block' : 'none';
     }
     
-    // キャンセルボタンのテキスト変更（確定済の場合は「閉じる」）
-    const cancelBtn = document.getElementById('btn-cancel-confirm');
+    // キャンセルボタンのチE��スト変更�E�確定済�E場合�E「閉じる」！E    const cancelBtn = document.getElementById('btn-cancel-confirm');
     if (cancelBtn) {
-        cancelBtn.textContent = isDone ? '閉じる' : 'キャンセル';
+        cancelBtn.textContent = isDone ? '閉じめE : 'キャンセル';
     }
 }
 
@@ -420,8 +415,8 @@ function renderChoiceTabs(a) {
     html += `
         <div style="padding:10px; border:1px solid var(--border); border-radius:10px; text-align:center; cursor:pointer; transition:var(--transition); ${manualActive}" 
              onclick="selectChoice(3)">
-            <div style="font-size:0.6rem; font-weight:800; opacity:0.7;">✨ 自由選択</div>
-            <div style="font-size:0.85rem; font-weight:700;">日付指定</div>
+            <div style="font-size:0.6rem; font-weight:800; opacity:0.7;">✨ 自由選抁E/div>
+            <div style="font-size:0.85rem; font-weight:700;">日付指宁E/div>
         </div>
     `;
 
@@ -446,7 +441,7 @@ function selectChoice(idx) {
 }
 
 function handleManualDateChange(val) {
-    // YYYY-MM-DD を M/D(曜) 形式に変換
+    // YYYY-MM-DD めEM/D(曁E 形式に変換
     if (!val) return;
     const d = new Date(val);
     state.manualDate = `${d.getMonth() + 1}/${d.getDate()}(${CONFIG.DOW_JA[d.getDay()]})`;
@@ -477,7 +472,7 @@ function renderSlotPicker() {
 
     const isClosed = checkIsClosed(targetDate);
     if (isClosed) {
-        const reason = isClosed === 'sunday' ? '日曜日' : '不定休';
+        const reason = isClosed === 'sunday' ? '日曜日' : '不定企E;
         container.innerHTML = `<div style="grid-column:1/-1; color:var(--rose); font-size:0.85rem; font-weight:700; text-align:center; padding:20px;">休診日のため選択できません (${reason})</div>`;
         return;
     }
@@ -499,7 +494,7 @@ function renderSlotPicker() {
         });
     }
 
-    // 予約可能時間は 10:00〜20:00 のため、range.end の ":00"（例: 20:00）を最後に追加
+    // 予紁E��能時間は 10:00、E0:00 のため、range.end の ":00"�E�侁E 20:00�E�を最後に追加
     if (range.end >= range.start) {
         const time = `${range.end}:00`;
         const active = state.selectedSlot === time ? 'background:var(--primary); color:white; border-color:var(--primary);' : '';
@@ -525,18 +520,17 @@ function setTimeStep(step) {
     state.timeStep = step;
     state.selectedSlot = null;
 
-    // UIの切り替え
-    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
+    // UIの刁E��替ぁE    document.querySelectorAll('.step-btn').forEach(btn => btn.classList.remove('active'));
     if (step === 30) {
         const btn30 = document.getElementById('step-30-btn');
         if (btn30) btn30.classList.add('active');
         const label = document.getElementById('slot-picker-label');
-        if (label) label.textContent = '確定時間 (30分単位)';
+        if (label) label.textContent = '確定時閁E(30刁E��佁E';
     } else {
         const btn15 = document.getElementById('step-15-btn');
         if (btn15) btn15.classList.add('active');
         const label = document.getElementById('slot-picker-label');
-        if (label) label.textContent = '確定時間 (15分単位)';
+        if (label) label.textContent = '確定時閁E(15刁E��佁E';
     }
 
     renderSlotPicker();
@@ -556,15 +550,15 @@ function updateScriptPreview() {
         targetDate = a.choices[state.selectedChoiceIdx].date;
     }
 
-    // 2026年や2026/などの年表記を削除
+    // 2026年めE026/などの年表記を削除
     const cleanedTargetDate = targetDate.replace(/2026[\/\-年]?/g, '');
 
-    // MMDDが3桁になっている場合は0を補って4桁にする
+    // MMDDぁE桁になってぁE��場合�E0を補って4桁にする
     const mmdd = String(a.receivedMMDD).padStart(4, '0');
 
-    // Format: [受信MMDD][名前][(アカウント)][変 (変更予約時)][予約日(曜)][時間]
+    // Format: [受信MMDD][名前][(アカウンチE][夁E(変更予紁E��)][予紁E��(曁E][時間]
     const isChange = a.type && a.type.includes("変更");
-    const hen = isChange ? "変" : "";
+    const hen = isChange ? "夁E : "";
     const script = `${mmdd}${a.name}${a.lineAccount}${hen}${cleanedTargetDate}${slot}`;
     document.getElementById('script-preview').textContent = script;
 }
@@ -589,8 +583,7 @@ function validateConfirmForm() {
         return;
     }
 
-    // 時間スロットが選択されている場合のみ活性化
-    const hasSlot = !!state.selectedSlot;
+    // 時間スロチE��が選択されてぁE��場合�Eみ活性匁E    const hasSlot = !!state.selectedSlot;
     btn.disabled = !hasSlot;
     btn.style.opacity = hasSlot ? '1' : '0.5';
     btn.style.cursor = hasSlot ? 'pointer' : 'not-allowed';
@@ -600,14 +593,13 @@ function validateConfirmForm() {
 function openPhoneModal(a) {
     state.selectedAppt = a;
 
-    // MMDDが3桁になっている場合は0を補って4桁にする
+    // MMDDぁE桁になってぁE��場合�E0を補って4桁にする
     const mmdd = String(a.receivedMMDD).padStart(4, '0');
 
-    // 管理者への指示
-    document.getElementById('phone-script-admin').textContent = `${mmdd}${a.name}${a.lineAccount}要電話案内`;
+    // 管琁E��E��の持E��
+    document.getElementById('phone-script-admin').textContent = `${mmdd}${a.name}${a.lineAccount}要E��話案�E`;
 
-    // ユーザーへの定型文
-    const template = `${a.name} 様\n\nお申込みいただきありがとうございます。\n誠に恐れ入りますが、直接医院へお電話にてご連絡をお願いしております。\n\nお電話口にて「LINEでの変更希望」とお伝えいただけますとスムーズです。\n\nどうぞよろしくお願いいたします。`;
+    // ユーザーへの定型斁E    const template = `${a.name} 様\n\nお申込みぁE��だきありがとぁE��ざいます、En誠に恐れ入りますが、直接医院へお電話にてご連絡をお願いしております、En\nお電話口にて「LINEでの変更希望」とお伝えぁE��だけますとスムーズです、En\nどぁE��よろしくお願いぁE��します。`;
     document.getElementById('phone-script-user').textContent = template;
 
     document.getElementById('modal-phone').style.display = 'flex';
@@ -632,7 +624,7 @@ function renderCalendar() {
     // 空白のセル
     for (let i = 0; i < first; i++) html += `<div class="day-cell empty"></div>`;
 
-    // 日付のセル
+    // 日付�Eセル
     for (let d = 1; d <= days; d++) {
         const cur = new Date(y, m, d);
         const key = fmtDate(cur);
@@ -663,8 +655,12 @@ function clickCalDate(key) {
     renderCalendar();
 
     const d = new Date(key);
-    document.getElementById("h-date-label").textContent = `${d.getMonth() + 1}月${d.getDate()}日(${CONFIG.DOW_JA[d.getDay()]})`;
+    document.getElementById("h-date-label").textContent = `${d.getMonth() + 1}朁E{d.getDate()}日(${CONFIG.DOW_JA[d.getDay()]})`;
     document.getElementById("h-memo-input").value = state.holidays[key] ? state.holidays[key].memo : "";
+    
+    if (typeof renderTimeSlotsBlocker === 'function') {
+        renderTimeSlotsBlocker(key);
+    }
     document.getElementById("selected-date-info").style.display = "block";
 }
 
@@ -676,11 +672,11 @@ async function toggleHoliday() {
     const btn = document.querySelector("#selected-date-info button");
     const originalText = btn.textContent;
 
-    // ボタンを無効化しローディング表示
+    // ボタンを無効化しローチE��ング表示
     btn.disabled = true;
     btn.classList.add("btn-loading");
 
-    // サーバーへ送信
+    // サーバ�Eへ送信
     if (CONFIG.API_URL_ALL) {
         try {
             const res = await apiFetch(CONFIG.API_URL_HOLIDAYS, {
@@ -691,7 +687,7 @@ async function toggleHoliday() {
             if (!res.ok) throw new Error("Sync failed");
         } catch (e) {
             console.error("Holiday sync error:", e);
-            showToast("同期エラー：スプレッドシートへの保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�スプレチE��シートへの保存に失敗しました、E, "var(--rose)");
             btn.disabled = false;
             btn.classList.remove("btn-loading");
             btn.textContent = originalText;
@@ -700,7 +696,7 @@ async function toggleHoliday() {
         }
     }
 
-    // 成功時のみローカル状態を更新
+    // 成功時�Eみローカル状態を更新
     if (state.holidays[key] && !memo) {
         delete state.holidays[key];
         showToast("不定休を解除しました");
@@ -735,9 +731,9 @@ function renderHolidayList() {
             <div class="h-list-item">
                 <div>
                     <div class="h-item-date">${d.getMonth() + 1}/${d.getDate()} (${CONFIG.DOW_JA[d.getDay()]})</div>
-                    <div class="h-item-memo">${state.holidays[k].memo || 'メモなし'}</div>
+                    <div class="h-item-memo">${state.holidays[k].memo || 'メモなぁE}</div>
                 </div>
-                <button class="btn-delete-h" onclick="deleteHoliday('${k}')">×</button>
+                <button class="btn-delete-h" onclick="deleteHoliday('${k}')">ÁE/button>
             </div>
         `;
     }).join('');
@@ -746,8 +742,7 @@ function renderHolidayList() {
 async function deleteHoliday(key) {
     const originalHolidays = { ...state.holidays };
 
-    // 楽観的UI更新（画面上はすぐ削除する）
-    delete state.holidays[key];
+    // 楽観的UI更新�E�画面上�Eすぐ削除する�E�E    delete state.holidays[key];
     renderAll();
     showToast("同期中...");
 
@@ -762,10 +757,10 @@ async function deleteHoliday(key) {
             showToast("削除しました");
         } catch (e) {
             console.error("Delete holiday sync error:", e);
-            // エラーが発生したら元の状態にロールバックする
+            // エラーが発生したら允E�E状態にロールバックする
             state.holidays = originalHolidays;
             renderAll();
-            showToast("同期エラー：削除の同期に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�削除の同期に失敗しました、E, "var(--rose)");
             setSyncStatus('同期エラー', 'var(--rose)');
         }
     } else {
@@ -792,19 +787,16 @@ function formatPhoneNumber(tel) {
     if (!tel) return "";
     let clean = String(tel).replace(/[^\d]/g, ""); // 数字以外を除去
 
-    // 先頭の0が消えている場合（例: "7022223333" -> "07022223333"）
-    if (clean.length === 9 || clean.length === 10) {
+    // 先頭の0が消えてぁE��場合（侁E "7022223333" -> "07022223333"�E�E    if (clean.length === 9 || clean.length === 10) {
         if (!clean.startsWith("0")) {
             clean = "0" + clean;
         }
     }
 
-    // 11桁の携帯電話（090-1234-5678）のフォーマット
-    if (clean.length === 11) {
+    // 11桁�E携帯電話�E�E90-1234-5678�E��EフォーマッチE    if (clean.length === 11) {
         return clean.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
     }
-    // 10桁の固定電話（03-1234-5678 など）のフォーマット
-    if (clean.length === 10) {
+    // 10桁�E固定電話�E�E3-1234-5678 など�E��EフォーマッチE    if (clean.length === 10) {
         return clean.replace(/(\d{2,3})(\d{3,4})(\d{4})/, "$1-$2-$3");
     }
 
@@ -840,28 +832,26 @@ function formatWithDow(dateStr) {
         }
     }
 
-    // 年表記 (2026/, 2026-, 2026年) を完全に削除したクリーンな文字列を作る
+    // 年表訁E(2026/, 2026-, 2026年) を完�Eに削除したクリーンな斁E���Eを作る
     let cleaned = dateStr.replace(/20\d{2}[\/\-年]?/g, '').replace(/日$/, '').trim();
 
-    // すでにカッコ付きの曜日が含まれている場合は、カッコを半角に統一してそのまま返す
-    if (/\([日月火水木金土]\)/.test(cleaned) || /（[日月火水木金土]）/.test(cleaned)) {
-        cleaned = cleaned.replace(/（/g, '(').replace(/）/g, ')');
+    // すでにカチE��付きの曜日が含まれてぁE��場合�E、カチE��を半角に統一してそ�Eまま返す
+    if (/\([日月火水木金土]\)/.test(cleaned) || /�E�E日月火水木金土]�E�E.test(cleaned)) {
+        cleaned = cleaned.replace(/�E�Eg, '(').replace(/�E�Eg, ')');
         return cleaned;
     }
 
-    // 曜日が含まれていない場合、パースを試みる
-    let year = new Date().getFullYear();
+    // 曜日が含まれてぁE��ぁE��合、パースを試みめE    let year = new Date().getFullYear();
     let month = 1;
     let day = 1;
 
-    // 元の文字列から年を抽出（もしあれば）
-    const yearMatch = dateStr.match(/(20\d{2})/);
+    // 允E�E斁E���Eから年を抽出�E�もしあれ�E�E�E    const yearMatch = dateStr.match(/(20\d{2})/);
     if (yearMatch) {
         year = parseInt(yearMatch[1], 10);
     }
 
-    // クリーンな文字列から月日を抽出
-    const mdMatch = cleaned.match(/(\d{1,2})[\/\-月](\d{1,2})/);
+    // クリーンな斁E���Eから月日を抽出
+    const mdMatch = cleaned.match(/(\d{1,2})[\/\-朁E(\d{1,2})/);
     if (mdMatch) {
         month = parseInt(mdMatch[1], 10);
         day = parseInt(mdMatch[2], 10);
@@ -885,7 +875,7 @@ function closeModal(id) {
 function copyText(id) {
     const txt = document.getElementById(id).textContent;
     navigator.clipboard.writeText(txt);
-    showToast("コピーしました");
+    showToast("コピ�Eしました");
 }
 
 function copyScript() {
@@ -897,8 +887,7 @@ function copyScript() {
 }
 
 function showToast(msg, color = "var(--emerald)") {
-    // 簡易的な通知実装
-    const toast = document.createElement('div');
+    // 簡易的な通知実裁E    const toast = document.createElement('div');
     toast.style.cssText = `position:fixed; bottom:80px; left:50%; transform:translateX(-50%); background:${color}; color:white; padding:12px 24px; border-radius:99px; font-weight:700; z-index:2000; box-shadow:0 8px 24px rgba(0,0,0,0.2); animation:modalIn 0.3s;`;
     toast.textContent = msg;
     document.body.appendChild(toast);
@@ -917,11 +906,11 @@ function checkIsClosed(dateStr) {
     const month = parseInt(match[1], 10);
     const day = parseInt(match[2], 10);
 
-    // 日曜日チェック
+    // 日曜日チェチE��
     const d = new Date(year, month - 1, day);
     if (!isNaN(d.getTime()) && d.getDay() === 0) return 'sunday';
 
-    // 不定休チェック (YYYY-MM-DD形式に変換して比較)
+    // 不定休チェチE�� (YYYY-MM-DD形式に変換して比輁E
     const key = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     if (state.holidays[key]) return 'holiday';
 
@@ -937,7 +926,7 @@ async function submitFinal() {
     const btn = document.getElementById('btn-submit-confirm');
     const originalText = btn.textContent;
 
-    // ステータス更新
+    // スチE�Eタス更新
     let targetDate;
     if (state.selectedChoiceIdx === 3) {
         targetDate = state.manualDate;
@@ -945,7 +934,7 @@ async function submitFinal() {
         targetDate = a.choices[state.selectedChoiceIdx].date;
     }
 
-    // ボタンを無効化しローディング表示
+    // ボタンを無効化しローチE��ング表示
     btn.disabled = true;
     btn.classList.add("btn-loading");
 
@@ -961,16 +950,15 @@ async function submitFinal() {
             if (!res.ok) throw new Error("Sync failed");
         } catch (e) {
             console.error("Submit final sync error:", e);
-            showToast("同期エラー：スプレッドシートへの保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�スプレチE��シートへの保存に失敗しました、E, "var(--rose)");
             btn.disabled = false;
             btn.classList.remove("btn-loading");
             btn.textContent = originalText;
             setSyncStatus('同期エラー', 'var(--rose)');
-            return; // 処理を中断し、モーダルは閉じない
-        }
+            return; // 処琁E��中断し、モーダルは閉じなぁE        }
     }
 
-    // 同期成功時のみローカル状態を更新してモーダルを閉じる
+    // 同期成功時�Eみローカル状態を更新してモーダルを閉じる
     a.status = 'done';
     a.confirmedData = confirmedData;
 
@@ -980,7 +968,7 @@ async function submitFinal() {
 
     closeModal('modal-confirm');
     renderAll();
-    showToast("予約確定を保存しました");
+    showToast("予紁E��定を保存しました");
 }
 
 async function markAsPhoneProcessed() {
@@ -988,7 +976,7 @@ async function markAsPhoneProcessed() {
     const btn = document.querySelector("#modal-phone .btn-primary");
     const originalText = btn.textContent;
 
-    // ボタンを無効化しローディング表示
+    // ボタンを無効化しローチE��ング表示
     btn.disabled = true;
     btn.classList.add("btn-loading");
 
@@ -1002,17 +990,16 @@ async function markAsPhoneProcessed() {
             if (!res.ok) throw new Error("Phone sync failed");
         } catch (e) {
             console.error("Phone processed sync error:", e);
-            showToast("同期エラー：スプレッドシートへの保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�スプレチE��シートへの保存に失敗しました、E, "var(--rose)");
             btn.disabled = false;
             btn.classList.remove("btn-loading");
             btn.textContent = originalText;
             setSyncStatus('同期エラー', 'var(--rose)');
-            return; // 処理を中断し、モーダルは閉じない
-        }
+            return; // 処琁E��中断し、モーダルは閉じなぁE        }
     }
 
-    // 同期成功時のみローカル状態を更新してモーダルを閉じる
-    a.status = 'done'; // または 'processed'
+    // 同期成功時�Eみローカル状態を更新してモーダルを閉じる
+    a.status = 'done'; // また�E 'processed'
 
     btn.disabled = false;
     btn.classList.remove("btn-loading");
@@ -1020,26 +1007,26 @@ async function markAsPhoneProcessed() {
 
     closeModal('modal-phone');
     renderAll();
-    showToast("電話案内済みとしてマークしました");
+    showToast("電話案�E済みとしてマ�Eクしました");
 }
 
 // ── DUMMY DATA ──
 function simulateDummyData() {
     state.appts = [
         {
-            id: "1", name: "テスト花子", tel: "090-1111-2222", lineAccount: "(ミラ総)", receivedFull: "2026/05/15 10:20", receivedMMDD: "0515", status: "pending", isSecondChange: false, choices: [
-                { date: "5/18(月)", rangeLabel: "11:00〜12:00", rangeStart: 11, rangeEnd: 12 },
-                { date: "5/20(水)", rangeLabel: "午後", rangeStart: 13, rangeEnd: 18 }
+            id: "1", name: "チE��ト花孁E, tel: "090-1111-2222", lineAccount: "(ミラ緁E", receivedFull: "2026/05/15 10:20", receivedMMDD: "0515", status: "pending", isSecondChange: false, choices: [
+                { date: "5/18(朁E", rangeLabel: "11:00、E2:00", rangeStart: 11, rangeEnd: 12 },
+                { date: "5/20(水)", rangeLabel: "午征E, rangeStart: 13, rangeEnd: 18 }
             ]
         },
         {
-            id: "2", name: "サンプル太郎", tel: "080-3333-4444", lineAccount: "(ミラc)", receivedFull: "2026/05/16 09:45", receivedMMDD: "0516", status: "pending", isSecondChange: true, choices: [
-                { date: "5/22(金)", rangeLabel: "終日", rangeStart: 10, rangeEnd: 20 }
+            id: "2", name: "サンプル太郁E, tel: "080-3333-4444", lineAccount: "(ミラc)", receivedFull: "2026/05/16 09:45", receivedMMDD: "0516", status: "pending", isSecondChange: true, choices: [
+                { date: "5/22(釁E", rangeLabel: "終日", rangeStart: 10, rangeEnd: 20 }
             ]
         },
         {
             id: "3", name: "佐藤 健", tel: "070-5555-6666", lineAccount: "(ミラmo)", receivedFull: "2026/05/16 11:30", receivedMMDD: "0516", status: "phone", isSecondChange: true, choices: [
-                { date: "5/25(月)", rangeLabel: "午前", rangeStart: 10, rangeEnd: 12 }
+                { date: "5/25(朁E", rangeLabel: "午前", rangeStart: 10, rangeEnd: 12 }
             ]
         }
     ].map(appt => {
@@ -1051,10 +1038,10 @@ function simulateDummyData() {
         }
         return appt;
     });
-    state.holidays = { "2026-05-20": { memo: "不定休" } };
+    state.holidays = { "2026-05-20": { memo: "不定企E } };
     state.customers = [
-        { name: "テスト花子", tel: "09011112222", changeCount: 1, isBlocked: false, lastUpdated: "2026/05/18 10:20" },
-        { name: "サンプル太郎", tel: "08033334444", changeCount: 2, isBlocked: true, lastUpdated: "2026/05/18 11:30" }
+        { name: "チE��ト花孁E, tel: "09011112222", changeCount: 1, isBlocked: false, lastUpdated: "2026/05/18 10:20" },
+        { name: "サンプル太郁E, tel: "08033334444", changeCount: 2, isBlocked: true, lastUpdated: "2026/05/18 11:30" }
     ];
 }
 
@@ -1079,18 +1066,17 @@ function renderCustomers() {
     }
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する顧客はいません</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する顧客はぁE��せん</td></tr>`;
         return;
     }
 
     tbody.innerHTML = list.map(c => {
         const isBlocked = c.isBlocked === true || c.isBlocked === "true" || c.isBlocked === "TRUE";
         const blockClass = isBlocked ? 'tag-rose' : 'tag-emerald';
-        const blockText = isBlocked ? '🔴 ブロック中' : '🟢 許可';
-        const blockBtnText = isBlocked ? '解除' : 'ブロック';
+        const blockText = isBlocked ? '🔴 ブロチE��中' : '🟢 許可';
+        const blockBtnText = isBlocked ? '解除' : 'ブロチE��';
 
-        // 予約変更回数カウントの背景色を設定（3以上は警告赤）
-        const actionCount = parseInt(c.changeCount || 0, 10);
+        // 予紁E��更回数カウント�E背景色を設定！E以上�E警告赤�E�E        const actionCount = parseInt(c.changeCount || 0, 10);
         let countStyle = 'font-weight: 800; font-size: 1.1rem;';
         if (actionCount >= 2) {
             countStyle += ' color: var(--rose);';
@@ -1123,7 +1109,7 @@ function renderCustomers() {
                     ${c.lastUpdated || '--'}
                 </td>
                 <td style="padding: 16px 24px; text-align: right;">
-                    <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.75rem; border-radius: 8px; margin-right: 6px;" onclick="openEditCustomerModal('${c.name}', '${c.tel}')">編集</button>
+                    <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.75rem; border-radius: 8px; margin-right: 6px;" onclick="openEditCustomerModal('${c.name}', '${c.tel}')">編雁E/button>
                     <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.75rem; border-radius: 8px; color: var(--rose); border-color: var(--rose-glow);" onclick="deleteCustomer('${c.name}', '${c.tel}')">削除</button>
                 </td>
             </tr>
@@ -1143,10 +1129,10 @@ async function adjustCustomerCount(name, tel, delta) {
     let originalCount = cust.changeCount;
     let newCount = Math.max(0, parseInt(originalCount || 0, 10) + delta);
 
-    // 楽観的更新
+    // 楽観皁E��新
     cust.changeCount = newCount;
 
-    // もし回数が2回以上に増えたら自動ブロック、1回以下に減ったら自動ブロック解除にする
+    // もし回数ぁE回以上に増えたら自動ブロチE��、E回以下に減ったら自動ブロチE��解除にする
     let autoBlock = cust.isBlocked;
     if (newCount >= 2 && delta > 0) {
         autoBlock = true;
@@ -1178,11 +1164,11 @@ async function adjustCustomerCount(name, tel, delta) {
             console.error("Adjust count error:", e);
             cust.changeCount = originalCount; // ロールバック
             renderCustomers();
-            showToast("同期エラー：スプレッドシートへの保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�スプレチE��シートへの保存に失敗しました、E, "var(--rose)");
             setSyncStatus('同期エラー', 'var(--rose)');
         }
     } else {
-        showToast("変更回数を更新しました（デモモード）");
+        showToast("変更回数を更新しました�E�デモモード！E);
     }
 }
 
@@ -1193,7 +1179,7 @@ async function toggleCustomerBlock(name, tel) {
     let originalBlock = cust.isBlocked;
     let newBlock = !originalBlock;
 
-    // 楽観的更新
+    // 楽観皁E��新
     cust.isBlocked = newBlock;
     renderCustomers();
 
@@ -1212,17 +1198,17 @@ async function toggleCustomerBlock(name, tel) {
                 })
             });
             if (!res.ok) throw new Error("Sync failed");
-            showToast(newBlock ? "予約をブロックしました" : "ブロックを解除しました");
+            showToast(newBlock ? "予紁E��ブロチE��しました" : "ブロチE��を解除しました");
             loadData();
         } catch (e) {
             console.error("Toggle block error:", e);
             cust.isBlocked = originalBlock; // ロールバック
             renderCustomers();
-            showToast("同期エラー：スプレッドシートへの保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�スプレチE��シートへの保存に失敗しました、E, "var(--rose)");
             setSyncStatus('同期エラー', 'var(--rose)');
         }
     } else {
-        showToast(newBlock ? "予約をブロックしました（デモモード）" : "ブロックを解除しました（デモモード）");
+        showToast(newBlock ? "予紁E��ブロチE��しました�E�デモモード！E : "ブロチE��を解除しました�E�デモモード！E);
     }
 }
 
@@ -1249,7 +1235,7 @@ function openEditCustomerModal(name, tel) {
     state.editingCustOriginalName = name;
     state.editingCustOriginalTel = tel;
 
-    document.getElementById('customer-modal-title').textContent = '顧客情報の編集';
+    document.getElementById('customer-modal-title').textContent = '顧客惁E��の編雁E;
     document.getElementById('cust-name').value = name;
     document.getElementById('cust-name').disabled = true;
     document.getElementById('cust-tel').value = tel.replace(/[^\d]/g, '');
@@ -1279,7 +1265,7 @@ async function saveCustomer() {
     const isBlocked = document.getElementById('cust-blocked').checked;
 
     if (!name || !tel) {
-        alert("名前と電話番号を入力してください。");
+        alert("名前と電話番号を�E力してください、E);
         return;
     }
 
@@ -1304,10 +1290,10 @@ async function saveCustomer() {
                 body: JSON.stringify(customerData)
             });
             if (!res.ok) throw new Error("Save customer failed");
-            showToast("顧客情報を保存しました");
+            showToast("顧客惁E��を保存しました");
         } catch (e) {
             console.error("Save customer error:", e);
-            showToast("同期エラー：保存に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�保存に失敗しました、E, "var(--rose)");
             btn.disabled = false;
             btn.classList.remove("btn-loading");
             btn.textContent = originalText;
@@ -1330,7 +1316,7 @@ async function saveCustomer() {
                 cust.lastUpdated = formatReceivedFull(new Date().toString());
             }
         }
-        showToast("顧客情報を保存しました（デモモード）");
+        showToast("顧客惁E��を保存しました�E�デモモード！E);
     }
 
     btn.disabled = false;
@@ -1342,7 +1328,7 @@ async function saveCustomer() {
 }
 
 async function deleteCustomer(name, tel) {
-    if (!confirm(`${name} 様の顧客データを削除しますか？\n(スプレッドシートの履歴から削除されます)`)) return;
+    if (!confirm(`${name} 様�E顧客チE�Eタを削除しますか�E�\n(スプレチE��シート�E履歴から削除されまぁE`)) return;
 
     if (CONFIG.API_URL_ALL) {
         showToast("同期中...");
@@ -1357,16 +1343,16 @@ async function deleteCustomer(name, tel) {
                 })
             });
             if (!res.ok) throw new Error("Delete failed");
-            showToast("顧客データを削除しました");
+            showToast("顧客チE�Eタを削除しました");
             loadData();
         } catch (e) {
             console.error("Delete customer error:", e);
-            showToast("同期エラー：削除に失敗しました。", "var(--rose)");
+            showToast("同期エラー�E�削除に失敗しました、E, "var(--rose)");
             setSyncStatus('同期エラー', 'var(--rose)');
         }
     } else {
         state.customers = state.customers.filter(c => !(c.name === name && c.tel === tel));
-        showToast("顧客データを削除しました（デモモード）");
+        showToast("顧客チE�Eタを削除しました�E�デモモード！E);
         renderCustomers();
     }
 }
@@ -1375,7 +1361,7 @@ async function revertStatusToPending() {
     const a = state.selectedAppt;
     if (!a) return;
 
-    if (!confirm("本当にこの予約確定を取り消して、未処理の状態に戻しますか？\n（患者の変更回数のカウントも自動的に1回差し引かれます）")) return;
+    if (!confirm("本当にこ�E予紁E��定を取り消して、未処琁E�E状態に戻しますか�E�\n�E�患老E�E変更回数のカウントも自動的に1回差し引かれます！E)) return;
 
     if (CONFIG.API_URL_ALL) {
         showToast("同期中...");
@@ -1398,7 +1384,7 @@ async function revertStatusToPending() {
             const data = await res.json();
             if (data.error) throw new Error(data.error);
 
-            showToast("未処理に戻しました");
+            showToast("未処琁E��戻しました");
             closeModal('modal-confirm');
             loadData();
         } catch (e) {
@@ -1410,8 +1396,179 @@ async function revertStatusToPending() {
         a.confirmedDate = '';
         a.confirmedTime = '';
         a.confirmedScript = '';
-        showToast("未処理に戻しました（デモモード）");
+        showToast("未処琁E��戻しました�E�デモモード！E);
         closeModal('modal-confirm');
         renderAll();
     }
 }
+function initRangeSelectors() {
+    const startSelect = document.getElementById('range-start');
+    const endSelect = document.getElementById('range-end');
+    if (!startSelect || !endSelect) return;
+    
+    startSelect.innerHTML = '';
+    endSelect.innerHTML = '';
+    
+    for (let h = 10; h <= 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            if (h === 20 && m > 0) continue;
+            const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+            startSelect.add(new Option(timeStr, timeStr));
+            endSelect.add(new Option(timeStr, timeStr));
+        }
+    }
+}
+
+function renderTimeSlotsBlocker(dateKey) {
+    const container = document.getElementById("time-matrix-container");
+    if (!container) return;
+    container.innerHTML = "";
+
+    const isHoliday = !!state.holidays[dateKey];
+    
+    let html = '<table class="time-matrix">';
+    html += '<tr><th></th><th>00</th><th>15</th><th>30</th><th>45</th></tr>';
+
+    for (let h = 10; h <= 20; h++) {
+        if(h === 20) {
+            html += `<tr><th>20晁E/th>`;
+            const timeStr = '20:00';
+            const slotKey = `${dateKey}_${timeStr}`;
+            const isBlocked = state.blockedSlots.includes(slotKey);
+            let cls = isHoliday ? "holiday-mode" : (isBlocked ? "blocked" : "");
+            html += `<td class="${cls}" onclick="toggleBlockedSlot('${slotKey}')"></td><td colspan="3"></td></tr>`;
+            break;
+        }
+
+        html += `<tr><th>${h}晁E/th>`;
+        for (let m = 0; m < 60; m += 15) {
+            const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+            const slotKey = `${dateKey}_${timeStr}`;
+            const isBlocked = state.blockedSlots.includes(slotKey);
+            
+            let cls = isHoliday ? "holiday-mode" : (isBlocked ? "blocked" : "");
+            
+            html += `<td class="${cls}" onclick="toggleBlockedSlot('${slotKey}')"></td>`;
+        }
+        html += '</tr>';
+    }
+    html += '</table>';
+    container.innerHTML = html;
+}
+
+window.blockSelectedRange = function() {
+    if (!state.selectedCalDate || state.holidays[state.selectedCalDate]) return;
+    const start = document.getElementById('range-start').value;
+    const end = document.getElementById('range-end').value;
+    
+    if (start >= end) {
+        alert("開始時刻は終亁E��刻より前に設定してください、E);
+        return;
+    }
+
+    const slots = [];
+    for (let h = 10; h <= 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            if (h === 20 && m > 0) continue;
+            const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+            if (timeStr >= start && timeStr < end) {
+                slots.push(`${state.selectedCalDate}_${timeStr}`);
+            }
+        }
+    }
+    bulkToggleBlocks(slots, 'add');
+};
+
+
+async function toggleBlockedSlot(slotKey) {
+    const isBlocked = state.blockedSlots.includes(slotKey);
+    const action = isBlocked ? 'delete' : 'add';
+
+    // 楽観的UI更新
+    if (isBlocked) {
+        state.blockedSlots = state.blockedSlots.filter(s => s !== slotKey);
+    } else {
+        state.blockedSlots.push(slotKey);
+    }
+    renderTimeSlotsBlocker(slotKey.split('_')[0]);
+
+    try {
+        const res = await apiFetch(`${'https://reserve-pro-dashboard.onrender.com/api/blocked-slots'}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, slotKey })
+        });
+        if (!res.ok) throw new Error("Sync failed");
+    } catch (e) {
+        console.error("Blocked slot sync error:", e);
+        showToast("同期エラー", "var(--rose)");
+        loadData(); // ロールバック
+    }
+}
+
+async function bulkToggleBlocks(slotsToToggle, action) {
+    if (!slotsToToggle.length) return;
+    
+    // 楽観的UI更新
+    const originalSlots = [...state.blockedSlots];
+    if (action === 'add') {
+        const newSlots = new Set([...state.blockedSlots, ...slotsToToggle]);
+        state.blockedSlots = Array.from(newSlots);
+    } else {
+        state.blockedSlots = state.blockedSlots.filter(s => !slotsToToggle.includes(s));
+    }
+    renderTimeSlotsBlocker(state.selectedCalDate);
+
+    // API同期
+    try {
+        const promises = slotsToToggle.map(slotKey => {
+            return apiFetch(`${'https://reserve-pro-dashboard.onrender.com/api/blocked-slots'}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ slotKey, action })
+            });
+        });
+        await Promise.all(promises);
+    } catch (e) {
+        console.error("Bulk toggle sync error:", e);
+        state.blockedSlots = originalSlots;
+        renderTimeSlotsBlocker(state.selectedCalDate);
+        showToast("同期エラー", "var(--rose)");
+    }
+}
+
+window.blockMorning = function() {
+    if (!state.selectedCalDate || state.holidays[state.selectedCalDate]) return;
+    const slots = [];
+    for (let h = 10; h < 13; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            slots.push(`${state.selectedCalDate}_${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+        }
+    }
+    bulkToggleBlocks(slots, 'add');
+};
+
+window.blockAfternoon = function() {
+    if (!state.selectedCalDate || state.holidays[state.selectedCalDate]) return;
+    const slots = [];
+    for (let h = 13; h <= 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            if (h === 20 && m > 0) continue;
+            slots.push(`${state.selectedCalDate}_${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+        }
+    }
+    bulkToggleBlocks(slots, 'add');
+};
+
+window.clearAllBlocks = function() {
+    if (!state.selectedCalDate || state.holidays[state.selectedCalDate]) return;
+    const slots = [];
+    for (let h = 10; h <= 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
+            if (h === 20 && m > 0) continue;
+            slots.push(`${state.selectedCalDate}_${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+        }
+    }
+    bulkToggleBlocks(slots, 'delete');
+};
+

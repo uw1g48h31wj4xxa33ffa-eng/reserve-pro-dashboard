@@ -28,7 +28,7 @@
           <i>📋</i> 申請一覧
         </div>
         <div class="nav-item" onclick="showView('calendar')">
-          <i>📅</i> カレンダー管理
+          <i>📅</i> 不定休・予約枠管理
         </div>
         <div class="nav-item" onclick="showView('customers')">
           <i>👥</i> 顧客・ブロック管理
@@ -153,7 +153,28 @@
                     style="font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; color: var(--primary);">--</div>
                   <input type="text" id="h-memo-input" class="search-bar" style="width: 100%; margin-bottom: 12px;"
                     placeholder="メモ（例：院長不在）">
-                  <button class="btn-primary" style="width: 100%;" onclick="toggleHoliday()">この日を登録/更新</button>
+                  <button class="btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="toggleHoliday()">この日を登録/更新</button>
+
+                  <div style="border-top: 1px solid var(--border-light); padding-top: 16px;">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
+                      <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">時間帯ブロック設定</h4>
+                      <span style="font-size: 0.7rem; color: var(--text-muted);">範囲指定 ＆ マトリクス</span>
+                    </div>
+
+                    <!-- 範囲指定 -->
+                    <div style="display: flex; gap: 4px; margin-bottom: 4px; align-items: center; background: var(--surface-lt); padding: 6px; border-radius: 8px;">
+                      <select id="range-start" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
+                      <span style="font-size: 0.75rem; color: var(--text-muted);">〜</span>
+                      <select id="range-end" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
+                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--primary); color: white; border: none; font-weight: bold;" onclick="blockSelectedRange()">追加</button>
+                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--surface); color: var(--rose); border: 1px solid var(--border);" onclick="clearAllBlocks()">全解除</button>
+                    </div>
+
+                    <!-- マトリクス -->
+                    <div id="time-matrix-container" style="margin-bottom: 2px;">
+                      <!-- JSでマトリクスを描画 -->
+                    </div>
+                  </div>
                 </div>
               </div>
 
