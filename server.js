@@ -74,7 +74,7 @@ function requireAdmin(req, res, next) {
 
 // 静的ファイルの提供（フロントエンド画面用）
 app.use(express.static(__dirname));
-const PORT = 3001; // ポートを3001に変更
+const PORT = process.env.PORT || 3001; // Render等に対応するため環境変数から取得
 
 // Firebaseからデータを取得
 async function getHolidaysData() {
@@ -184,10 +184,7 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
 cron.schedule('0 0 * * *', async () => {
     console.log('[Cron] 深夜0時: データベースを初期状態（デモ用データ）にリセットします');
     const demoData = {
-        holidays: {
-            "2026-06-15": { memo: "定期健診" },
-            "2026-06-25": { memo: "学会出席" }
-        },
+        holidays: {},
         blockedSlots: [
             "2026-06-20_10:00",
             "2026-06-20_10:15"
