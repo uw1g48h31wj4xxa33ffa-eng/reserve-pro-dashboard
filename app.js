@@ -204,19 +204,7 @@ function setSyncStatus(text, color) {
     // 同期エラー警告バナーの制御
     const banner = document.getElementById('sync-error-banner');
     if (banner) {
-        if (text === '同期エラー') {
-            banner.style.display = 'flex';
-            banner.style.background = 'linear-gradient(135deg, var(--rose), #e11d48)';
-            banner.style.boxShadow = '0 4px 12px rgba(244, 63, 94, 0.2)';
-            banner.textContent = `⚠️ スプレッドシートとの同期に失敗しました。接続を確認し、ここをクリックして再試行してください（自動リトライ中...）。`;
-        } else if (text === '同期中...') {
-            banner.style.display = 'flex';
-            banner.style.background = 'linear-gradient(135deg, var(--amber), #d97706)';
-            banner.style.boxShadow = '0 4px 12px rgba(245, 158, 11, 0.2)';
-            banner.textContent = `⚡ スプレッドシートと同期しています...`;
-        } else {
-            banner.style.display = 'none';
-        }
+        banner.style.display = 'none';
     }
 }
 
