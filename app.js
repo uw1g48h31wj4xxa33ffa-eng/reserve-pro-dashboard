@@ -247,6 +247,10 @@ function showView(viewId) {
         if (mobileCustBtn) mobileCustBtn.classList.add('active');
         document.getElementById('page-title').textContent = '顧客・ブロック管理';
         renderCustomers();
+    } else if (viewId === 'forms') {
+        const mobileFormsBtn = document.getElementById('mobile-nav-forms');
+        if (mobileFormsBtn) mobileFormsBtn.classList.add('active');
+        document.getElementById('page-title').textContent = '案内用フォーム';
     }
 
     if (viewId === 'calendar') renderCalendar();
