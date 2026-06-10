@@ -1248,3 +1248,44 @@ header {
     font-size: 0.8rem;
   }
 }
+
+/* --- TIME MATRIX --- */
+.time-matrix { 
+    width: 100%; 
+    border-collapse: separate; 
+    border-spacing: 4px; 
+    font-size: 1rem; 
+    text-align: center; 
+}
+.time-matrix th { 
+    font-weight: 600; 
+    color: var(--text-muted); 
+    padding: 8px 0; 
+    font-size: 0.9rem;
+}
+.time-matrix td { 
+    height: 32px;
+    padding: 0; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+    color: var(--text-main); 
+    font-weight: 500; 
+    width: 22%; 
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #fff;
+}
+.time-matrix td:hover { 
+    border-color: var(--primary); 
+    background: var(--surface-lt); 
+}
+.time-matrix td.blocked { 
+    background: var(--rose); 
+    color: white; 
+    border-color: var(--rose); 
+}
+.time-matrix td.holiday-mode { 
+    opacity: 0.4; 
+    pointer-events: none; 
+    background: #f3f4f6;
+}
