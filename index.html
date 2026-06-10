@@ -4,22 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserve Pro | 不定休・予約枠管理カレンダー</title>
+  <title>Ultimate Reserve Pro | 予約管理（モバイル対応版）</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@500&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260606">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
   <div class="app-container">
-    <!-- スマホ用オーバーレイ -->
-    <div class="mobile-overlay" id="mobile-overlay" onclick="toggleMenu()"></div>
-    
-    <!-- サイドバー -->
-    <aside id="sidebar">
+    <!-- サイドバー (PC表示用) -->
+    <aside>
       <div class="brand">
         <div class="logo-icon">UR</div>
         <div class="brand-name">Reserve Pro</div>
@@ -27,13 +24,19 @@
 
       <div class="nav-section">
         <span class="section-label">メイン</span>
-        <div class="nav-item active">
-          <i>📅</i> カレンダー管理
+        <div class="nav-item active" onclick="showView('requests')">
+          <i>📋</i> 申請一覧
+        </div>
+        <div class="nav-item" onclick="showView('calendar')">
+          <i>📅</i> 不定休カレンダー
+        </div>
+        <div class="nav-item" onclick="showView('customers')">
+          <i>👥</i> 顧客・ブロック管理
         </div>
       </div>
 
       <div class="nav-section" style="margin-top: 24px;">
-        <span class="section-label" style="color:var(--primary);">🔒 デモ用フォーム</span>
+        <span class="section-label" style="color:var(--primary);">🔒 案内用フォーム</span>
         <a href="/forms_demo/new-reservation/index.html" target="_blank" class="nav-item" style="text-decoration:none; color:inherit; font-size:0.9rem;">
           <i>📝</i> 新規予約・再予約フォーム
         </a>
@@ -47,44 +50,14 @@
           <i>🤝</i> ご紹介専用フォーム
         </a>
       </div>
-
-      <div class="nav-section" style="margin-top: 16px;">
-        <span class="section-label" style="color:var(--emerald);">📋 管理ツール</span>
-        <a href="./mobile/index.html" class="nav-item" style="text-decoration:none; color:inherit; font-size:0.9rem; background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.25);">
-          <i>🗂️</i> 予約管理ダッシュボード
-        </a>
-      </div>
-
-      <div class="nav-section" style="margin-top: 32px; flex: 1; display: flex; flex-direction: column;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <span class="section-label" style="margin-bottom: 0;">登録済み一覧</span>
-          <span class="tag tag-blue" id="h-count-badge" style="font-size: 0.7rem;">0 件</span>
-        </div>
-        <div class="h-list-items" id="h-list-items" style="flex: 1; overflow-y: auto;">
-          <!-- JSで描画 -->
-        </div>
-      </div>
     </aside>
 
     <!-- メインコンテンツ -->
-    <script>
-    // --- モバイル用メニュー開閉 ---
-    function toggleMenu() {
-      const sidebar = document.getElementById('sidebar');
-      const overlay = document.getElementById('mobile-overlay');
-      if (sidebar && overlay) {
-        sidebar.classList.toggle('open');
-        overlay.classList.toggle('active');
-      }
-    }
-    </script>
     <main>
       <header>
-        <button id="mobile-menu-btn" class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-        <div class="page-title" id="page-title">不定休・予約枠カレンダー設定</div>
+        <div class="page-title" id="page-title">予約申請一覧</div>
         <div class="header-actions">
-          <button class="btn-primary" style="background: var(--surface-lt); color: var(--text-main);" onclick="logout()">🚪 ログアウト</button>
-          <div class="stat-pill" id="sync-status-pill" onclick="loadData()" style="cursor: pointer; display: none;" title="クリックして再同期">
+          <div class="stat-pill" id="sync-status-pill" onclick="loadData()" style="cursor: pointer;" title="クリックして再同期">
             <span class="dot" style="background: var(--emerald)"></span>
             <span id="sync-status">同期完了</span>
           </div>
@@ -94,17 +67,70 @@
 
       <!-- 同期エラー警告バナー -->
       <div id="sync-error-banner" class="sync-error-banner" style="display: none;" onclick="loadData()">
-        ⚠️ 同期に失敗しました。再接続を試みています。
+        ⚠️ スプレッドシートとの同期に失敗しました。クリックして再接続を試みます。
       </div>
 
       <div class="content-body">
 
+        <!-- ════ 申請一覧ビュー ════ -->
+        <div id="view-requests" class="view-container active">
+          <!-- 統計カード -->
+          <div class="stats-grid">
+            <div class="stat-card pending">
+              <div class="stat-icon">⌛</div>
+              <div class="stat-label">未処理</div>
+              <div class="stat-value" id="stat-pending">--</div>
+            </div>
+            <div class="stat-card phone">
+              <div class="stat-icon" style="color: var(--amber)">📞</div>
+              <div class="stat-label">要電話案内</div>
+              <div class="stat-value" id="stat-phone">--</div>
+            </div>
+            <div class="stat-card done">
+              <div class="stat-icon" style="color: var(--emerald)">✓</div>
+              <div class="stat-label">本日確定</div>
+              <div class="stat-value" id="stat-done">--</div>
+            </div>
+            <div class="stat-card holiday">
+              <div class="stat-icon" style="color: var(--primary)">📅</div>
+              <div class="stat-label">不定休設定</div>
+              <div class="stat-value" id="stat-holidays">--</div>
+            </div>
+          </div>
+
+          <!-- 申請テーブル -->
+          <div class="list-header">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <h3 style="font-family: var(--font-heading)">受信した申請</h3>
+              <span class="tag tag-blue" id="request-count">0 件</span>
+            </div>
+            <input type="text" class="search-bar" placeholder="患者名で検索..." oninput="filterTable(this.value)">
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="request-table">
+              <thead>
+                <tr>
+                  <th>患者情報 / アカウント</th>
+                  <th>受信日時</th>
+                  <th>希望日時</th>
+                  <th>ステータス</th>
+                  <th>アクション</th>
+                </tr>
+              </thead>
+              <tbody id="request-tbody">
+                <!-- JSで描画 -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <!-- ════ 不定休カレンダービュー ════ -->
-        <div id="view-calendar" class="view-container active">
+        <div id="view-calendar" class="view-container">
           <div class="calendar-layout">
-            <div class="calendar-card" style="width: 100%;">
+            <div class="calendar-card">
               <div class="calendar-nav">
-                <div class="month-title" id="cal-month-title">--</div>
+                <div class="month-title" id="cal-month-title">MAY 2026</div>
                 <div class="nav-btns">
                   <button class="nav-btn" onclick="moveMonth(-1)">‹</button>
                   <button class="nav-btn" onclick="moveMonth(1)">›</button>
@@ -115,51 +141,214 @@
               </div>
             </div>
 
-            <div class="holiday-panel" style="display: flex; flex-direction: column; gap: 16px;  overflow-y: auto; overflow-x: hidden; padding-right: 8px;">
-              <div class="h-panel-card" style="flex: 1; display: flex; flex-direction: column; gap: 16px;">
-                <div style="flex: 1; min-width: 250px;">
-                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 4px;">不定休の設定</h3>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px;">
-                  ※カレンダーの日付を押して不定休の登録・解除
-
+            <div class="holiday-panel">
+              <div class="h-panel-card">
+                <h3 style="font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 12px;">不定休の設定</h3>
+                <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+                  カレンダーの日付をクリックして、不定休の登録・解除ができます。
                 </p>
-                <div id="selected-date-info">
+                <div id="selected-date-info" style="display: none;">
                   <span class="section-label">選択中の日付</span>
                   <div id="h-date-label"
-                    style="font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; color: var(--primary);">--</div>
-                  <input type="text" id="h-memo-input" class="search-bar" style="width: 100%; margin-bottom: 4px;"
+                    style="font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; color: var(--primary);">--</div>
+                  <input type="text" id="h-memo-input" class="search-bar" style="width: 100%; margin-bottom: 12px;"
                     placeholder="メモ（例：院長不在）">
-                  <button class="btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="toggleHoliday()">この日を休診にする/解除</button>
-                  
-                  <div style="border-top: 1px solid var(--border-light); padding-top: 16px;">
-                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px;">
-                      <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">時間帯ブロック設定</h4>
-                      <span style="font-size: 0.7rem; color: var(--text-muted);">範囲指定 ＆ マトリクス</span>
-                    </div>
-
-                    <!-- 範囲指定 -->
-                    <div style="display: flex; gap: 4px; margin-bottom: 4px; align-items: center; background: var(--surface-lt); padding: 6px; border-radius: 8px;">
-                      <select id="range-start" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
-                      <span style="font-size: 0.75rem; color: var(--text-muted);">〜</span>
-                      <select id="range-end" style="flex: 1; padding: 2px; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; outline: none;"></select>
-                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--primary); color: white; border: none; font-weight: bold;" onclick="blockSelectedRange()">追加</button>
-                      <button class="nav-btn" style="width: auto; height: 24px; padding: 0 8px; font-size: 0.7rem; background: var(--surface); color: var(--rose); border: 1px solid var(--border);" onclick="clearAllBlocks()">全解除</button>
-                    </div>
-
-                    <!-- マトリクス -->
-                    <div id="time-matrix-container" style="margin-bottom: 2px;">
-                      <!-- JSでマトリクスを描画 -->
-                    </div>
-                  </div>
+                  <button class="btn-primary" style="width: 100%;" onclick="toggleHoliday()">この日を登録/更新</button>
                 </div>
               </div>
 
+              <div class="h-panel-card" style="flex: 1; display: flex; flex-direction: column;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <h3 style="font-family: var(--font-heading); font-size: 1.1rem;">登録済み一覧</h3>
+                  <span class="tag tag-blue" id="h-count-badge">0 件</span>
+                </div>
+                <div class="h-list-items" id="h-list-items">
+                  <!-- JSで描画 -->
+                </div>
               </div>
+            </div>
+          </div>
+        </div>
+ 
+        <!-- ════ 顧客・ブロック管理ビュー ════ -->
+        <div id="view-customers" class="view-container">
+          <!-- 統計・検索バー -->
+          <div class="list-header">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <h3 style="font-family: var(--font-heading)">顧客・ブロックリスト</h3>
+              <span class="tag tag-blue" id="customer-count">0 名</span>
+            </div>
+            <div class="customer-actions-wrapper">
+              <input type="text" class="search-bar" id="customer-search" placeholder="名前または電話番号で検索..." oninput="filterCustomers(this.value)">
+              <button class="btn-primary" onclick="openAddCustomerModal()">＋ 新規顧客追加</button>
+            </div>
+          </div>
+
+          <div class="customer-list-card">
+            <div class="table-responsive-wrapper">
+              <table class="request-table" style="border-spacing: 0; width: 100%;">
+                <thead>
+                  <tr style="border-bottom: 2px solid var(--border);">
+                    <th style="padding: 12px 16px;">顧客名 / 電話番号</th>
+                    <th style="padding: 12px 16px; text-align: center;">予約アクション回数</th>
+                    <th style="padding: 12px 16px; text-align: center;">LINE予約ブロック</th>
+                    <th style="padding: 12px 16px;">最終更新</th>
+                    <th style="padding: 12px 16px; text-align: right;">アクション</th>
+                  </tr>
+                </thead>
+                <tbody id="customer-tbody">
+                  <!-- JSで描画 -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
       </div>
     </main>
+  </div>
+
+  <!-- モバイル用ボトムナビゲーション -->
+  <nav class="mobile-nav">
+    <div class="mobile-nav-item active" id="mobile-nav-requests" onclick="showView('requests')">
+      <span class="mobile-nav-icon">📋</span>
+      <span class="mobile-nav-label">申請一覧</span>
+    </div>
+    <div class="mobile-nav-item" id="mobile-nav-calendar" onclick="showView('calendar')">
+      <span class="mobile-nav-icon">📅</span>
+      <span class="mobile-nav-label">カレンダー</span>
+    </div>
+    <div class="mobile-nav-item" id="mobile-nav-customers" onclick="showView('customers')">
+      <span class="mobile-nav-icon">👥</span>
+      <span class="mobile-nav-label">顧客・ブロック</span>
+    </div>
+  </nav>
+
+  <!-- 確定モーダル -->
+  <div class="modal-backdrop" id="modal-confirm">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="modal-p-name" style="font-family: var(--font-heading); font-size: 1.75rem;">患者名 様</h2>
+          <p id="modal-p-meta" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">アカウント名 / 申請: 05/15 10:00</p>
+        </div>
+        <button onclick="closeModal('modal-confirm')" class="modal-close-btn">×</button>
+      </div>
+
+      <div id="modal-body-content">
+        <!-- 第1〜3希望の選択タブ + 自由選択 -->
+        <span class="section-label">希望枠の選択</span>
+        <div id="choice-tabs" class="choice-tabs-grid"></div>
+
+        <!-- 自由選択用日付入力 (初期は非表示) -->
+        <div id="manual-date-container" style="display: none; margin-bottom: 24px;">
+          <span class="section-label">日付を自由に選択</span>
+          <input type="date" id="manual-date-input" class="search-bar" style="width: 100%;"
+            onchange="handleManualDateChange(this.value)">
+        </div>
+
+        <!-- スロットピッカー -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span class="section-label" id="slot-picker-label" style="margin-bottom: 0;">確定時間 (30分単位)</span>
+          <div class="step-toggle-container" style="display: flex; background: var(--surface-lt); border: 1px solid var(--border); border-radius: 20px; padding: 2px;">
+            <button type="button" id="step-30-btn" class="step-btn active" onclick="setTimeStep(30)">30分</button>
+            <button type="button" id="step-15-btn" class="step-btn" onclick="setTimeStep(15)">15分</button>
+          </div>
+        </div>
+        <div id="slot-picker" class="slot-picker-grid">
+        </div>
+
+        <!-- スクリプトプレビュー -->
+        <div class="script-preview-container">
+          <span class="script-badge">LINE返信スクリプト</span>
+          <div id="script-preview"
+            style="font-family: var(--font-mono); font-size: 1.25rem; color: var(--emerald); word-break: break-all;">--
+          </div>
+        </div>
+        <button class="btn-secondary" style="width: 100%; margin-top: 12px;" onclick="copyScript()">📋 スクリプトをコピー</button>
+      </div>
+
+      <div class="modal-footer-actions">
+        <button class="btn-secondary" id="btn-cancel-confirm" style="flex: 1;" onclick="closeModal('modal-confirm')">キャンセル</button>
+        <button class="btn-rose" id="btn-revert-confirm" style="flex: 1.2; display: none; background: var(--rose); color: white; border: none; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: 700; transition: all 0.2s;" onclick="revertStatusToPending()">↩ 未処理に戻す</button>
+        <button class="btn-primary" id="btn-submit-confirm" style="flex: 1.5; background: var(--primary); color: white;"
+          onclick="submitFinal()">✓ 予約確定を保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 要電話案内モーダル -->
+  <div class="modal-backdrop" id="modal-phone">
+    <div class="modal" style="border-color: var(--amber)">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">📞</div>
+        <h2 style="font-family: var(--font-heading); color: var(--amber)">2回目以降の変更申請</h2>
+        <p style="color: var(--text-muted); margin-top: 8px;">直接医院へお電話いただくようご案内が必要です。</p>
+      </div>
+
+      <div class="phone-warning-box">
+        この患者様は既に1回予約変更を行っています。フォームでの受付は対象外のため、電話案内用のスクリプトを使用してください。
+      </div>
+
+      <span class="section-label">LINE管理者への指示</span>
+      <div id="phone-script-admin" class="script-display-box">
+        --</div>
+      <button class="btn-secondary" style="width: 100%; margin-bottom: 24px;"
+        onclick="copyText('phone-script-admin')">📋 指示をコピー</button>
+
+      <span class="section-label">お客様への定型文</span>
+      <div id="phone-script-user" class="script-display-box" style="height: 100px; overflow-y: auto; font-size: 0.85rem;">
+        --</div>
+      <button class="btn-secondary" style="width: 100%;" onclick="copyText('phone-script-user')">📋 定型文をコピー</button>
+
+      <div class="modal-footer-actions" style="margin-top: 32px;">
+        <button class="btn-secondary" style="flex: 1;" onclick="closeModal('modal-phone')">閉じる</button>
+        <button class="btn-primary" style="flex: 2; background: var(--amber); color: white; border-color: var(--amber);"
+          onclick="markAsPhoneProcessed()">📞 電話案内済みにする</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 顧客追加・編集モーダル -->
+  <div class="modal-backdrop" id="modal-customer">
+    <div class="modal" style="max-width: 480px;">
+      <div class="modal-header">
+        <h2 id="customer-modal-title" style="font-family: var(--font-heading); font-size: 1.5rem;">新規顧客の登録</h2>
+        <button onclick="closeModal('modal-customer')" class="modal-close-btn">×</button>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="margin-bottom: 12px;">
+          <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">お名前（漢字、スペースなし推奨）</label>
+          <input type="text" id="cust-name" class="search-bar" style="width: 100%;" placeholder="例：山田太郎">
+        </div>
+        
+        <div style="margin-bottom: 12px;">
+          <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">電話番号（ハイフンなし）</label>
+          <input type="tel" id="cust-tel" class="search-bar" style="width: 100%;" placeholder="例：09012345678">
+        </div>
+
+        <div style="margin-bottom: 12px;">
+          <label style="font-weight: 700; font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">予約アクション回数（1:新規, 2:変更1回目, 3:変更2回目）</label>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <button class="btn-secondary" style="padding: 8px 16px;" onclick="adjustCustCount(-1)">-</button>
+            <span id="cust-count-display" style="font-size: 1.25rem; font-weight: 800; width: 40px; text-align: center;">1</span>
+            <button class="btn-secondary" style="padding: 8px 16px;" onclick="adjustCustCount(1)">+</button>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin-top: 10px;">
+          <input type="checkbox" id="cust-blocked" style="width: 20px; height: 20px; cursor: pointer;">
+          <label for="cust-blocked" style="font-weight: 700; cursor: pointer; color: var(--rose);">LINE予約を強制ブロックする</label>
+        </div>
+      </div>
+
+      <div class="modal-footer-actions" style="margin-top: 32px;">
+        <button class="btn-secondary" style="flex: 1;" onclick="closeModal('modal-customer')">キャンセル</button>
+        <button class="btn-primary" style="flex: 1.5; background: var(--primary); color: white;"
+          onclick="saveCustomer()">✓ 顧客情報を保存</button>
+      </div>
+    </div>
   </div>
 
   <!-- Login Modal -->
@@ -172,7 +361,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260616"></script>
+  <script src="app.js?v=20260610"></script>
 </body>
 
 </html>
