@@ -57,7 +57,7 @@
       <header>
         <div class="page-title" id="page-title">予約申請一覧</div>
         <div class="header-actions">
-          <button class="btn-primary" style="background: var(--surface-lt); color: var(--text-main);" onclick="logout()">🚪 ログアウト</button>
+          <button class="btn-secondary" style="background: var(--surface-lt); color: var(--text-main);" onclick="logout()">🚪 ログアウト</button>
           <div class="stat-pill" id="sync-status-pill" onclick="loadData()" style="cursor: pointer;" title="クリックして再同期">
             <span class="dot" style="background: var(--emerald)"></span>
             <span id="sync-status">同期完了</span>
@@ -224,6 +224,20 @@
           </div>
         </div>
 
+        <!-- ════ 案内用フォームビュー (モバイル用) ════ -->
+        <div id="view-forms" class="view-container">
+          <div class="calendar-card" style="padding: 24px; max-width: 600px; margin: 0 auto;">
+            <h3 style="margin-bottom: 24px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px; color: #111827;">
+              <span style="color:var(--primary);">🔒</span> 案内用フォーム
+            </h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <a href="/forms_demo/new-reservation/index.html" target="_blank" style="background: #f9fafb; border: 1.5px solid #e5e7eb; padding: 16px; border-radius: 12px; text-decoration: none; text-align: left; display: block; color: #374151; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">📝 新規予約・再予約フォーム</a>
+              <a href="/forms_demo/change/index.html" target="_blank" style="background: #f9fafb; border: 1.5px solid #e5e7eb; padding: 16px; border-radius: 12px; text-decoration: none; text-align: left; display: block; color: #374151; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">🔄 予約変更フォーム</a>
+              <a href="/forms_demo/counseling/index.html" target="_blank" style="background: #f9fafb; border: 1.5px solid #e5e7eb; padding: 16px; border-radius: 12px; text-decoration: none; text-align: left; display: block; color: #374151; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">💬 カウンセリング予約</a>
+              <a href="/forms_demo/referral-reservation/index.html" target="_blank" style="background: #f9fafb; border: 1.5px solid #e5e7eb; padding: 16px; border-radius: 12px; text-decoration: none; text-align: left; display: block; color: #374151; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">🤝 ご紹介専用フォーム</a>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -386,7 +400,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260610"></script>
+  <script src="app.js?v=20260611"></script>
 </body>
 
 </html>
