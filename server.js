@@ -6,7 +6,7 @@ let serviceAccount;
 try {
     serviceAccount = require('./firebase-key.json');
 } catch (e) {
-    serviceAccount = { project_id: "test-mock" }; // CIテスト用のダミー
+    serviceAccount = { project_id: "test-mock" }; // CIチE��ト用のダミ�E
 }
 
 admin.initializeApp({
@@ -23,8 +23,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'super-secret-key-2026';
 
 const app = express();
 
-// セキュリティヘッダーの設定（インラインスクリプト等を許可するためCSPはオフ）
-app.use(helmet({
+// セキュリチE��ヘッダーの設定（インラインスクリプト等を許可するためCSPはオフ！Eapp.use(helmet({
   contentSecurityPolicy: false,
 }));
 
@@ -35,18 +34,16 @@ app.use(express.json());
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     
-    // adminアカウント
-    if (username === 'admin' && password === 'admin123') {
+    // adminアカウンチE    if (username === 'admin' && password === 'admin123') {
         const token = jwt.sign({ username, role: 'admin' }, JWT_SECRET, { expiresIn: '12h' });
         return res.json({ token, role: 'admin' });
     }
-    // staffアカウント（閲覧のみ）
-    if (username === 'staff' && password === 'staff123') {
+    // staffアカウント（閲覧のみ�E�E    if (username === 'staff' && password === 'staff123') {
         const token = jwt.sign({ username, role: 'staff' }, JWT_SECRET, { expiresIn: '12h' });
         return res.json({ token, role: 'staff' });
     }
     
-    return res.status(401).json({ error: 'ユーザー名またはパスワードが間違っています。' });
+    return res.status(401).json({ error: 'ユーザー名また�Eパスワードが間違ってぁE��す、E });
 });
 
 // 認証ミドルウェア (Token検証)
@@ -54,30 +51,27 @@ function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     
-    if (token == null) return res.status(401).json({ error: '認証トークンが必要です。' });
+    if (token == null) return res.status(401).json({ error: '認証ト�Eクンが忁E��です、E });
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.status(401).json({ error: 'トークンが無効または期限切れです。' });
+        if (err) return res.status(401).json({ error: 'ト�Eクンが無効また�E期限刁E��です、E });
         req.user = user;
         next();
     });
 }
 
-// 権限管理ミドルウェア (Admin必須)
+// 権限管琁E��ドルウェア (Admin忁E��E
 function requireAdmin(req, res, next) {
     if (req.user && req.user.role === 'admin') {
         next();
     } else {
-        res.status(403).json({ error: 'この操作を実行するには管理者権限が必要です。' });
+        res.status(403).json({ error: 'こ�E操作を実行するには管琁E��E��限が忁E��です、E });
     }
 }
 
-// 静的ファイルの提供（フロントエンド画面用）
-app.use(express.static(__dirname));
-const PORT = process.env.PORT || 3001; // Render等に対応するため環境変数から取得
-
-// Firebaseからデータを取得
-async function getHolidaysData() {
+// 静的ファイルの提供（フロントエンド画面用�E�Eapp.use(express.static(__dirname));
+const PORT = process.env.PORT || 3001; // Render等に対応するため環墁E��数から取征E
+// FirebaseからチE�Eタを取征Easync function getHolidaysData() {
     try {
         const doc = await db.collection('settings').doc('holidaysData').get();
         if (!doc.exists) {
@@ -90,8 +84,7 @@ async function getHolidaysData() {
     }
 }
 
-// Firebaseへデータを保存
-async function saveHolidaysData(data) {
+// FirebaseへチE�Eタを保孁Easync function saveHolidaysData(data) {
     try {
         await db.collection('settings').doc('holidaysData').set(data);
     } catch (e) {
@@ -100,7 +93,7 @@ async function saveHolidaysData(data) {
     }
 }
 
-// 監査ログ（オペレーション履歴）を記録する
+// 監査ログ�E�オペレーション履歴�E�を記録する
 async function saveAuditLog(username, action, details) {
     try {
         await db.collection('audit_logs').add({
@@ -114,13 +107,13 @@ async function saveAuditLog(username, action, details) {
     }
 }
 
-// API: 全件取得 (全権限・一般公開アクセス可能)
+// API: 全件取征E(全権限�E一般公開アクセス可能)
 app.get('/api/holidays', async (req, res) => {
     const data = await getHolidaysData();
     res.json(data);
 });
 
-// API: 休診日更新 (Admin権限必須)
+// API: 休診日更新 (Admin権限忁E��E
 app.post('/api/holidays', authenticateToken, requireAdmin, async (req, res) => {
     const action = req.body.action;
     const date = req.body.date;
@@ -149,7 +142,7 @@ app.post('/api/holidays', authenticateToken, requireAdmin, async (req, res) => {
     }
 });
 
-// API: 予約不可枠の更新 (Admin権限必須)
+// API: 予紁E��可枠の更新 (Admin権限忁E��E
 app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res) => {
     const action = req.body.action;
     const slotKey = req.body.slotKey; // e.g. "2026-05-20_10:15"
@@ -180,9 +173,9 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
     }
 });
 
-// 深夜0時にデモ用データにリセットする定期実行タスク (毎日00:00 JST)
+// 深夁E時にチE��用チE�EタにリセチE��する定期実行タスク (毎日00:00 JST)
 cron.schedule('0 0 * * *', async () => {
-    console.log('[Cron] 深夜0時: データベースを初期状態（デモ用データ）にリセットします');
+    console.log('[Cron] 深夁E晁E チE�Eタベ�Eスを�E期状態（デモ用チE�Eタ�E�にリセチE��しまぁE);
     const demoData = {
         holidays: {},
         blockedSlots: [
@@ -192,9 +185,9 @@ cron.schedule('0 0 * * *', async () => {
     };
     try {
         await saveHolidaysData(demoData);
-        console.log('[Cron] リセット完了');
+        console.log('[Cron] リセチE��完亁E);
     } catch (e) {
-        console.error('[Cron] リセット失敗:', e);
+        console.error('[Cron] リセチE��失敁E', e);
     }
 }, {
     scheduled: true,
@@ -204,13 +197,13 @@ cron.schedule('0 0 * * *', async () => {
 if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`=========================================`);
-        console.log(` 予約システム用 ローカルサーバー 稼働中...`);
-        console.log(` ポート: ${PORT}`);
-        console.log(` データベース: Firebase Firestore`);
-        console.log(` 終了する場合はこのウィンドウを閉じるか Ctrl+C を押してください`);
+        console.log(` 予紁E��スチE��用 ローカルサーバ�E 稼働中...`);
+        console.log(` ポ�EチE ${PORT}`);
+        console.log(` チE�Eタベ�Eス: Firebase Firestore`);
+        console.log(` 終亁E��る場合�Eこ�Eウィンドウを閉じるぁECtrl+C を押してください`);
         console.log(`=========================================`);
     });
 }
 
-// テスト用にappをエクスポート
-module.exports = app;
+// チE��ト用にappをエクスポ�EチEmodule.exports = app;
+
