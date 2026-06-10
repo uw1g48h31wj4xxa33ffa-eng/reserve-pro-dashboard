@@ -139,6 +139,7 @@ function renderAccountList() {
 
 // ── DATA LOADING ──
 async function loadData() {
+    if (typeof initRangeSelectors === 'function') initRangeSelectors();
     if (state.retryTimer) {
         clearTimeout(state.retryTimer);
         state.retryTimer = null;
