@@ -4,7 +4,7 @@
 
 // ── CONFIGURATION ──
 const CONFIG = {
-    GAS_URL: "/api/holidays", // デプロイ・ローカル両対応の相対パス
+    GAS_URL: "", // デモ環境のため空にする
     DOW_JA: ["日", "月", "火", "水", "木", "金", "土"]
 };
 
@@ -520,5 +520,8 @@ function showToast(msg, color = "var(--emerald)") {
 
 // ── DUMMY DATA ──
 function simulateDummyData() {
-    state.holidays = { "2026-05-20": { memo: "院長学会出席" } };
+    state.holidays = {
+        "2026-06-15": { memo: "定期健診" },
+        "2026-06-25": { memo: "学会出席" }
+    };
 }
