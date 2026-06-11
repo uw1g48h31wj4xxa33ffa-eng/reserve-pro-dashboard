@@ -348,7 +348,7 @@ function handleRowClick(id) {
 // ── CONFIRM MODAL ──
 function openConfirmModal(a) {
     state.selectedAppt = a;
-    state.selectedChoiceIdx = 0;
+    state.selectedChoiceIdx = a.choices && a.choices.length > 0 ? 0 : 3;
     state.selectedSlot = null;
     state.manualDate = null;
     state.timeStep = 30;
@@ -880,53 +880,28 @@ function formatWithDow(dateStr) {
 function openManualAddModal() {
     document.getElementById('manual-name').value = '';
     document.getElementById('manual-tel').value = '';
-    document.getElementById('manual-choice1').value = '';
-    document.getElementById('manual-choice2').value = '';
-    document.getElementById('manual-choice3').value = '';
     document.getElementById('modal-manual-add').style.display = 'flex';
 }
 
 function submitManualAdd() {
     const name = document.getElementById('manual-name').value.trim();
     const tel = document.getElementById('manual-tel').value.trim();
-    const c1 = document.getElementById('manual-choice1').value;
-    const c2 = document.getElementById('manual-choice2').value;
-    const c3 = document.getElementById('manual-choice3').value;
 
-    if (!name || !tel || !c1) {
-        showToast("名前、電話番号、希望日時1は必須です", "var(--amber)");
+    if (!name || !tel) {
+        showToast("名前と電話番号は必須です", "var(--amber)");
         return;
     }
 
-    const parseChoice = (val) => {
-        if (!val) return null;
-        const d = new Date(val);
-        const y = d.getFullYear();
-        const m = String(d.getMonth() + 1).padStart(2, '0');
-        const day = String(d.getDate()).padStart(2, '0');
-        const h = String(d.getHours()).padStart(2, '0');
-        const min = String(d.getMinutes()).padStart(2, '0');
-        return {
-            date: `${y}-${m}-${day} (${CONFIG.DOW_JA[d.getDay()]})`,
-            time: `${h}:${min}`
-        };
-    };
-
-    const choices = [];
-    const parsed1 = parseChoice(c1);
-    if (parsed1) choices.push(parsed1);
-    const parsed2 = parseChoice(c2);
-    if (parsed2) choices.push(parsed2);
-    const parsed3 = parseChoice(c3);
-    if (parsed3) choices.push(parsed3);
-
+    const d = new Date();
     const newAppt = {
         id: `manual_${Date.now()}`,
         name: name,
+        lineAccount: '手動追加',
         tel: formatPhoneNumber(tel),
         status: 'pending',
-        receivedFull: formatReceivedFull(new Date().toISOString()),
-        choices: choices,
+        receivedFull: formatReceivedFull(d.toString()),
+        receivedMMDD: String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'),
+        choices: [],
         isManual: true
     };
 
