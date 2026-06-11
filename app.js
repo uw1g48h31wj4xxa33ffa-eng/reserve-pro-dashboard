@@ -16,11 +16,11 @@ const CONFIG = {
 let state = {
     appts: [],
     holidays: {},
-    customers: [], // 顧客管理リスト
+    customers: [], // 患者管理リスト
     currentView: 'requests',
     filterAccount: 'all',
     searchQuery: '',
-    searchCustomerQuery: '', // 顧客検索用
+    searchCustomerQuery: '', // 患者検索用
 
     // Calendar State
     curYear: new Date().getFullYear(),
@@ -281,7 +281,7 @@ function showView(viewId) {
         if (navItems.length > 2) navItems[2].classList.add('active');
         const mobileCustBtn = document.getElementById('mobile-nav-customers');
         if (mobileCustBtn) mobileCustBtn.classList.add('active');
-        document.getElementById('page-title').textContent = '顧客・ブロック管理';
+        document.getElementById('page-title').textContent = '患者・ブロック管理';
         renderCustomers();
     } else if (viewId === 'forms') {
         const mobileFormsBtn = document.getElementById('mobile-nav-forms');
@@ -1163,7 +1163,7 @@ function renderCustomers() {
     }
 
     if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する顧客はいません</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:80px; color:var(--text-dim)">該当する患者はいません</td></tr>`;
         return;
     }
 
@@ -1312,7 +1312,7 @@ async function toggleCustomerBlock(name, tel) {
 
 function openAddCustomerModal() {
     state.custModalMode = 'add';
-    document.getElementById('customer-modal-title').textContent = '新規顧客の登録';
+    document.getElementById('customer-modal-title').textContent = '新規患者の登録';
     document.getElementById('cust-name').value = '';
     document.getElementById('cust-name').disabled = false;
     document.getElementById('cust-tel').value = '';
@@ -1333,7 +1333,7 @@ function openEditCustomerModal(name, tel) {
     state.editingCustOriginalName = name;
     state.editingCustOriginalTel = tel;
 
-    document.getElementById('customer-modal-title').textContent = '顧客情報の編集';
+    document.getElementById('customer-modal-title').textContent = '患者情報の編集';
     document.getElementById('cust-name').value = name;
     document.getElementById('cust-name').disabled = true;
     document.getElementById('cust-tel').value = tel.replace(/[^\d]/g, '');
@@ -1388,7 +1388,7 @@ async function saveCustomer() {
                 body: JSON.stringify(customerData)
             });
             if (!res.ok) throw new Error("Save customer failed");
-            showToast("顧客情報を保存しました");
+            showToast("患者情報を保存しました");
         } catch (e) {
             console.error("Save customer error:", e);
             showToast("同期エラー：保存に失敗しました。", "var(--rose)");
@@ -1414,7 +1414,7 @@ async function saveCustomer() {
                 cust.lastUpdated = formatReceivedFull(new Date().toString());
             }
         }
-        showToast("顧客情報を保存しました（デモモード）");
+        showToast("患者情報を保存しました（デモモード）");
     }
 
     btn.disabled = false;
@@ -1426,7 +1426,7 @@ async function saveCustomer() {
 }
 
 async function deleteCustomer(name, tel) {
-    if (!confirm(`${name} 様の顧客データを削除しますか？\n(スプレッドシートの履歴から削除されます)`)) return;
+    if (!confirm(`${name} 様の患者データを削除しますか？\n(スプレッドシートの履歴から削除されます)`)) return;
 
     if (CONFIG.API_URL_ALL) {
         showToast("同期中...");
@@ -1441,7 +1441,7 @@ async function deleteCustomer(name, tel) {
                 })
             });
             if (!res.ok) throw new Error("Delete failed");
-            showToast("顧客データを削除しました");
+            showToast("患者データを削除しました");
             loadData();
         } catch (e) {
             console.error("Delete customer error:", e);
@@ -1450,7 +1450,7 @@ async function deleteCustomer(name, tel) {
         }
     } else {
         state.customers = state.customers.filter(c => !(c.name === name && c.tel === tel));
-        showToast("顧客データを削除しました（デモモード）");
+        showToast("患者データを削除しました（デモモード）");
         renderCustomers();
     }
 }

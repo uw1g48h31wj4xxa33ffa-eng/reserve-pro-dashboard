@@ -31,7 +31,7 @@
           <i>📅</i> 不定休・予約枠管理
         </div>
         <div class="nav-item" onclick="showView('customers')">
-          <i>👥</i> 顧客・ブロック管理
+          <i>👥</i> 患者・ブロック管理
         </div>
       </div>
 
@@ -191,17 +191,17 @@
           </div>
         </div>
  
-        <!-- ════ 顧客・ブロック管理ビュー ════ -->
+        <!-- ════ 患者・ブロック管理ビュー ════ -->
         <div id="view-customers" class="view-container">
           <!-- 統計・検索バー -->
           <div class="list-header">
             <div style="display: flex; gap: 12px; align-items: center;">
-              <h3 style="font-family: var(--font-heading)">顧客・ブロックリスト</h3>
+              <h3 style="font-family: var(--font-heading)">患者・ブロックリスト</h3>
               <span class="tag tag-blue" id="customer-count">0 名</span>
             </div>
             <div class="customer-actions-wrapper">
               <input type="text" class="search-bar" id="customer-search" placeholder="名前または電話番号で検索..." oninput="filterCustomers(this.value)">
-              <button class="btn-primary" onclick="openAddCustomerModal()">＋ 新規顧客追加</button>
+              <button class="btn-primary" onclick="openAddCustomerModal()">＋ 新規患者追加</button>
             </div>
           </div>
 
@@ -210,7 +210,7 @@
               <table class="request-table" style="border-spacing: 0; width: 100%;">
                 <thead>
                   <tr style="border-bottom: 2px solid var(--border);">
-                    <th style="padding: 12px 16px;">顧客名 / 電話番号</th>
+                    <th style="padding: 12px 16px;">患者名 / 電話番号</th>
                     <th style="padding: 12px 16px; text-align: center;">予約アクション回数</th>
                     <th style="padding: 12px 16px; text-align: center;">LINE予約ブロック</th>
                     <th style="padding: 12px 16px;">最終更新</th>
@@ -255,7 +255,7 @@
     </div>
     <div class="mobile-nav-item" id="mobile-nav-customers" onclick="showView('customers')">
       <span class="mobile-nav-icon">👥</span>
-      <span class="mobile-nav-label">顧客・ブロック</span>
+      <span class="mobile-nav-label">患者・ブロック</span>
     </div>
   
     <div class="mobile-nav-item" id="mobile-nav-forms" onclick="showView('forms')">
@@ -349,11 +349,11 @@
     </div>
   </div>
 
-  <!-- 顧客追加・編集モーダル -->
+  <!-- 患者追加・編集モーダル -->
   <div class="modal-backdrop" id="modal-customer">
     <div class="modal" style="max-width: 480px;">
       <div class="modal-header">
-        <h2 id="customer-modal-title" style="font-family: var(--font-heading); font-size: 1.5rem;">新規顧客の登録</h2>
+        <h2 id="customer-modal-title" style="font-family: var(--font-heading); font-size: 1.5rem;">新規患者の登録</h2>
         <button onclick="closeModal('modal-customer')" class="modal-close-btn">×</button>
       </div>
 
@@ -386,7 +386,7 @@
       <div class="modal-footer-actions" style="margin-top: 32px;">
         <button class="btn-secondary" style="flex: 1;" onclick="closeModal('modal-customer')">キャンセル</button>
         <button class="btn-primary" style="flex: 1.5; background: var(--primary); color: white;"
-          onclick="saveCustomer()">✓ 顧客情報を保存</button>
+          onclick="saveCustomer()">✓ 患者情報を保存</button>
       </div>
     </div>
   </div>
@@ -427,7 +427,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260617"></script>
+  <script src="app.js?v=20260618"></script>
 </body>
 
 </html>
