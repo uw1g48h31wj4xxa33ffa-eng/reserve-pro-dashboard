@@ -151,6 +151,7 @@ async function loadData() {
         // デモ用ダミーデータ
         console.warn("GAS_URL is not set. Loading dummy data.");
         simulateDummyData();
+        loadManualAppts();
         renderAll();
         setSyncStatus('デモモード', 'var(--primary)');
         return;
@@ -179,6 +180,10 @@ async function loadData() {
             cust.tel = formatPhoneNumber(cust.tel);
             return cust;
         });
+
+        // 手動追加された一時データをロード（翌日には自動削除）
+        loadManualAppts();
+
         renderAll();
         setSyncStatus('同期完了', 'var(--emerald)');
         state.retryCount = 0; // 成功したのでリセット
@@ -902,13 +907,24 @@ function submitManualAdd() {
         receivedFull: formatReceivedFull(d.toString()),
         receivedMMDD: String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'),
         choices: [],
-        isManual: true
+        isManual: true,
+        addedDate: d.toDateString() // ローカル保存用（翌日削除判定）
     };
+
+    // 一時的にローカルストレージへ保存
+    try {
+        const storedStr = localStorage.getItem('demo_manual_appts');
+        let storedAppts = storedStr ? JSON.parse(storedStr) : [];
+        storedAppts.unshift(newAppt);
+        localStorage.setItem('demo_manual_appts', JSON.stringify(storedAppts));
+    } catch (e) {
+        console.error("Failed to save to localStorage", e);
+    }
 
     state.appts.unshift(newAppt);
     renderAll();
     closeModal('modal-manual-add');
-    showToast("手動追加しました（※このデータはリロードで消えます）", "var(--emerald)");
+    showToast("手動追加しました（ブラウザに一時保存されます）", "var(--emerald)");
 }
 
 function closeModal(id) {
