@@ -877,6 +877,65 @@ function formatWithDow(dateStr) {
     return `${month}/${day}(${dow})`;
 }
 
+function openManualAddModal() {
+    document.getElementById('manual-name').value = '';
+    document.getElementById('manual-tel').value = '';
+    document.getElementById('manual-choice1').value = '';
+    document.getElementById('manual-choice2').value = '';
+    document.getElementById('manual-choice3').value = '';
+    document.getElementById('modal-manual-add').style.display = 'flex';
+}
+
+function submitManualAdd() {
+    const name = document.getElementById('manual-name').value.trim();
+    const tel = document.getElementById('manual-tel').value.trim();
+    const c1 = document.getElementById('manual-choice1').value;
+    const c2 = document.getElementById('manual-choice2').value;
+    const c3 = document.getElementById('manual-choice3').value;
+
+    if (!name || !tel || !c1) {
+        showToast("名前、電話番号、希望日時1は必須です", "var(--amber)");
+        return;
+    }
+
+    const parseChoice = (val) => {
+        if (!val) return null;
+        const d = new Date(val);
+        const y = d.getFullYear();
+        const m = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const h = String(d.getHours()).padStart(2, '0');
+        const min = String(d.getMinutes()).padStart(2, '0');
+        return {
+            date: `${y}-${m}-${day} (${CONFIG.DOW_JA[d.getDay()]})`,
+            time: `${h}:${min}`
+        };
+    };
+
+    const choices = [];
+    const parsed1 = parseChoice(c1);
+    if (parsed1) choices.push(parsed1);
+    const parsed2 = parseChoice(c2);
+    if (parsed2) choices.push(parsed2);
+    const parsed3 = parseChoice(c3);
+    if (parsed3) choices.push(parsed3);
+
+    const newAppt = {
+        id: `manual_${Date.now()}`,
+        name: name,
+        tel: formatPhoneNumber(tel),
+        status: 'pending',
+        receivedFull: formatReceivedFull(new Date().toISOString()),
+        choices: choices,
+        isManual: true
+    };
+
+    state.appts.unshift(newAppt);
+    renderAll();
+    closeModal('modal-manual-add');
+    showToast("手動追加しました（※このデータはリロードで消えます）", "var(--emerald)");
+}
+
 function closeModal(id) {
     document.getElementById(id).style.display = 'none';
 }

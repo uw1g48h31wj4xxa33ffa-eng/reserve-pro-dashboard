@@ -99,9 +99,10 @@
 
           <!-- 申請テーブル -->
           <div class="list-header">
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <h3 style="font-family: var(--font-heading)">受信した申請</h3>
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <h3 style="font-family: var(--font-heading)">申請一覧</h3>
               <span class="tag tag-blue" id="request-count">0 件</span>
+              <button class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem; margin-left: auto;" onclick="openManualAddModal()">➕ 手動追加</button>
             </div>
             <input type="text" class="search-bar" placeholder="患者名で検索..." oninput="filterTable(this.value)">
           </div>
@@ -390,6 +391,43 @@
     </div>
   </div>
 
+  <!-- Manual Add Modal -->
+  <div class="modal-backdrop" id="modal-manual-add">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-family: var(--font-heading)">手動で申請を追加</h3>
+        <button onclick="closeModal('modal-manual-add')" class="modal-close-btn">×</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 8px;">患者名</label>
+          <input type="text" id="manual-name" placeholder="山田 太郎" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 8px;">電話番号</label>
+          <input type="text" id="manual-tel" placeholder="090-1234-5678" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 8px;">希望日時1</label>
+          <input type="datetime-local" id="manual-choice1" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 8px;">希望日時2 (任意)</label>
+          <input type="datetime-local" id="manual-choice2" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;">
+        </div>
+        <div style="margin-bottom: 16px;">
+          <label style="display: block; font-weight: 600; margin-bottom: 8px;">希望日時3 (任意)</label>
+          <input type="datetime-local" id="manual-choice3" style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px;">
+        </div>
+        <p style="font-size: 0.85rem; color: var(--amber); margin-top: 8px;">※追加したデータはブラウザの更新で消える場合があります。</p>
+      </div>
+      <div class="modal-footer-actions" style="margin-top: 24px;">
+        <button class="btn-secondary" style="flex: 1;" onclick="closeModal('modal-manual-add')">キャンセル</button>
+        <button class="btn-primary" style="flex: 1.5;" onclick="submitManualAdd()">✓ 追加する</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Login Modal -->
   <div id="login-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
     <div style="background:var(--surface); padding:32px; border-radius:16px; width:100%; max-width:400px; box-shadow:0 10px 40px rgba(0,0,0,0.5);">
@@ -400,7 +438,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20260611"></script>
+  <script src="app.js?v=20260612"></script>
 </body>
 
 </html>
