@@ -404,6 +404,7 @@ header {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 24px;
 }
 
 .modal {
@@ -416,6 +417,8 @@ header {
   box-shadow: 0 32px 64px rgba(0,0,0,0.15);
   animation: modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }
 
 .modal-header {
@@ -831,15 +834,15 @@ header {
 .choice-tabs-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .slot-picker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  gap: 10px;
-  margin-bottom: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
 .script-preview-container {
@@ -1223,8 +1226,8 @@ header {
 
   .slot-picker-grid {
     grid-template-columns: repeat(4, 1fr); /* 4列に整列 */
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 6px;
+    margin-bottom: 12px;
   }
 
   .script-preview-container {

@@ -522,7 +522,7 @@ function renderSlotPicker() {
             const time = `${h}:${m}`;
             const active = state.selectedSlot === time ? 'background:var(--primary); color:white; border-color:var(--primary);' : '';
             html += `
-                <div style="padding:8px; border:1px solid var(--border); border-radius:8px; text-align:center; font-family:var(--font-mono); font-size:0.85rem; cursor:pointer; transition:var(--transition); ${active}"
+                <div style="padding:6px 4px; border:1px solid var(--border); border-radius:8px; text-align:center; font-family:var(--font-mono); font-size:0.85rem; cursor:pointer; transition:var(--transition); ${active}"
                      onclick="selectSlot('${time}')">
                     ${time}
                 </div>
@@ -535,7 +535,7 @@ function renderSlotPicker() {
         const time = `${range.end}:00`;
         const active = state.selectedSlot === time ? 'background:var(--primary); color:white; border-color:var(--primary);' : '';
         html += `
-            <div style="padding:8px; border:1px solid var(--border); border-radius:8px; text-align:center; font-family:var(--font-mono); font-size:0.85rem; cursor:pointer; transition:var(--transition); ${active}"
+            <div style="padding:6px 4px; border:1px solid var(--border); border-radius:8px; text-align:center; font-family:var(--font-mono); font-size:0.85rem; cursor:pointer; transition:var(--transition); ${active}"
                  onclick="selectSlot('${time}')">
                 ${time}
             </div>
