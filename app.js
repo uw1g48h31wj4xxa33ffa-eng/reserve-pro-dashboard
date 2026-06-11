@@ -235,6 +235,15 @@ function loadManualAppts() {
     }
 }
 
+function saveManualApptsToLocalStorage() {
+    try {
+        const manualAppts = state.appts.filter(a => a.isManual);
+        localStorage.setItem('demo_manual_appts', JSON.stringify(manualAppts));
+    } catch (e) {
+        console.error("Failed to save manual appts", e);
+    }
+}
+
 // ── RENDERING ──
 function renderAll() {
     renderStats();
@@ -1022,7 +1031,7 @@ async function submitFinal() {
 
     const confirmedData = { script, date: targetDate, time: state.selectedSlot };
 
-    if (CONFIG.API_URL_ALL) {
+    if (CONFIG.API_URL_ALL && !a.isManual) {
         try {
             const res = await apiFetch(CONFIG.API_URL_STATUS, {
                 method: 'POST',
@@ -1044,6 +1053,10 @@ async function submitFinal() {
     // 同期成功時のみローカル状態を更新してモーダルを閉じる
     a.status = 'done';
     a.confirmedData = confirmedData;
+
+    if (a.isManual) {
+        saveManualApptsToLocalStorage();
+    }
 
     btn.disabled = false;
     btn.classList.remove("btn-loading");
@@ -1337,9 +1350,9 @@ function adjustCustCount(delta) {
     custCountInModal = Math.max(0, custCountInModal + delta);
     document.getElementById('cust-count-display').textContent = custCountInModal;
 
-    if (custCountInModal >= 2 && delta > 0) {
+    if (custCountInModal >= 2) {
         document.getElementById('cust-blocked').checked = true;
-    } else if (custCountInModal < 2 && delta < 0) {
+    } else if (custCountInModal < 2) {
         document.getElementById('cust-blocked').checked = false;
     }
 }
@@ -1448,7 +1461,7 @@ async function revertStatusToPending() {
 
     if (!confirm("本当にこの予約確定を取り消して、未処理の状態に戻しますか？\n（患者の変更回数のカウントも自動的に1回差し引かれます）")) return;
 
-    if (CONFIG.API_URL_ALL) {
+    if (CONFIG.API_URL_ALL && !a.isManual) {
         showToast("同期中...");
         try {
             const res = await apiFetch(CONFIG.API_URL_CUSTOMERS, {
@@ -1478,10 +1491,9 @@ async function revertStatusToPending() {
         }
     } else {
         a.status = 'pending';
-        a.confirmedDate = '';
-        a.confirmedTime = '';
-        a.confirmedScript = '';
-        showToast("未処理に戻しました（デモモード）");
+        a.confirmedData = null;
+        if (a.isManual) saveManualApptsToLocalStorage();
+        showToast("未処理に戻しました");
         closeModal('modal-confirm');
         renderAll();
     }
