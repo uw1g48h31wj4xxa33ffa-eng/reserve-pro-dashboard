@@ -182,8 +182,8 @@ app.post('/api/blocked-slots', authenticateToken, requireAdmin, async (req, res)
 
 // --- 統合バックエンド用 API群 (モバイルダッシュボード用) ---
 
-// API: 全データ取得 (全件取得 - 要Admin権限 / JWT認証)
-app.get('/api/all', authenticateToken, requireAdmin, async (req, res) => {
+// API: 全データ取得 (全件取得 - JWT認証)
+app.get('/api/all', authenticateToken, async (req, res) => {
     try {
         // 1. 予約リストの取得
         const apptsSnapshot = await db.collection('appointments').orderBy('createdAt', 'desc').get();
