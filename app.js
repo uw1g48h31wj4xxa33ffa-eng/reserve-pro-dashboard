@@ -213,6 +213,28 @@ function setSyncStatus(text, color) {
     }
 }
 
+function loadManualAppts() {
+    try {
+        const storedStr = localStorage.getItem('demo_manual_appts');
+        if (!storedStr) return;
+        
+        let storedAppts = JSON.parse(storedStr);
+        const todayStr = new Date().toDateString();
+        
+        // 当日追加されたものだけを残す（翌日には自動削除される）
+        const validAppts = storedAppts.filter(a => a.addedDate === todayStr);
+        
+        if (validAppts.length !== storedAppts.length) {
+            localStorage.setItem('demo_manual_appts', JSON.stringify(validAppts));
+        }
+        
+        // state.appts の先頭に追加
+        state.appts = [...validAppts, ...state.appts];
+    } catch (e) {
+        console.error("Failed to load manual appts from localStorage", e);
+    }
+}
+
 // ── RENDERING ──
 function renderAll() {
     renderStats();
