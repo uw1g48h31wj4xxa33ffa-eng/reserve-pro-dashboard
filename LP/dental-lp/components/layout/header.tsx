@@ -6,9 +6,10 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { label: "サービス", href: "#services" },
+  { label: "運営課題", href: "#problems" },
   { label: "実績", href: "#results" },
-  { label: "サポート内容", href: "#flow" },
+  { label: "支援内容", href: "#services" },
+  { label: "改善フロー", href: "#flow" },
   { label: "お問い合わせ", href: "#contact" },
 ];
 

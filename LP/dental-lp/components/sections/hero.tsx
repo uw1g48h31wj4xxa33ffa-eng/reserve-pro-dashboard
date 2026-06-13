@@ -26,22 +26,21 @@ export function HeroSection() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/97 via-white/85 to-white/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/97 via-white/88 to-white/40" />
       </div>
 
-      {/* Decorative blobs */}
-      <div className="absolute top-1/4 right-10 w-64 h-64 rounded-full bg-teal-100/40 blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 w-48 h-48 rounded-full bg-sky-100/40 blur-3xl -z-10 pointer-events-none" />
+      {/* Blobs */}
+      <div className="absolute top-1/4 right-10 w-72 h-72 rounded-full bg-teal-100/30 blur-3xl -z-10 pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-56 h-56 rounded-full bg-sky-100/30 blur-3xl -z-10 pointer-events-none" />
 
       <div className="container-lg py-20">
         <motion.div
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12 } } }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.13 } } }}
           initial="hidden"
           animate="show"
           className="max-w-2xl"
         >
-          {/* Eyebrow */}
+          {/* Badge */}
           <motion.div variants={fadeUp}>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-teal-50 text-teal-700 border border-teal-100 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
@@ -64,9 +63,9 @@ export function HeroSection() {
             variants={fadeUp}
             className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10"
           >
-            予約・LINE運用・掘り起こしから採用支援まで。
+            予約導線・LINE運用・掘り起こしから採用・業務改善まで。
             <br className="hidden md:block" />
-            医院ごとに最適な仕組みづくりを伴走サポートします。
+            個人事業主だからこそできる、現場に寄り添った伴走支援です。
           </motion.p>
 
           {/* CTAs */}
@@ -91,7 +90,7 @@ export function HeroSection() {
             className="flex flex-wrap gap-6 mt-12 text-sm text-gray-500"
           >
             {[
-              "✅ 予約確定率 50%達成",
+              "✅ 予約確定率 30% → 50%達成",
               "✅ 無断キャンセル 0〜1件",
               "✅ 掘り起こし 平均13件/月",
             ].map((badge) => (
