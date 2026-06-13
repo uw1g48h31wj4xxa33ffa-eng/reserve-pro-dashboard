@@ -91,38 +91,13 @@ export function ServicesSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] bg-gray-100"
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50 flex items-center justify-center p-4"
             >
-              <Image
+              <img
                 src="/system_mockup.png"
                 alt="システム画面モックアップ"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="w-full h-auto object-contain rounded-xl"
               />
-            </motion.div>
-
-            {/* Floating badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full gradient-brand flex items-center justify-center text-white text-xl shadow-md">
-                  🤝
-                </div>
-                <div>
-                  <div className="text-xs text-gray-500 font-bold mb-1">
-                    システム販売ではなく
-                  </div>
-                  <div className="text-sm font-black text-gray-900">
-                    「伴走型」の実務支援
-                  </div>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>

@@ -74,29 +74,13 @@ export function FutureSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-square md:aspect-[4/3] bg-gray-100"
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-gray-50 flex items-center justify-center p-4"
             >
-              <Image
+              <img
                 src="/ai_analysis.png"
                 alt="システム・データ分析イメージ"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="w-full h-auto object-contain rounded-xl"
               />
-            </motion.div>
-
-            {/* Floating stats card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="absolute -bottom-6 -right-6 md:right-auto md:-left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100"
-            >
-              <div className="text-sm font-bold text-gray-500 mb-2">改善のサイクル</div>
-              <div className="flex gap-2 text-xl">
-                <span>📊</span> ➡️ <span>💡</span> ➡️ <span>📈</span>
-              </div>
             </motion.div>
           </div>
 
