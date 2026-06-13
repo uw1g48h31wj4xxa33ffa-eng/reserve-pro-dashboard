@@ -1,234 +1,218 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { CheckCircle2 } from "lucide-react";
-
-interface FormData {
-  clinicName: string;
-  personName: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
-const initialForm: FormData = {
-  clinicName: "",
-  personName: "",
-  email: "",
-  phone: "",
-  message: "",
-};
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export function ContactSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-  const [form, setForm] = useState<FormData>(initialForm);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [formState, setFormState] = useState({
+    clinicName: "",
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const validate = (): boolean => {
-    const newErrors: Partial<FormData> = {};
-    if (!form.clinicName.trim()) newErrors.clinicName = "医院名を入力してください";
-    if (!form.personName.trim()) newErrors.personName = "担当者名を入力してください";
-    if (!form.email.trim()) {
-      newErrors.email = "メールアドレスを入力してください";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      newErrors.email = "正しいメールアドレスを入力してください";
-    }
-    if (!form.message.trim()) newErrors.message = "相談内容を入力してください";
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
     setSubmitting(true);
-    // TODO: Replace with Firebase / Resend / Formspree integration
-    await new Promise((r) => setTimeout(r, 1200));
-    setSubmitting(false);
-    setSubmitted(true);
+    // Simulate API call
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+    }, 1500);
   };
 
-  const inputClass = (field: keyof FormData) =>
-    `w-full px-4 py-3 rounded-xl border text-sm transition-all outline-none ${
-      errors[field]
-        ? "border-red-300 bg-red-50 focus:border-red-400 focus:ring-2 focus:ring-red-100"
-        : "border-gray-200 bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-100"
-    }`;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
-    <section id="contact" className="section-py" ref={ref}>
-      <div className="container-md">
-        {/* Heading */}
+    <section id="contact" className="section-py bg-gray-50 relative overflow-hidden" ref={ref}>
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-white/50 to-transparent pointer-events-none" />
+      
+      <div className="container-lg max-w-5xl relative z-10">
+        
+        {/* Soft Messaging Header */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <span className="section-eyebrow">お問い合わせ</span>
-          <h2 className="section-heading">まずは無料でご相談ください</h2>
-          <p className="section-subheading">
-            貴院のお悩みをお聞かせください。<br />
-            現場に合わせた最適なサポートをご提案いたします。
-          </p>
+          <span className="section-eyebrow">Share Your Situation</span>
+          <h2 className="section-heading mb-8">
+            医院ごとに<span className="text-teal-600">課題は異なります</span>
+          </h2>
+          
+          <div className="max-w-2xl mx-auto space-y-6">
+            <div className="flex flex-wrap justify-center gap-3 text-sm font-bold text-gray-500 mb-8">
+              <span>予約導線</span>
+              <span className="text-gray-300">/</span>
+              <span>LINE運用</span>
+              <span className="text-gray-300">/</span>
+              <span>掘り起こし</span>
+              <span className="text-gray-300">/</span>
+              <span>採用</span>
+              <span className="text-gray-300">/</span>
+              <span>業務改善</span>
+            </div>
+            
+            <p className="text-lg text-gray-600 leading-loose">
+              現場によって状況はさまざまです。<br />
+              今の状況を共有いただければ、<br className="md:hidden" />改善のヒントをお伝えします。
+            </p>
+            <p className="text-lg text-gray-600 leading-loose">
+              お忙しい先生やご担当者様に合わせて、<br className="md:hidden" />ご都合の良い方法でお話をお伺いいたします。
+            </p>
+          </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden"
+          className="max-w-2xl mx-auto"
         >
-          <AnimatePresence mode="wait">
-            {submitted ? (
-              /* ── 送信完了 ── */
-              <motion.div
-                key="success"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center justify-center py-20 px-8 text-center"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                  className="w-20 h-20 rounded-full bg-teal-50 flex items-center justify-center mb-6"
-                >
-                  <CheckCircle2 className="text-teal-500" size={40} />
-                </motion.div>
-                <h3 className="text-2xl font-black text-gray-900 mb-3">
-                  お問い合わせありがとうございます！
-                </h3>
-                <p className="text-gray-500 leading-relaxed mb-8">
-                  内容を確認のうえ、2営業日以内にメールまたはお電話にてご連絡いたします。
-                  <br />
-                  しばらくお待ちください。
-                </p>
-                <button
-                  onClick={() => { setSubmitted(false); setForm(initialForm); }}
-                  className="text-sm text-teal-600 underline underline-offset-4 hover:opacity-70 transition-opacity"
-                >
-                  別の内容で問い合わせる
-                </button>
-              </motion.div>
-            ) : (
-              /* ── フォーム ── */
-              <motion.form
-                key="form"
-                onSubmit={handleSubmit}
-                noValidate
-                className="p-8 md:p-12 space-y-6"
-              >
-                {/* Row 1 */}
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      医院名 <span className="text-red-400">*</span>
+          {submitted ? (
+            <div className="bg-white rounded-3xl p-12 text-center shadow-lg border border-teal-100">
+              <div className="w-20 h-20 bg-teal-50 text-teal-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                ✓
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                ご共有ありがとうございます
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                内容を確認次第、担当者よりご連絡させていただきます。<br />
+                今しばらくお待ちくださいませ。
+              </p>
+            </div>
+          ) : (
+            <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-8 md:p-12 border border-gray-100">
+              <div className="mb-8 text-center border-b border-gray-100 pb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">現在の状況をお聞かせください</h3>
+                <p className="text-sm text-gray-500">※営業的な売り込みは行いませんのでご安心ください。</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Clinic Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="clinicName" className="block text-sm font-bold text-gray-700">
+                      医院名 <span className="text-teal-600 text-xs ml-1">必須</span>
                     </label>
                     <input
+                      type="text"
                       id="clinicName"
-                      type="text"
-                      placeholder="例）サクラ歯科医院"
-                      value={form.clinicName}
-                      onChange={(e) => setForm({ ...form, clinicName: e.target.value })}
-                      className={inputClass("clinicName")}
+                      name="clinicName"
+                      required
+                      value={formState.clinicName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900"
+                      placeholder="例）デンタルクリニック東京"
                     />
-                    {errors.clinicName && (
-                      <p className="text-xs text-red-500 mt-1">{errors.clinicName}</p>
-                    )}
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      担当者名 <span className="text-red-400">*</span>
+
+                  {/* Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="block text-sm font-bold text-gray-700">
+                      ご担当者様名 <span className="text-teal-600 text-xs ml-1">必須</span>
                     </label>
                     <input
-                      id="personName"
                       type="text"
-                      placeholder="例）田中 院長"
-                      value={form.personName}
-                      onChange={(e) => setForm({ ...form, personName: e.target.value })}
-                      className={inputClass("personName")}
+                      id="name"
+                      name="name"
+                      required
+                      value={formState.name}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900"
+                      placeholder="例）山田 太郎"
                     />
-                    {errors.personName && (
-                      <p className="text-xs text-red-500 mt-1">{errors.personName}</p>
-                    )}
                   </div>
                 </div>
 
-                {/* Row 2 */}
-                <div className="grid md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      メールアドレス <span className="text-red-400">*</span>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Email */}
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-gray-700">
+                      メールアドレス <span className="text-teal-600 text-xs ml-1">必須</span>
                     </label>
                     <input
-                      id="email"
                       type="email"
-                      placeholder="例）info@clinic.jp"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      className={inputClass("email")}
+                      id="email"
+                      name="email"
+                      required
+                      value={formState.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900"
+                      placeholder="例）info@example.com"
                     />
-                    {errors.email && (
-                      <p className="text-xs text-red-500 mt-1">{errors.email}</p>
-                    )}
                   </div>
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                      電話番号
+
+                  {/* Phone */}
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="block text-sm font-bold text-gray-700">
+                      電話番号 <span className="text-gray-400 text-xs ml-1">任意</span>
                     </label>
                     <input
-                      id="phone"
                       type="tel"
-                      placeholder="例）03-1234-5678"
-                      value={form.phone}
-                      onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      className={inputClass("phone")}
+                      id="phone"
+                      name="phone"
+                      value={formState.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900"
+                      placeholder="例）03-0000-0000"
                     />
                   </div>
                 </div>
 
                 {/* Message */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-1.5">
-                    相談内容 <span className="text-red-400">*</span>
+                <div className="space-y-2">
+                  <label htmlFor="message" className="block text-sm font-bold text-gray-700">
+                    現在のお悩み・課題 <span className="text-teal-600 text-xs ml-1">必須</span>
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    required
                     rows={5}
-                    placeholder="現在お困りのことや、改善したいことをご自由にお書きください。"
-                    value={form.message}
-                    onChange={(e) => setForm({ ...form, message: e.target.value })}
-                    className={`${inputClass("message")} resize-none`}
+                    value={formState.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 resize-none"
+                    placeholder="例）LINEを導入したものの、活用できていません。現在の予約フローに無駄が多いと感じているため、改善のヒントを頂きたいです。"
                   />
-                  {errors.message && (
-                    <p className="text-xs text-red-500 mt-1">{errors.message}</p>
-                  )}
                 </div>
 
-                {/* Submit */}
-                <div className="pt-2">
+                {/* Submit Button */}
+                <div className="pt-6">
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 text-base font-bold text-white rounded-full gradient-brand shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-4 px-8 text-base font-bold text-teal-700 bg-teal-50 border border-teal-100 rounded-xl shadow-sm hover:bg-teal-100 hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {submitting ? "送信中..." : "無料相談を申し込む →"}
+                    {submitting ? "送信中..." : "今の状況を共有する"}
                   </button>
-                  <p className="text-center text-xs text-gray-400 mt-3">
-                    ご入力いただいた情報は、お問い合わせへの返答のみに使用します。
+                  <p className="text-center text-xs text-gray-400 mt-4">
+                    ※ご共有いただいた内容は厳重に管理いたします。
                   </p>
                 </div>
-              </motion.form>
-            )}
-          </AnimatePresence>
+              </form>
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

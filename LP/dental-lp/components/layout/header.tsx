@@ -88,9 +88,9 @@ export function Header() {
           <div className="hidden md:block">
             <button
               onClick={() => handleNav("#contact")}
-              className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-brand shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+              className="hidden md:block px-5 py-2 text-sm font-bold text-white rounded-full gradient-brand shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
             >
-              無料相談する
+              今の状況を共有する
             </button>
           </div>
 
