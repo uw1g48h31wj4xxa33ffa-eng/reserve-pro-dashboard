@@ -2,130 +2,127 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { MessageCircle, CalendarCheck, Users, Repeat2, ArrowRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
-const services = [
+const SERVICES = [
   {
-    icon: <MessageCircle size={24} />,
-    title: "LINE予約導線の最適化",
-    description:
-      "問い合わせからLINEでのやり取りを自動化。患者の温度感に合わせた返信テンプレートで、迷わず予約に進める導線を設計します。",
-    tags: ["自動返信", "シナリオ設計", "CTA最適化"],
-    color: "turquoise",
+    icon: "📝",
+    title: "予約フォーム制作",
+    desc: "患者様が迷わず予約できる、シンプルで分かりやすいフォームを設計・制作します。",
   },
   {
-    icon: <CalendarCheck size={24} />,
-    title: "予約確定率の引き上げ",
-    description:
-      "「とりあえず聞いてみた」段階の患者を逃さない。AI分析で患者タイプを特定し、最適なタイミングでの声がけを自動化します。",
-    tags: ["患者分類AI", "タイミング最適化", "自動フォロー"],
-    color: "sky",
+    icon: "💬",
+    title: "LINE導線設計",
+    desc: "問い合わせからLINE登録・予約へとスムーズに誘導する導線を設計します。",
   },
   {
-    icon: <Users size={24} />,
-    title: "掘り起こし自動化",
-    description:
-      "過去に問い合わせたけど予約しなかった患者へのアプローチを自動化。月平均13件の掘り起こしを実現します。",
-    tags: ["休眠患者管理", "リマインド自動化", "優先順位付け"],
-    color: "royal",
+    icon: "✅",
+    title: "予約確定フォロー",
+    desc: "予約後の事前案内・確認メッセージを自動化し、来院率を高めます。",
   },
   {
-    icon: <Repeat2 size={24} />,
+    icon: "🚫",
     title: "無断キャンセル対策",
-    description:
-      "予約前後の自動リマインドと、キャンセル後の再予約フローで無断キャンセルを大幅削減。月平均3件→0〜1件を実現します。",
-    tags: ["事前リマインド", "再予約促進", "キャンセル分析"],
-    color: "turquoise",
+    desc: "前日・当日のリマインドメッセージを自動送信し、無断キャンセルを劇的に削減します。",
+  },
+  {
+    icon: "🔁",
+    title: "掘り起こし運用",
+    desc: "来院が途絶えた患者様へ、タイミングを見計らったメッセージで再来院を促します。",
+  },
+  {
+    icon: "📊",
+    title: "分析レポート",
+    desc: "予約率・キャンセル率・掘り起こし実績などを毎月レポートとしてご報告します。",
+  },
+  {
+    icon: "💡",
+    title: "改善提案",
+    desc: "データに基づき、さらなる予約率向上のための改善案を継続的にご提案します。",
   },
 ];
 
-const colorMap = {
-  turquoise: {
-    icon: "bg-turquoise-50 text-turquoise-600",
-    tag: "bg-turquoise-50 text-turquoise-700",
-    border: "hover:border-turquoise-200",
-  },
-  sky: {
-    icon: "bg-sky-50 text-sky-600",
-    tag: "bg-sky-50 text-sky-700",
-    border: "hover:border-sky-200",
-  },
-  royal: {
-    icon: "bg-royal-50 text-royal-600",
-    tag: "bg-royal-50 text-royal-700",
-    border: "hover:border-royal-200",
-  },
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+const itemVar = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
 };
 
-export function ServiceSection() {
+export function ServicesSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="service" className="section-pad bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="services" className="section-py bg-gray-50" ref={ref}>
+      <div className="container-lg">
+        {/* Heading */}
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
         >
-          <Badge variant="sky" className="mb-4">サービス紹介</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            「予約できなかった患者」を
-            <br />
-            <span className="gradient-text">ゼロに近づける4つの仕組み。</span>
-          </h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            システムを導入するのが目的ではありません。
-            予約率を上げることが目的です。
+          <span className="section-eyebrow">サービス内容</span>
+          <h2 className="section-heading">提供しているサービス</h2>
+          <p className="section-subheading">
+            システムの導入だけではありません。<br />
+            個人事業主だからこそできる、現場に寄り添った運用まで一緒に取り組みます。
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((service, i) => {
-            const c = colorMap[service.color as keyof typeof colorMap];
-            return (
+        <div className="grid md:grid-cols-2 gap-10 items-center">
+          {/* Service list */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            className="space-y-4"
+          >
+            {SERVICES.map((s, i) => (
               <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className={`bg-white rounded-2xl border border-gray-100 p-7 card-hover group transition-all duration-300 ${c.border}`}
+                key={i}
+                variants={itemVar}
+                className="flex items-start gap-5 bg-white rounded-3xl px-8 py-7 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-x-1 transition-all duration-300"
               >
-                <div className={`inline-flex p-3 rounded-xl ${c.icon} mb-4`}>
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4">{service.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className={`text-xs px-2.5 py-1 rounded-full font-medium ${c.tag}`}>
-                      {tag}
-                    </span>
-                  ))}
+                <span className="text-3xl flex-shrink-0 mt-0.5">{s.icon}</span>
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{s.title}</h3>
+                  <p className="text-base text-gray-500 leading-relaxed">{s.desc}</p>
                 </div>
               </motion.div>
-            );
-          })}
-        </div>
+            ))}
+          </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-10 text-center"
-        >
-          <button
-            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 text-turquoise-600 font-semibold hover:text-turquoise-700 transition-colors"
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 32 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="relative"
           >
-            サービスについて詳しく聞く
-            <ArrowRight size={16} />
-          </button>
-        </motion.div>
+            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+              <Image
+                src="/system_mockup.png"
+                alt="予約管理・LINE運用のイメージ"
+                width={600}
+                height={400}
+                className="w-full h-auto"
+              />
+            </div>
+            {/* Floating badge */}
+            <motion.div
+              animate={{ y: [0, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+              className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-lg border border-gray-100"
+            >
+              <div className="text-xs text-teal-600 font-semibold">実績</div>
+              <div className="text-lg font-black text-gray-900">予約確定率 50%</div>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

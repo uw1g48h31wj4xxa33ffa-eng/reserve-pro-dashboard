@@ -1,54 +1,67 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export function Footer() {
+  const handleNav = (href: string) => {
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <footer className="bg-gray-900 text-gray-400">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg gradient-brand flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2L3 7V12C3 16.55 6.84 20.74 12 22C17.16 20.74 21 16.55 21 12V7L12 2Z" fill="white" opacity="0.9"/>
-                  <path d="M9 12L11 14L15 10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <div>
-                <div className="text-base font-bold text-white">DentalConnect</div>
-                <div className="text-xs text-turquoise-400">予約率改善サービス</div>
-              </div>
-            </div>
-            <p className="text-sm leading-relaxed text-gray-400 max-w-xs">
-              歯科医院向けLINE予約導線最適化サービス。<br/>
-              問い合わせから予約確定、掘り起こしまで。<br/>
-              予約率改善のための仕組みをご提供します。
+      <div className="container-lg py-12">
+        <div className="grid md:grid-cols-3 gap-8 pb-8 border-b border-gray-700">
+          {/* Brand */}
+          <div>
+            <div className="text-white font-bold text-lg mb-1">DentalConnect</div>
+            <div className="text-teal-400 text-sm mb-3">LINE予約導線改善サポート</div>
+            <p className="text-sm leading-relaxed">
+              歯科医院の予約率改善を、<br />
+              現場に寄り添った個人サポートで実現します。
             </p>
           </div>
 
+          {/* Nav */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">サービス</h3>
-            <ul className="space-y-2.5 text-sm">
-              {["LINE予約導線最適化", "AI患者分析", "掘り起こし自動化", "予約管理ダッシュボード"].map(item => (
-                <li key={item}>
-                  <a href="#service" className="hover:text-turquoise-400 transition-colors">{item}</a>
-                </li>
+            <div className="text-white font-semibold text-sm mb-4">メニュー</div>
+            <nav className="space-y-2" aria-label="フッターナビゲーション">
+              {[
+                { label: "サービス内容", href: "#services" },
+                { label: "実績", href: "#results" },
+                { label: "サポートイメージ", href: "#flow" },
+                { label: "お問い合わせ", href: "#contact" },
+              ].map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => handleNav(item.href)}
+                  className="block text-sm hover:text-teal-400 transition-colors"
+                >
+                  {item.label}
+                </button>
               ))}
-            </ul>
+            </nav>
           </div>
 
+          {/* CTA */}
           <div>
-            <h3 className="text-sm font-semibold text-white mb-4">会社情報</h3>
-            <ul className="space-y-2.5 text-sm">
-              {["会社概要", "プライバシーポリシー", "利用規約", "お問い合わせ"].map(item => (
-                <li key={item}>
-                  <a href="#contact" className="hover:text-turquoise-400 transition-colors">{item}</a>
-                </li>
-              ))}
-            </ul>
+            <div className="text-white font-semibold text-sm mb-4">まずはお気軽にご相談を</div>
+            <p className="text-sm mb-4 leading-relaxed">
+              貴院の課題やお悩みをお聞かせください。<br />
+              オンラインで無料ご相談を承っています。
+            </p>
+            <button
+              onClick={() => handleNav("#contact")}
+              className="px-5 py-2.5 text-sm font-bold text-white rounded-full gradient-brand shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+            >
+              無料相談する →
+            </button>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500">© 2025 DentalConnect. All rights reserved.</p>
-          <p className="text-xs text-gray-500">歯科医院のための予約率改善パートナー</p>
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
+          <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
+          <p className="text-xs">個人事業主によるLINE予約導線改善サポート</p>
         </div>
       </div>
     </footer>

@@ -2,15 +2,30 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "DentalConnect | 歯科医院向け予約率改善サービス",
+  title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
   description:
-    "歯科医院向けLINE予約導線最適化サービス。問い合わせから予約確定・掘り起こしまで、予約率改善のための仕組みをご提供します。予約率最大+20pt、無断キャンセルゼロへ。",
-  keywords: ["歯科医院", "予約率改善", "LINE予約", "歯科クリニック", "掘り起こし", "無断キャンセル対策"],
+    "問い合わせから予約確定・掘り起こしまで。歯科医院の予約率を改善する個人事業主によるLINE運用サポートサービスです。予約確定率30%→50%、無断キャンセル0〜1件の実績あり。",
+  keywords: [
+    "歯科医院",
+    "予約率改善",
+    "LINE予約",
+    "無断キャンセル対策",
+    "掘り起こし",
+    "歯科経営",
+    "LINE運用",
+  ],
+  authors: [{ name: "DentalConnect" }],
   openGraph: {
-    title: "DentalConnect | 歯科医院向け予約率改善サービス",
-    description: "問い合わせを予約につなげる仕組みを。歯科医院向けLINE予約導線最適化サービス。",
+    title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
+    description:
+      "問い合わせから予約確定・掘り起こしまで。現場に合わせた個人サポートで予約率を改善します。",
     type: "website",
     locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
+    description: "問い合わせから予約・掘り起こしまで。歯科医院の予約率改善をサポートします。",
   },
   robots: {
     index: true,
@@ -20,39 +35,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="ja">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "DentalConnect",
-              "description": "歯科医院向けLINE予約導線最適化サービス",
-              "applicationCategory": "BusinessApplication",
-              "offers": {
-                "@type": "Offer",
-                "description": "月額サブスクリプション"
-              },
-              "audience": {
-                "@type": "Audience",
-                "audienceType": "歯科医院"
-              }
-            }),
-          }}
-        />
-      </head>
       <body>{children}</body>
     </html>
   );
