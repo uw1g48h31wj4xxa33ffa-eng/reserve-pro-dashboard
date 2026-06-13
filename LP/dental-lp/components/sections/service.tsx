@@ -1,85 +1,73 @@
 "use client";
 
-import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 
 const SERVICES = [
   {
-    icon: "📝",
-    title: "予約フォーム制作",
-    desc: "患者様が迷わず予約できる、シンプルで分かりやすいフォームを設計・制作します。",
+    icon: "📅",
+    title: "予約率の改善・最適化",
+    desc: "予約フォームの導線見直しや、無断キャンセルを防ぐためのリマインド設定など、確実な来院に繋げる仕組みを構築します。",
   },
   {
     icon: "💬",
-    title: "LINE導線設計",
-    desc: "問い合わせからLINE登録・予約へとスムーズに誘導する導線を設計します。",
+    title: "LINE運用の構築・代行",
+    desc: "公式LINEの立ち上げから、患者様に読まれる配信メッセージの作成、自動応答の設定まで、実務をまるごとサポートします。",
   },
   {
-    icon: "✅",
-    title: "予約確定フォロー",
-    desc: "予約後の事前案内・確認メッセージを自動化し、来院率を高めます。",
+    icon: "🔄",
+    title: "休眠患者の掘り起こし運用",
+    desc: "過去の患者データを活用し、適切なタイミングで再来院を促すアプローチを実施。定期検診への移行率を高めます。",
   },
   {
-    icon: "🚫",
-    title: "無断キャンセル対策",
-    desc: "前日・当日のリマインドメッセージを自動送信し、無断キャンセルを劇的に削減します。",
-  },
-  {
-    icon: "🔁",
-    title: "掘り起こし運用",
-    desc: "来院が途絶えた患者様へ、タイミングを見計らったメッセージで再来院を促します。",
+    icon: "👨‍⚕️",
+    title: "採用支援（歯科医師・衛生士）",
+    desc: "求人媒体の最適化や、採用特設ページの改善により、貴院の魅力を正しく伝え、質の高いスタッフ採用を実現します。",
   },
   {
     icon: "📊",
-    title: "分析レポート",
-    desc: "予約率・キャンセル率・掘り起こし実績などを毎月レポートとしてご報告します。",
-  },
-  {
-    icon: "💡",
-    title: "改善提案",
-    desc: "データに基づき、さらなる予約率向上のための改善案を継続的にご提案します。",
+    title: "業務改善・数値集計サポート",
+    desc: "受付スタッフの業務負担を軽減するためのフロー見直しや、経営判断に必要な数値（予約率・リピート率等）の集計を代行します。",
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
-const itemVar = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export function ServicesSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const containerVar = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
+
+  const itemVar = {
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  };
 
   return (
-    <section id="services" className="section-py bg-gray-50" ref={ref}>
+    <section id="services" className="section-py relative bg-white">
       <div className="container-lg">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <span className="section-eyebrow">サービス内容</span>
-          <h2 className="section-heading">提供しているサービス</h2>
+        <div className="text-center mb-20">
+          <span className="section-eyebrow">Our Support</span>
+          <h2 className="section-heading">
+            現場に入り込む<br />
+            <span className="text-teal-600">5つの運営サポート</span>
+          </h2>
           <p className="section-subheading">
-            システムの導入だけではありません。<br />
-            個人事業主だからこそできる、現場に寄り添った運用まで一緒に取り組みます。
+            単なるツール導入ではなく、貴院の状況に合わせた実務支援を行います。
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* Service list */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Text/List Side */}
           <motion.div
-            variants={container}
+            ref={ref}
+            variants={containerVar}
             initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="space-y-4"
+            animate={isInView ? "show" : "hidden"}
+            className="order-2 lg:order-1 space-y-6"
           >
             {SERVICES.map((s, i) => (
               <motion.div
@@ -96,32 +84,47 @@ export function ServicesSection() {
             ))}
           </motion.div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+          {/* Image Side */}
+          <div className="order-1 lg:order-2 relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] bg-gray-100"
+            >
               <Image
-                src="/system_mockup.png"
-                alt="予約管理・LINE運用のイメージ"
-                width={600}
-                height={400}
-                className="w-full h-auto"
+                src="/consulting.png"
+                alt="歯科医院スタッフへのコンサルティング風景"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
+            </motion.div>
+
             {/* Floating badge */}
             <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-lg border border-gray-100"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100"
             >
-              <div className="text-xs text-teal-600 font-semibold">実績</div>
-              <div className="text-lg font-black text-gray-900">予約確定率 50%</div>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full gradient-brand flex items-center justify-center text-white text-xl shadow-md">
+                  🤝
+                </div>
+                <div>
+                  <div className="text-xs text-gray-500 font-bold mb-1">
+                    システム販売ではなく
+                  </div>
+                  <div className="text-sm font-black text-gray-900">
+                    「伴走型」の実務支援
+                  </div>
+                </div>
+              </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

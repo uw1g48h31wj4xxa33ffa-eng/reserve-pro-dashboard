@@ -1,102 +1,118 @@
 "use client";
 
-import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import Image from "next/image";
 
-const FUTURE_FEATURES = [
-  {
-    icon: "👥",
-    title: "患者分析",
-    desc: "患者様の来院傾向・行動パターンをデータで可視化します。",
-    tag: "近日公開",
-  },
+const SUPPORT_FEATURES = [
   {
     icon: "📈",
-    title: "予約率分析",
-    desc: "曜日・時間帯別の予約率をグラフで確認し、最適化を支援します。",
-    tag: "開発中",
+    title: "月次レポートの作成と共有",
+    tag: "数値集計",
+    desc: "予約率、無断キャンセル率、LINE経由の来院数などを毎月レポート化し、医院の現状を可視化します。",
   },
   {
-    icon: "💬",
-    title: "LINE分析",
-    desc: "配信メッセージの開封率・返答率を分析し、改善に役立てます。",
-    tag: "開発中",
+    icon: "🎯",
+    title: "目標達成に向けた改善提案",
+    tag: "戦略立案",
+    desc: "集計したデータに基づき、次月に取り組むべき優先課題と具体的なアクションプランをご提案します。",
   },
   {
-    icon: "🔁",
-    title: "掘り起こし分析",
-    desc: "休眠患者様の割合・復帰率を継続的にトラッキングします。",
-    tag: "計画中",
+    icon: "💻",
+    title: "マニュアル化・業務効率化",
+    tag: "業務改善",
+    desc: "属人化している受付業務や案内フローをマニュアル化し、新人スタッフでも即戦力になる仕組みを整えます。",
   },
   {
-    icon: "🤖",
-    title: "AI改善提案",
-    desc: "データを基にAIが最適な改善アクションを自動で提案します。",
-    tag: "計画中",
+    icon: "🤝",
+    title: "定期ミーティングの実施",
+    tag: "伴走支援",
+    desc: "院長先生やスタッフの皆様と定期的にミーティングを行い、現場の声を吸い上げながら改善の軌道修正を行います。",
+  },
+  {
+    icon: "💡",
+    title: "採用ページの継続的改善",
+    tag: "採用支援",
+    desc: "求職者の反応を見ながら、募集要項やアピールポイントを定期的にブラッシュアップし、採用成功率を高めます。",
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-const itemVar = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export function FutureSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const containerVar = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
+
+  const itemVar = {
+    hidden: { opacity: 0, x: 20 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  };
 
   return (
-    <section id="future" className="section-py bg-gray-50" ref={ref}>
+    <section className="section-py relative bg-white">
       <div className="container-lg">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <span className="section-eyebrow">将来追加予定</span>
-          <h2 className="section-heading">さらなる改善のために、<br className="md:hidden" />進化し続けます</h2>
+        <div className="text-center mb-20">
+          <span className="section-eyebrow">Continuous Support</span>
+          <h2 className="section-heading">
+            データに基づく<br />
+            <span className="text-teal-600">継続的な業務改善</span>
+          </h2>
           <p className="section-subheading">
-            現在のサポートに加え、データ分析・AI活用機能を順次追加予定です。
+            仕組みを作って終わりではありません。<br className="hidden md:block" />
+            数字と現場の声を拾い上げ、医院の成長を長期的にサポートします。
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-10 items-center">
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -32 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="rounded-3xl overflow-hidden shadow-xl border border-gray-100">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Image Side */}
+          <div className="relative">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-square md:aspect-[4/3] bg-gray-100"
+            >
               <Image
-                src="/ai_analysis.png"
-                alt="AI分析・データ活用のイメージ"
-                width={600}
-                height={400}
-                className="w-full h-auto"
+                src="/consulting_data.png"
+                alt="タブレットを見ながらデータに基づく改善提案を行う様子"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* Features */}
+            {/* Floating stats card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="absolute -bottom-6 -right-6 md:right-auto md:-left-6 bg-white p-6 rounded-2xl shadow-xl border border-gray-100"
+            >
+              <div className="text-sm font-bold text-gray-500 mb-2">改善のサイクル</div>
+              <div className="flex gap-2 text-xl">
+                <span>📊</span> ➡️ <span>💡</span> ➡️ <span>📈</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Features Side */}
           <motion.div
-            variants={container}
+            ref={ref}
+            variants={containerVar}
             initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            className="space-y-4"
+            animate={isInView ? "show" : "hidden"}
+            className="space-y-6"
           >
-            {FUTURE_FEATURES.map((f, i) => (
+            {SUPPORT_FEATURES.map((f, i) => (
               <motion.div
                 key={i}
                 variants={itemVar}
-                className="flex items-start gap-5 bg-white rounded-3xl px-8 py-7 shadow-sm border border-gray-100"
+                className="flex items-start gap-5 bg-white rounded-3xl px-8 py-7 shadow-sm border border-gray-100 hover:shadow-md hover:translate-x-1 transition-all duration-300"
               >
                 <span className="text-3xl flex-shrink-0 mt-0.5">{f.icon}</span>
                 <div className="flex-1">

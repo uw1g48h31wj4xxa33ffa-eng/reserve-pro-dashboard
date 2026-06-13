@@ -15,10 +15,10 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="text-white font-bold text-lg mb-1">DentalConnect</div>
-            <div className="text-teal-400 text-sm mb-3">LINE予約導線改善サポート</div>
+            <div className="text-teal-400 text-sm mb-3">歯科医院向け 運営改善パートナー</div>
             <p className="text-sm leading-relaxed">
-              歯科医院の予約率改善を、<br />
-              現場に寄り添った個人サポートで実現します。
+              歯科医院の運営課題を、<br />
+              現場に寄り添った個人サポートで解決します。
             </p>
           </div>
 
@@ -61,7 +61,7 @@ export function Footer() {
 
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-sm">
           <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
-          <p className="text-xs">個人事業主によるLINE予約導線改善サポート</p>
+          <p className="text-xs">個人事業主による歯科医院運営改善サポート</p>
         </div>
       </div>
     </footer>

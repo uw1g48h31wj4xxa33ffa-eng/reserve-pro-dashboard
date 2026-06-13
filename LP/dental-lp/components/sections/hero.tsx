@@ -45,7 +45,7 @@ export function HeroSection() {
           <motion.div variants={fadeUp}>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-teal-50 text-teal-700 border border-teal-100 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-              歯科医院向け LINE予約導線改善サポート
+              歯科医院向け 運営改善パートナー
             </span>
           </motion.div>
 
@@ -54,11 +54,9 @@ export function HeroSection() {
             variants={fadeUp}
             className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-gray-900 mb-6"
           >
-            問い合わせを
+            歯科医院の運営課題を
             <br />
-            <span className="gradient-brand-text">予約につなげる</span>
-            <br />
-            仕組みを。
+            <span className="gradient-brand-text">現場目線で改善する</span>
           </motion.h1>
 
           {/* Sub */}
@@ -66,9 +64,9 @@ export function HeroSection() {
             variants={fadeUp}
             className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10"
           >
-            問い合わせから予約確定、掘り起こしまで。
+            予約・LINE運用・掘り起こしから採用支援まで。
             <br className="hidden md:block" />
-            現場に合わせた運用サポートをご提案します。
+            医院ごとに最適な仕組みづくりを伴走サポートします。
           </motion.p>
 
           {/* CTAs */}

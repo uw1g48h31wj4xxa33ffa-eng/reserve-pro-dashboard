@@ -6,68 +6,71 @@ import { useRef } from "react";
 
 const PROBLEMS = [
   {
-    icon: "📋",
-    title: "問い合わせが来ても\n予約にならない",
-    desc: "せっかく来た問い合わせが、対応が遅れたりフォームが分かりにくかったりで予約に結びつかない。",
+    icon: "📉",
+    title: "予約枠が埋まらない\nキャンセルが多い",
+    desc: "せっかくの初診予約も、無断キャンセルや直前キャンセルでチェアーが空いてしまう。",
   },
   {
-    icon: "📵",
-    title: "無断キャンセルが\n繰り返される",
-    desc: "リマインドがなく、当日になって無断キャンセルが発覚。診療枠の無駄と収益損失が続いている。",
-  },
-  {
-    icon: "💬",
-    title: "LINEを\n活用できていない",
-    desc: "LINEは登録してもらっているのに、一斉配信だけで予約導線やフォロー運用には使えていない。",
+    icon: "📱",
+    title: "LINEを導入したが\n活用できていない",
+    desc: "アカウントは作ったものの、どんなメッセージを送ればいいかわからず放置状態。",
   },
   {
     icon: "🔍",
-    title: "過去の患者様に\nアプローチできない",
-    desc: "来院が途絶えた患者様を把握できておらず、掘り起こしの仕組みがまったくない状態。",
+    title: "休眠患者の\n掘り起こしができない",
+    desc: "治療中断や定期検診から足が遠のいている患者様への適切なアプローチ手段がない。",
   },
   {
-    icon: "👥",
-    title: "スタッフ対応が\n属人化している",
-    desc: "担当者によって対応がバラバラで、引き継ぎや標準化ができておらず、教育コストがかかる。",
+    icon: "👩‍⚕️",
+    title: "歯科医師・衛生士が\n採用できない",
+    desc: "求人を出しても応募が来ない。医院の魅力が求職者に上手く伝わっていない。",
+  },
+  {
+    icon: "⚙️",
+    title: "業務が属人化し\n数字の管理ができていない",
+    desc: "受付スタッフの負担が大きく、予約率やリピート率などの正確な数値集計ができていない。",
   },
 ];
 
-const container = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export function ProblemsSection() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  };
 
   return (
-    <section id="problems" className="section-py bg-gray-50" ref={ref}>
+    <section id="problems" className="section-py bg-gray-50">
       <div className="container-lg">
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-16"
-        >
-          <span className="section-eyebrow">よくあるお悩み</span>
+        <div className="text-center mb-20">
+          <span className="section-eyebrow">Problems</span>
           <h2 className="section-heading">
-            こんなお悩み、<br className="md:hidden" />
-            ありませんか？
+            こんな<span className="text-teal-600">運営課題</span>、
+            <br className="md:hidden" />
+            抱えていませんか？
           </h2>
-        </motion.div>
+          <p className="section-subheading">
+            現場のスタッフも院長も、日々の診療に追われて<br className="hidden md:block" />
+            「わかってはいるけど手が回らない」状態になっていませんか？
+          </p>
+        </div>
 
-        {/* Cards */}
         <motion.div
+          ref={ref}
           variants={container}
           initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          animate={isInView ? "show" : "hidden"}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {PROBLEMS.map((p, i) => (
             <motion.div
@@ -83,30 +86,20 @@ export function ProblemsSection() {
             </motion.div>
           ))}
 
-          {/* CTA card */}
+          {/* Solution Highlight */}
           <motion.div
             variants={item}
             className="gradient-brand rounded-3xl p-10 text-white flex flex-col justify-between"
           >
             <div>
-              <div className="text-4xl mb-6">💡</div>
+              <div className="text-4xl mb-6">🤝</div>
               <h3 className="text-lg font-bold leading-snug mb-4">
-                これらをすべて<br />まとめて解決します
+                これらをすべて<br />まとめて伴走支援します
               </h3>
               <p className="text-base opacity-90 leading-relaxed">
-                個人事業主だからこそできる、現場に寄り添った柔軟なサポートです。
+                外部のシステム会社ではなく、現場に入り込む「運営改善パートナー」として解決に導きます。
               </p>
             </div>
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="mt-6 inline-block text-sm font-bold text-white underline underline-offset-4 hover:opacity-80 transition-opacity"
-            >
-              無料相談する →
-            </a>
           </motion.div>
         </motion.div>
       </div>

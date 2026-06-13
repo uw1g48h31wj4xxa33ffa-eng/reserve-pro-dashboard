@@ -2,30 +2,30 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
+  title: "歯科医院向け 運営改善パートナー | DentalConnect",
   description:
-    "問い合わせから予約確定・掘り起こしまで。歯科医院の予約率を改善する個人事業主によるLINE運用サポートサービスです。予約確定率30%→50%、無断キャンセル0〜1件の実績あり。",
+    "予約改善・LINE運用・掘り起こしから、採用・業務改善まで。歯科医院の運営課題を現場目線で解決する、個人事業主の伴走支援パートナーです。",
   keywords: [
     "歯科医院",
+    "運営改善",
     "予約率改善",
-    "LINE予約",
-    "無断キャンセル対策",
-    "掘り起こし",
-    "歯科経営",
     "LINE運用",
+    "採用支援",
+    "業務改善",
+    "伴走支援",
   ],
   authors: [{ name: "DentalConnect" }],
   openGraph: {
-    title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
+    title: "歯科医院向け 運営改善パートナー | DentalConnect",
     description:
-      "問い合わせから予約確定・掘り起こしまで。現場に合わせた個人サポートで予約率を改善します。",
+      "予約・LINE運用から採用・業務改善まで。医院ごとに最適な仕組みづくりをサポートします。",
     type: "website",
     locale: "ja_JP",
   },
   twitter: {
     card: "summary_large_image",
-    title: "歯科医院向け LINE予約導線改善サポート | DentalConnect",
-    description: "問い合わせから予約・掘り起こしまで。歯科医院の予約率改善をサポートします。",
+    title: "歯科医院向け 運営改善パートナー | DentalConnect",
+    description: "予約改善から採用まで。歯科医院の運営改善を現場目線でサポートします。",
   },
   robots: {
     index: true,

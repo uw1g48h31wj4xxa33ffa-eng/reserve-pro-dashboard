@@ -65,7 +65,7 @@ export function Header() {
                 DentalConnect
               </div>
               <div className="text-xs text-teal-600 font-medium mt-0.5">
-                LINE予約導線改善サポート
+                歯科医院向け 運営改善パートナー
               </div>
             </div>
           </button>
