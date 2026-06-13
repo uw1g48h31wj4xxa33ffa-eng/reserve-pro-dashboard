@@ -5,7 +5,7 @@ import { ProblemsSection } from "@/components/sections/problems";
 import { ResultsSection } from "@/components/sections/results";
 import { ServicesSection } from "@/components/sections/service";
 import { FlowSection } from "@/components/sections/flow";
-import { PricingSection } from "@/components/sections/pricing";
+import { SystemSection } from "@/components/sections/system";
 import { ContactSection } from "@/components/sections/contact";
 
 export default function Home() {
@@ -23,8 +23,8 @@ export default function Home() {
         <ServicesSection />
         {/* 改善フロー */}
         <FlowSection />
-        {/* 料金プラン */}
-        <PricingSection />
+        {/* システム紹介 */}
+        <SystemSection />
         {/* お問い合わせ */}
         <ContactSection />
       </main>
