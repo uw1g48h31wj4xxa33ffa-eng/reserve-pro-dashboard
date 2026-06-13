@@ -118,22 +118,27 @@ export default function ImprovementPage() {
           <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--color-text-muted)', fontSize: '1.1rem' }} className="animate-on-scroll" style={{ opacity: 0 }}>
             <p>システムを導入するだけではありません。個人事業主ならではの細やかなサポートで、<br />貴院の現場に合わせた最適な仕組みづくりから日々の運用まで支援します。</p>
           </div>
-          <div className="system-features" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
-            {[
-              { title: '予約フォーム制作', desc: '患者様が迷わず予約できる分かりやすいフォームを構築します。' },
-              { title: 'LINE導線設計', desc: '問い合わせから予約へのスムーズな流れをLINE上に構築します。' },
-              { title: '自動応答設計', desc: 'よくある質問への自動返信を設定し、スタッフの負担を軽減します。' },
-              { title: '予約確定フォロー', desc: '予約後の事前案内や確認メッセージを自動化し、安心感を与えます。' },
-              { title: 'リマインド運用', desc: '前日・当日のリマインドで無断キャンセルを劇的に削減します。' },
-              { title: '掘り起こし支援', desc: '過去の患者様に合わせたメッセージ配信で、無理なく再来院を促します。' },
-              { title: '分析レポート', desc: '予約率やキャンセル率などのデータを分かりやすくまとめ、毎月ご報告します。' },
-              { title: '改善提案', desc: 'データに基づき、さらに予約率を高めるための次の一手をご提案します。' }
-            ].map((service, i) => (
-              <div key={i} className="system-feature animate-on-scroll" style={{ opacity: 0, animationDelay: `${(i % 4) * 0.1}s`, background: '#fff', padding: '1.5rem', borderRadius: '12px', borderLeft: '4px solid var(--color-primary)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
-                <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--color-primary-dark)' }}>{service.title}</h3>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>{service.desc}</p>
-              </div>
-            ))}
+          <div className="system-content">
+            <div className="system-features" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+              {[
+                { title: '予約フォーム制作', desc: '迷わず予約できるフォームを構築' },
+                { title: 'LINE導線設計', desc: '問い合わせから予約へのスムーズな流れ' },
+                { title: '自動応答設計', desc: 'よくある質問への自動返信を設定' },
+                { title: '予約確定フォロー', desc: '事前案内や確認メッセージを自動化' },
+                { title: 'リマインド運用', desc: '前日・当日のリマインドでキャンセル削減' },
+                { title: '掘り起こし支援', desc: '過去の患者様に合わせたメッセージ配信' },
+                { title: '分析レポート', desc: '予約率やキャンセル率などのデータ報告' },
+                { title: '改善提案', desc: 'データに基づき次の一手をご提案' }
+              ].map((service, i) => (
+                <div key={i} className="system-feature animate-on-scroll" style={{ opacity: 0, animationDelay: `${(i % 4) * 0.1}s`, background: '#fff', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid var(--color-primary)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+                  <h3 style={{ fontSize: '1.1rem', marginBottom: '0.2rem', color: 'var(--color-primary-dark)' }}>{service.title}</h3>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: '0.85rem' }}>{service.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="system-image-wrapper animate-on-scroll" style={{ opacity: 0, animationDelay: '0.2s' }}>
+              <img src="/system_mockup.png" alt="System Dashboard Mockup" className="system-image" />
+            </div>
           </div>
         </div>
       </section>
@@ -157,18 +162,23 @@ export default function ImprovementPage() {
       <section className="section ai">
         <div className="container">
           <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>将来機能（順次追加予定）</h2>
-          <div className="ai-grid animate-on-scroll" style={{ opacity: 0, marginTop: '3rem' }}>
-            {[
-              { icon: '👥', title: '患者分析' },
-              { icon: '💬', title: 'LINE分析' },
-              { icon: '📈', title: '予約率分析' },
-              { icon: '💡', title: 'AI改善提案' },
-            ].map((item, i) => (
-              <div key={i} className="ai-card">
-                <div className="ai-card-icon">{item.icon}</div>
-                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-primary-dark)' }}>{item.title}</h4>
-              </div>
-            ))}
+          <div className="system-content" style={{ marginTop: '3rem' }}>
+            <div className="system-image-wrapper animate-on-scroll" style={{ opacity: 0 }}>
+              <img src="/ai_analysis.png" alt="AI Analysis Graphic" className="system-image" />
+            </div>
+            <div className="ai-grid animate-on-scroll" style={{ opacity: 0, animationDelay: '0.2s' }}>
+              {[
+                { icon: '👥', title: '患者分析' },
+                { icon: '💬', title: 'LINE分析' },
+                { icon: '📈', title: '予約率分析' },
+                { icon: '💡', title: 'AI改善提案' },
+              ].map((item, i) => (
+                <div key={i} className="ai-card">
+                  <div className="ai-card-icon">{item.icon}</div>
+                  <h4 style={{ fontSize: '1.2rem', color: 'var(--color-primary-dark)' }}>{item.title}</h4>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
