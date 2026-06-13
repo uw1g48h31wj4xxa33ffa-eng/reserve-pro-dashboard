@@ -94,8 +94,8 @@ export function ServicesSection() {
               className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] bg-gray-100"
             >
               <Image
-                src="/consulting.png"
-                alt="歯科医院スタッフへのコンサルティング風景"
+                src="/system_mockup.png"
+                alt="システム画面モックアップ"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

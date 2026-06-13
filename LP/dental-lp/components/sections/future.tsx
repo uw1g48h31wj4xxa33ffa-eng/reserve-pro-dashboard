@@ -77,8 +77,8 @@ export function FutureSection() {
               className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-square md:aspect-[4/3] bg-gray-100"
             >
               <Image
-                src="/consulting_data.png"
-                alt="タブレットを見ながらデータに基づく改善提案を行う様子"
+                src="/ai_analysis.png"
+                alt="システム・データ分析イメージ"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
