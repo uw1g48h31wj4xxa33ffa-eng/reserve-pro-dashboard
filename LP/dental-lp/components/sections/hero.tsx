@@ -74,7 +74,7 @@ export function HeroSection() {
               onClick={() => handleNav("#contact")}
               className="px-8 py-4 text-base font-bold text-white rounded-full gradient-brand shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
             >
-              無料相談を申し込む
+              無料相談はこちら（Zoom）
             </button>
             <button
               onClick={() => handleNav("#results")}

@@ -68,13 +68,17 @@ export function ContactSection() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <span className="section-eyebrow">お問い合わせ</span>
-          <h2 className="section-heading">まずは無料でご相談ください</h2>
-          <p className="section-subheading">
-            貴院のお悩みをお聞かせください。<br />
-            現場に合わせた最適なサポートをご提案いたします。
+          <span className="section-eyebrow">Free Consultation</span>
+          <h2 className="section-heading mb-6">
+            無料<span className="text-teal-600">Zoom相談</span><br className="md:hidden" />受付中
+          </h2>
+          <p className="text-lg text-gray-600 mb-2">
+            現在の運用状況をヒアリングし、具体的な改善ポイントをご提案いたします。
+          </p>
+          <p className="text-gray-500 font-bold">
+            ※無理な営業は一切行いませんので、まずはお気軽にご相談ください。
           </p>
         </motion.div>
 
@@ -218,9 +222,9 @@ export function ContactSection() {
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 text-base font-bold text-white rounded-full gradient-brand shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-4 px-8 text-base font-bold text-white rounded-xl gradient-brand shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {submitting ? "送信中..." : "無料相談を申し込む →"}
+                    {submitting ? "送信中..." : "無料相談（Zoom）を申し込む"}
                   </button>
                   <p className="text-center text-xs text-gray-400 mt-3">
                     ご入力いただいた情報は、お問い合わせへの返答のみに使用します。

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function Footer() {
   const handleNav = (href: string) => {
@@ -41,6 +42,18 @@ export function Footer() {
                 </button>
               ))}
             </nav>
+            <ul className="space-y-3 mt-4">
+              <li>
+                <Link href="/company" className="text-sm hover:text-teal-400 transition-colors">
+                  事業者情報
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-sm hover:text-teal-400 transition-colors">
+                  プライバシーポリシー
+                </Link>
+              </li>
+            </ul>
           </div>
 
           {/* CTA */}
