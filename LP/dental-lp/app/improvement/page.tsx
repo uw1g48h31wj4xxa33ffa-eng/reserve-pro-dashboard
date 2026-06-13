@@ -28,7 +28,10 @@ export default function ImprovementPage() {
         <div className="container header-container">
           <div className="logo">
             <div className="logo-icon">D</div>
-            <span>Dental Reserve Pro</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              <span>DentalConnect</span>
+              <span style={{ fontSize: '0.7rem', color: 'var(--color-primary)', fontWeight: 600 }}>予約導線改善サポート</span>
+            </div>
           </div>
           <a href="#contact" className="btn btn-primary" style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }}>無料相談</a>
         </div>
@@ -39,14 +42,14 @@ export default function ImprovementPage() {
         <img src="/fv_bg.png" alt="Dental Clinic Background" className="hero-bg" />
         <div className="hero-overlay"></div>
         <div className="container hero-content animate-on-scroll" style={{ opacity: 0 }}>
-          <span className="hero-badge">歯科医院向け LINE予約導線最適化サービス</span>
+          <span className="hero-badge">歯科医院向け LINE予約導線改善サポート</span>
           <h1 className="hero-title">
             問い合わせを<br />
             <span>予約につなげる</span>仕組みを。
           </h1>
           <p className="hero-subtitle">
             問い合わせから予約確定、掘り起こしまで。<br />
-            予約率改善のための仕組みをご提供します。
+            現場に合わせた運用をご提案します。
           </p>
           <div className="hero-cta">
             <a href="#contact" className="btn btn-primary">無料相談を予約する</a>
@@ -60,7 +63,7 @@ export default function ImprovementPage() {
           <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>こんなお悩みありませんか？</h2>
           <div className="pain-grid">
             {[
-              "問い合わせは来るのに予約につながらない",
+              "問い合わせは来る、でも予約にならない",
               "無断キャンセルが多い",
               "LINEを活用できていない",
               "過去の患者様の掘り起こしができていない",
@@ -99,7 +102,7 @@ export default function ImprovementPage() {
             <div className="result-card animate-on-scroll" style={{ opacity: 0, animationDelay: '0.2s' }}>
               <div className="result-label">掘り起こし</div>
               <div className="result-numbers">
-                <span className="before">月0件</span>
+                <span className="before">0件</span>
                 <span className="arrow">→</span>
                 <span className="after">平均13件</span>
               </div>
@@ -108,10 +111,37 @@ export default function ImprovementPage() {
         </div>
       </section>
 
+      {/* Services Provided Section */}
+      <section className="section system">
+        <div className="container">
+          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>提供内容</h2>
+          <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--color-text-muted)', fontSize: '1.1rem' }} className="animate-on-scroll" style={{ opacity: 0 }}>
+            <p>システムを導入するだけではありません。個人事業主ならではの細やかなサポートで、<br />貴院の現場に合わせた最適な仕組みづくりから日々の運用まで支援します。</p>
+          </div>
+          <div className="system-features" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+            {[
+              { title: '予約フォーム制作', desc: '患者様が迷わず予約できる分かりやすいフォームを構築します。' },
+              { title: 'LINE導線設計', desc: '問い合わせから予約へのスムーズな流れをLINE上に構築します。' },
+              { title: '自動応答設計', desc: 'よくある質問への自動返信を設定し、スタッフの負担を軽減します。' },
+              { title: '予約確定フォロー', desc: '予約後の事前案内や確認メッセージを自動化し、安心感を与えます。' },
+              { title: 'リマインド運用', desc: '前日・当日のリマインドで無断キャンセルを劇的に削減します。' },
+              { title: '掘り起こし支援', desc: '過去の患者様に合わせたメッセージ配信で、無理なく再来院を促します。' },
+              { title: '分析レポート', desc: '予約率やキャンセル率などのデータを分かりやすくまとめ、毎月ご報告します。' },
+              { title: '改善提案', desc: 'データに基づき、さらに予約率を高めるための次の一手をご提案します。' }
+            ].map((service, i) => (
+              <div key={i} className="system-feature animate-on-scroll" style={{ opacity: 0, animationDelay: `${(i % 4) * 0.1}s`, background: '#fff', padding: '1.5rem', borderRadius: '12px', borderLeft: '4px solid var(--color-primary)', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' }}>
+                <h3 style={{ fontSize: '1.2rem', marginBottom: '0.5rem', color: 'var(--color-primary-dark)' }}>{service.title}</h3>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>{service.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Flow Section */}
       <section className="section flow">
         <div className="container">
-          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>解決へのステップ</h2>
+          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>サポートイメージ</h2>
           <div className="flow-container">
             {['問い合わせ', '予約フォーム', 'LINE', '予約確定', '来院', '掘り起こし', '再来院'].map((step, i) => (
               <div key={i} className="flow-step animate-on-scroll" style={{ opacity: 0, animationDelay: `${i * 0.1}s` }}>
@@ -123,59 +153,22 @@ export default function ImprovementPage() {
         </div>
       </section>
 
-      {/* System Section */}
-      <section className="section system">
-        <div className="container">
-          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>最適化された管理環境</h2>
-          <div className="system-content">
-            <div className="system-features animate-on-scroll" style={{ opacity: 0 }}>
-              <div className="system-feature">
-                <h3>予約管理</h3>
-                <p>直感的なUIで、日々の予約状況を瞬時に把握。ダブルブッキングを防ぎます。</p>
-              </div>
-              <div className="system-feature">
-                <h3>LINE連携</h3>
-                <p>患者様とのコミュニケーションをLINEに集約。自動リマインドでキャンセルを防止。</p>
-              </div>
-              <div className="system-feature">
-                <h3>患者管理</h3>
-                <p>カルテ情報と連携し、一人ひとりに合わせたパーソナライズされた対応を実現。</p>
-              </div>
-              <div className="system-feature">
-                <h3>分析画面</h3>
-                <p>予約率やキャンセル率、スタッフ別の対応状況など、経営指標を可視化します。</p>
-              </div>
-            </div>
-            <div className="system-image-wrapper animate-on-scroll" style={{ opacity: 0, animationDelay: '0.2s' }}>
-              <img src="/system_mockup.png" alt="System Dashboard Mockup" className="system-image" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AI Analysis Section */}
+      {/* Future Features (AI) Section */}
       <section className="section ai">
         <div className="container">
-          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>最先端のAI分析機能</h2>
-          <div className="system-content" style={{ marginTop: '3rem' }}>
-            <div className="system-image-wrapper animate-on-scroll" style={{ opacity: 0 }}>
-              <img src="/ai_analysis.png" alt="AI Analysis Graphic" className="system-image" />
-            </div>
-            <div className="ai-grid animate-on-scroll" style={{ opacity: 0, animationDelay: '0.2s' }}>
-              {[
-                { icon: '🧠', title: '患者行動分析' },
-                { icon: '📈', title: '予約率分析' },
-                { icon: '🎯', title: '掘り起こし分析' },
-                { icon: '👥', title: '患者分類' },
-                { icon: '💬', title: 'LINE分析' },
-                { icon: '💡', title: '改善提案' },
-              ].map((item, i) => (
-                <div key={i} className="ai-card">
-                  <div className="ai-card-icon">{item.icon}</div>
-                  <h4>{item.title}</h4>
-                </div>
-              ))}
-            </div>
+          <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>将来機能（順次追加予定）</h2>
+          <div className="ai-grid animate-on-scroll" style={{ opacity: 0, marginTop: '3rem' }}>
+            {[
+              { icon: '👥', title: '患者分析' },
+              { icon: '💬', title: 'LINE分析' },
+              { icon: '📈', title: '予約率分析' },
+              { icon: '💡', title: 'AI改善提案' },
+            ].map((item, i) => (
+              <div key={i} className="ai-card">
+                <div className="ai-card-icon">{item.icon}</div>
+                <h4 style={{ fontSize: '1.2rem', color: 'var(--color-primary-dark)' }}>{item.title}</h4>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -183,14 +176,13 @@ export default function ImprovementPage() {
       {/* CTA Section */}
       <section id="contact" className="section cta-section">
         <div className="container animate-on-scroll" style={{ opacity: 0 }}>
-          <h2 className="cta-title">まずは現状の課題をお聞かせください</h2>
+          <h2 className="cta-title">システムだけではなく、運用までサポートします</h2>
           <p className="cta-desc">
-            貴院の状況に合わせた最適な予約率改善の仕組みをご提案いたします。
-            オンラインでの無料相談やデモ画面のご案内も承っております。
+            まずは貴院の現状のお悩みをお聞かせください。<br />
+            個人事業主ならではの、現場に寄り添った柔軟なサポートをご提案いたします。
           </p>
           <div className="cta-buttons">
-            <a href="#" className="btn btn-primary">無料相談に申し込む</a>
-            <a href="#" className="btn btn-secondary">デモ画面を依頼する</a>
+            <a href="#" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem' }}>無料相談受付中</a>
           </div>
         </div>
       </section>
@@ -198,7 +190,7 @@ export default function ImprovementPage() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} Dental Reserve Pro. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} DentalConnect 予約導線改善サポート. All rights reserved.</p>
         </div>
       </footer>
     </div>
