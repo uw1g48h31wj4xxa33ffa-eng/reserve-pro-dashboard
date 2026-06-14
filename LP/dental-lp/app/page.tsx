@@ -4,7 +4,7 @@ import { HeroSection } from "@/components/sections/hero";
 import { ProblemsSection } from "@/components/sections/problems";
 import { ResultsSection } from "@/components/sections/results";
 import { ServicesSection } from "@/components/sections/service";
-import { FlowSection } from "@/components/sections/flow";
+import { WhySection } from "@/components/sections/why";
 import { SystemSection } from "@/components/sections/system";
 import { ContactSection } from "@/components/sections/contact";
 
@@ -19,10 +19,10 @@ export default function Home() {
         <ProblemsSection />
         {/* 実績 */}
         <ResultsSection />
+        {/* なぜ改善できるのか */}
+        <WhySection />
         {/* 支援内容 */}
         <ServicesSection />
-        {/* 改善フロー */}
-        <FlowSection />
         {/* システム紹介 */}
         <SystemSection />
         {/* お問い合わせ */}

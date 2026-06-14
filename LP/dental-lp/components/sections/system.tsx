@@ -94,14 +94,13 @@ export function SystemSection() {
     <section id="system" className="section-py bg-white">
       <div className="container-lg">
         <div className="text-center mb-20">
-          <span className="section-eyebrow">Tools & System</span>
+          <span className="section-eyebrow">Case Study</span>
           <h2 className="section-heading">
-            改善を支える<span className="text-teal-600">ツール・システム</span>
+            実際の<span className="text-teal-600">運用例</span>
           </h2>
           <p className="section-subheading">
-            システムはあくまで「改善の手段」です。
-            <br className="hidden md:block" />
-            現場の状況に合わせて必要なものだけを、適切に活用します。
+            ※当サービスはシステム販売ではありません。<br className="hidden md:block" />
+            これらは、現場改善の結果として必要に応じて構築している仕組みの一例です。
           </p>
         </div>
 
@@ -150,7 +149,7 @@ export function SystemSection() {
 
           </motion.div>
 
-          {/* Tools list */}
+          {/* Explanation */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -158,11 +157,11 @@ export function SystemSection() {
             className="space-y-6"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-sm font-bold mb-4">
-              <span>💡</span> システムは主役ではありません
+              <span>⚠️</span> 独自ツールやAIは主役ではありません
             </div>
             <p className="text-base text-gray-600 leading-relaxed mb-8">
-              当サービスの主役は「改善の実績と成果」です。
-              ツールや仕組みは、その実現を後押しするための手段として必要な場合のみ導入します。
+              当サービスの主役は「現場の改善」です。
+              予約アプリや高度なLINE構築、独自ツールなどは最初から売り込むものではありません。現場理解をベースに、課題解決のために必要だと判断した場合のみ構築・運用いたします。
             </p>
             {tools.map((tool, i) => (
               <motion.div

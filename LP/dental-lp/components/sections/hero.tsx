@@ -3,114 +3,63 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export function HeroSection() {
   const handleNav = (href: string) => {
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <Image
-          src="/fv_bg.png"
-          alt="清潔感ある歯科医院の内観"
-          fill
-          priority
-          className="object-cover"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/97 via-white/88 to-white/40" />
-      </div>
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
+      {/* Background Video/Image Concept (Using a subtle gradient/blur for now to keep it clean) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-50 via-white to-white" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-teal-50 to-transparent rounded-full blur-3xl opacity-60 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
-      {/* Blobs */}
-      <div className="absolute top-1/4 right-10 w-72 h-72 rounded-full bg-teal-100/30 blur-3xl -z-10 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 w-56 h-56 rounded-full bg-sky-100/30 blur-3xl -z-10 pointer-events-none" />
-
-      <div className="container-lg py-20">
-        <motion.div
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.13 } } }}
-          initial="hidden"
-          animate="show"
-          className="max-w-2xl"
-        >
-          {/* Badge */}
-          <motion.div variants={fadeUp}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-teal-50 text-teal-700 border border-teal-100 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-              歯科医院向け 運営改善パートナー
-            </span>
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h1
-            variants={fadeUp}
-            className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-gray-900 mb-6"
-          >
-            歯科医院の運営課題を
-            <br />
-            <span className="gradient-brand-text">現場目線で改善する</span>
-          </motion.h1>
-
-          {/* Sub */}
-          <motion.p
-            variants={fadeUp}
-            className="text-lg md:text-xl text-gray-600 leading-relaxed mb-10"
-          >
-            予約導線・LINE運用・掘り起こしから採用・業務改善まで。
-            <br className="hidden md:block" />
-            個人事業主だからこそできる、現場に寄り添った伴走支援です。
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
-            <button
-              onClick={() => handleNav("#contact")}
-              className="px-8 py-4 text-base font-bold text-white rounded-full gradient-brand shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
-            >
-              今の状況を共有する
-            </button>
-            <button
-              onClick={() => handleNav("#results")}
-              className="px-8 py-4 text-base font-bold text-teal-700 rounded-full bg-white border-2 border-teal-200 hover:border-teal-400 hover:bg-teal-50 hover:-translate-y-1 transition-all duration-200"
-            >
-              実績を見る →
-            </button>
-          </motion.div>
-
-          {/* Trust badges */}
+      <div className="container-lg relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            variants={fadeUp}
-            className="flex flex-wrap gap-6 mt-12 text-sm text-gray-500"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            {[
-              "✅ 予約確定率 30% → 50%達成",
-              "✅ 無断キャンセル 0〜1件",
-              "✅ 掘り起こし 平均13件/月",
-            ].map((badge) => (
-              <span key={badge} className="font-medium">
-                {badge}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-gray-100 shadow-sm text-sm font-bold text-gray-600 mb-8 tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+              歯科医院向け 運営改善パートナー
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 tracking-tight leading-[1.3] mb-8">
+              歯科医院の運営課題を<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-sky-600">
+                現場目線で改善する
               </span>
-            ))}
-          </motion.div>
-        </motion.div>
-      </div>
+            </h1>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-gray-300 flex items-start justify-center pt-2"
-        >
-          <div className="w-1.5 h-2.5 rounded-full bg-teal-400" />
-        </motion.div>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm md:text-base font-bold text-gray-500 mb-8">
+              <span>予約</span>
+              <span className="text-gray-300">/</span>
+              <span>LINE運用</span>
+              <span className="text-gray-300">/</span>
+              <span>掘り起こし</span>
+              <span className="text-gray-300">/</span>
+              <span>採用</span>
+              <span className="text-gray-300">/</span>
+              <span>業務改善</span>
+            </div>
+
+            <p className="text-lg md:text-xl text-gray-600 mb-12 leading-relaxed max-w-2xl mx-auto">
+              医院ごとに合わせた<br className="md:hidden" />仕組みづくりをサポートします
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => handleNav("#contact")}
+                className="w-full sm:w-auto px-8 py-4 text-base font-bold text-white rounded-full gradient-brand shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200"
+              >
+                まずは状況を共有する
+              </button>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

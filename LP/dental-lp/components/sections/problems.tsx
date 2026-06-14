@@ -1,106 +1,72 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-
-const PROBLEMS = [
-  {
-    icon: "📉",
-    title: "予約枠が埋まらない\nキャンセルが多い",
-    desc: "せっかくの初診予約も、無断キャンセルや直前キャンセルでチェアーが空いてしまう。",
-  },
-  {
-    icon: "📱",
-    title: "LINEを導入したが\n活用できていない",
-    desc: "アカウントは作ったものの、どんなメッセージを送ればいいかわからず放置状態。",
-  },
-  {
-    icon: "🔍",
-    title: "休眠患者の\n掘り起こしができない",
-    desc: "治療中断や定期検診から足が遠のいている患者様への適切なアプローチ手段がない。",
-  },
-  {
-    icon: "👩‍⚕️",
-    title: "歯科医師・衛生士が\n採用できない",
-    desc: "求人を出しても応募が来ない。医院の魅力が求職者に上手く伝わっていない。",
-  },
-  {
-    icon: "⚙️",
-    title: "業務が属人化し\n数字の管理ができていない",
-    desc: "受付スタッフの負担が大きく、予約率やリピート率などの正確な数値集計ができていない。",
-  },
-];
 
 export function ProblemsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const container = {
+  const problems = [
+    "問い合わせは来るが予約にならない",
+    "LINEを活用できていない",
+    "無断キャンセルが多い",
+    "掘り起こしができていない",
+    "数字管理が属人化している",
+    "採用に時間を取られている",
+  ];
+
+  const containerVar = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
 
-  const item = {
+  const itemVar = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   return (
     <section id="problems" className="section-py bg-gray-50">
       <div className="container-lg">
-        <div className="text-center mb-20">
-          <span className="section-eyebrow">Problems</span>
+        <div className="text-center mb-16">
+          <span className="section-eyebrow">Current Issues</span>
           <h2 className="section-heading">
-            こんな<span className="text-teal-600">運営課題</span>、
-            <br className="md:hidden" />
-            抱えていませんか？
+            こんな<span className="text-teal-600">お悩み</span>はありませんか？
           </h2>
-          <p className="section-subheading">
-            現場のスタッフも院長も、日々の診療に追われて<br className="hidden md:block" />
-            「わかってはいるけど手が回らない」状態になっていませんか？
-          </p>
         </div>
 
         <motion.div
           ref={ref}
-          variants={container}
+          variants={containerVar}
           initial="hidden"
           animate={isInView ? "show" : "hidden"}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
-          {PROBLEMS.map((p, i) => (
+          {problems.map((prob, i) => (
             <motion.div
               key={i}
-              variants={item}
-              className="bg-white rounded-3xl p-10 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
+              variants={itemVar}
+              className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-start gap-4 hover:shadow-md transition-shadow"
             >
-              <div className="text-4xl mb-6">{p.icon}</div>
-              <h3 className="text-lg font-bold text-gray-900 leading-snug mb-4 whitespace-pre-line">
-                {p.title}
-              </h3>
-              <p className="text-base text-gray-500 leading-relaxed">{p.desc}</p>
+              <div className="w-8 h-8 rounded-full bg-red-50 text-red-500 flex items-center justify-center flex-shrink-0 font-bold text-lg">
+                !
+              </div>
+              <p className="text-gray-700 font-bold leading-relaxed pt-1">{prob}</p>
             </motion.div>
           ))}
+        </motion.div>
 
-          {/* Solution Highlight */}
-          <motion.div
-            variants={item}
-            className="gradient-brand rounded-3xl p-10 text-white flex flex-col justify-between"
-          >
-            <div>
-              <div className="text-4xl mb-6">🤝</div>
-              <h3 className="text-lg font-bold leading-snug mb-4">
-                これらをすべて<br />まとめて伴走支援します
-              </h3>
-              <p className="text-base opacity-90 leading-relaxed">
-                外部のシステム会社ではなく、現場に入り込む「運営改善パートナー」として解決に導きます。
-              </p>
-            </div>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-xl md:text-2xl font-black text-gray-900 leading-relaxed">
+            現場の課題は、机上のシステム導入だけでは解決しません。<br />
+            <span className="text-teal-600">現場を理解した「運営改善パートナー」</span>が必要です。
+          </p>
         </motion.div>
       </div>
     </section>
