@@ -5,14 +5,16 @@ export function middleware(req: NextRequest) {
   const basicAuth = req.headers.get('authorization');
 
   if (basicAuth) {
-    const authValue = basicAuth.split(' ')[1];
-    // atob is deprecated in Node, but works in Edge Runtime (Middleware)
-    // For wider compatibility, using Buffer is safer, but Next.js middleware runs in Edge where atob is supported.
-    const [user, pwd] = atob(authValue).split(':');
+    try {
+      const authValue = basicAuth.split(' ')[1];
+      const decodedValue = atob(authValue);
+      const [user, pwd] = decodedValue.split(':');
 
-    // ★ここでIDとパスワードを指定しています
-    if (user === 'dental' && pwd === 'preview') {
-      return NextResponse.next();
+      if (user === 'dental' && pwd === 'preview') {
+        return NextResponse.next();
+      }
+    } catch (e) {
+      // 復号エラーなどは無視して401へ
     }
   }
 
@@ -24,7 +26,6 @@ export function middleware(req: NextRequest) {
   });
 }
 
-// 認証を適用するパスを指定します
 export const config = {
-  matcher: ['/:path*'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|uploads).*)'],
 };
