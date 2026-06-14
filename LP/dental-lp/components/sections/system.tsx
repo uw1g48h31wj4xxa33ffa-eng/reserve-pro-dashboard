@@ -88,46 +88,36 @@ function LineFlowMockup() {
       {/* ① LINE Phone (Back Left) */}
       <div className="absolute left-2 top-4 w-[240px] bg-white rounded-[2.5rem] p-2 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[6px] border-gray-900 overflow-hidden h-[400px] z-10 -rotate-3">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-30" />
-        <div className="w-full h-full rounded-2xl overflow-hidden relative bg-gray-100 flex flex-col gap-2 p-2 pt-8">
-          <div className="w-full rounded-xl overflow-hidden shadow-sm h-full">
-            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-full blur-[0.5px] opacity-95 object-cover" />
+        <div className="w-full h-full rounded-2xl overflow-y-auto custom-scrollbar relative bg-gray-100 flex flex-col gap-2 p-2 pt-8 pb-4">
+          <div className="w-full rounded-xl overflow-hidden shadow-sm">
+            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
+          </div>
+          <div className="w-full rounded-xl overflow-hidden shadow-sm">
+            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
+          </div>
+          <div className="w-full rounded-xl overflow-hidden shadow-sm">
+            <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
         </div>
       </div>
 
       {/* ② 改善フロー (Front Right) */}
-      <div className="absolute right-0 bottom-6 w-[220px] bg-white/95 backdrop-blur-sm rounded-3xl p-5 shadow-2xl border border-gray-100 z-20 rotate-2 max-h-[420px] overflow-y-auto custom-scrollbar">
-        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3 sticky top-0 bg-white/95 backdrop-blur-sm z-10">配信自動化フロー</div>
-        
-        <div className="flex flex-col gap-4">
-          {/* 追加された画像たち */}
-          <div className="flex flex-col gap-2">
-            <div className="w-full rounded-xl overflow-hidden shadow-sm border border-gray-100">
-              <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
-            </div>
-            <div className="w-full rounded-xl overflow-hidden shadow-sm border border-gray-100">
-              <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
-            </div>
+      <div className="absolute right-0 bottom-6 w-[220px] bg-white/95 backdrop-blur-sm rounded-3xl p-5 shadow-2xl border border-gray-100 z-20 rotate-2">
+        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">配信自動化フロー</div>
+        <div className="flex flex-col gap-3">
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
+            <span className="text-xs font-medium text-gray-700">最終来院から●●日後</span>
           </div>
-
-          <div className="w-full h-px bg-gray-100" />
-
-          {/* 既存のテキストフロー */}
-          <div className="flex flex-col gap-3">
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
-              <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
-              <span className="text-xs font-medium text-gray-700">最終来院から●●日後</span>
-            </div>
-            <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
-            <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
-              <span className="font-bold text-teal-600 text-[10px]">Step 2</span><br/>
-              <span className="text-xs font-medium text-teal-800">検診案内を自動送信</span>
-            </div>
-            <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
-              <span className="font-bold text-teal-600 text-[10px]">Step 3</span><br/>
-              <span className="text-xs font-medium text-gray-700">予約システムと連携</span>
-            </div>
+          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
+          <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 2</span><br/>
+            <span className="text-xs font-medium text-teal-800">検診案内を自動送信</span>
+          </div>
+          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 3</span><br/>
+            <span className="text-xs font-medium text-gray-700">予約システムと連携</span>
           </div>
         </div>
       </div>
