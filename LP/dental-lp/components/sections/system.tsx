@@ -4,6 +4,11 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 
+// Privacy mask
+const PrivacyMask = ({ className }: { className?: string }) => (
+  <div className={`absolute backdrop-blur-md bg-white/60 border border-white/40 shadow-sm rounded-md z-10 ${className}`} />
+);
+
 // Dashboard Mockup
 function DashboardMockup() {
   return (
@@ -130,6 +135,9 @@ export function SystemSection() {
                     height={800}
                     className="w-full h-full object-cover object-top"
                   />
+                  {/* 「申請一覧のテスト」などが入っている部分をぼかす */}
+                  <PrivacyMask className="top-[25%] left-[5%] w-[90%] h-[20%]" />
+                  <PrivacyMask className="top-[50%] left-[5%] w-[90%] h-[20%]" />
                 </div>
               </div>
             </motion.div>
