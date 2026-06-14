@@ -13,8 +13,22 @@ export function ContactSection() {
     name: "",
     email: "",
     phone: "",
-    message: "",
+    interests: [] as string[],
+    otherInterest: "",
   });
+
+  const interestOptions = [
+    "予約導線",
+    "LINE運用",
+    "掘り起こし",
+    "採用",
+    "数値管理",
+    "業務改善",
+    "ホームページ",
+    "SNS運用",
+    "AI活用",
+    "その他",
+  ];
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -30,11 +44,23 @@ export function ContactSection() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCheckboxChange = (option: string) => {
+    setFormState((prev) => {
+      const isSelected = prev.interests.includes(option);
+      return {
+        ...prev,
+        interests: isSelected
+          ? prev.interests.filter((item) => item !== option)
+          : [...prev.interests, option],
+      };
     });
   };
 
@@ -161,23 +187,75 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-bold text-gray-700">
-                    現在のお悩み・課題 <span className="text-teal-600 text-xs ml-1">必須</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    value={formState.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 resize-none outline-none"
-                  />
+                <div className="space-y-4">
+                  <div className="flex justify-between items-end">
+                    <label className="block text-sm font-bold text-gray-700">
+                      気になる項目 <span className="text-gray-400 text-xs ml-1 font-normal">複数選択可</span>
+                    </label>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {interestOptions.map((option) => (
+                      <label
+                        key={option}
+                        onClick={() => handleCheckboxChange(option)}
+                        className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
+                          formState.interests.includes(option)
+                            ? "border-teal-400 bg-teal-50"
+                            : "border-gray-200 bg-gray-50 hover:bg-gray-100"
+                        }`}
+                      >
+                        <div
+                          className={`w-4 h-4 rounded-[4px] border flex items-center justify-center transition-colors ${
+                            formState.interests.includes(option)
+                              ? "bg-teal-500 border-teal-500"
+                              : "bg-white border-gray-300"
+                          }`}
+                        >
+                          {formState.interests.includes(option) && (
+                            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                              <path
+                                d="M2 6L5 9L10 3"
+                                stroke="white"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          )}
+                        </div>
+                        <span
+                          className={`text-sm ${
+                            formState.interests.includes(option)
+                              ? "text-teal-800 font-bold"
+                              : "text-gray-600"
+                          }`}
+                        >
+                          {option}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                  {formState.interests.includes("その他") && (
+                    <div className="pt-2">
+                      <input
+                        type="text"
+                        name="otherInterest"
+                        placeholder="その他の内容をご記入ください"
+                        value={formState.otherInterest}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 text-sm rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-white text-gray-900 outline-none"
+                      />
+                    </div>
+                  )}
                 </div>
 
-                <div className="pt-2 text-center text-xs text-gray-500 mb-6">
-                  いただいた内容は、<br className="md:hidden" />内容確認およびご連絡のために利用いたします
+                <div className="pt-4 text-center space-y-1">
+                  <p className="text-xs text-red-400 font-bold">
+                    患者様の個人情報などの記載はお控えください
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    いただいた内容は、内容確認およびご連絡のために利用いたします
+                  </p>
                 </div>
 
                 <div className="pt-2">
