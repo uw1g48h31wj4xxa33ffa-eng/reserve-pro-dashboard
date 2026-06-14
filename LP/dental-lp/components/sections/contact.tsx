@@ -74,7 +74,7 @@ export function ContactSection() {
           className="text-center mb-16 space-y-6"
         >
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            まず状況を聞く。
+            まず状況を聞く
           </p>
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
             その上で、できることから考える
