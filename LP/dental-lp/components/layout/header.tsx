@@ -35,10 +35,10 @@ export function Header() {
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-3 group"
+            className="flex items-center gap-2 md:gap-3 group"
             aria-label="トップへ戻る"
           >
-            <div className="w-9 h-9 rounded-xl gradient-brand flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+            <div className="w-8 h-8 md:w-9 md:h-9 rounded-xl gradient-brand flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M12 2C8.13 2 5 5.13 5 9c0 2.74 1.54 5.12 3.82 6.38L8 20h8l-.82-4.62C17.46 14.12 19 11.74 19 9c0-3.87-3.13-7-7-7z"
@@ -51,7 +51,7 @@ export function Header() {
             <div className="text-left">
               <div
                 className={cn(
-                  "text-base font-bold leading-none transition-colors",
+                  "text-sm md:text-base font-bold leading-none transition-colors",
                   scrolled ? "text-gray-900" : "text-gray-900"
                 )}
               >
@@ -64,7 +64,7 @@ export function Header() {
           <div>
             <button
               onClick={() => handleNav("#contact")}
-              className="px-5 py-2 text-sm font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+              className="whitespace-nowrap px-3 py-2 md:px-5 md:py-2 text-[10px] sm:text-xs md:text-sm font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
             >
               状況を聞かせてください
             </button>
