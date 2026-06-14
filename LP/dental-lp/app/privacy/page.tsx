@@ -75,7 +75,8 @@ export default function PrivacyPage() {
           <section className="space-y-4">
             <h2 className="text-lg font-bold text-sky-900 border-b border-sky-50 pb-2">7. お問い合わせ</h2>
             <p className="text-sm md:text-base text-gray-600 pl-2">
-              個人情報の取り扱いに関するお問い合わせは、現状共有フォームまたは指定の連絡方法より受け付けます
+              個人情報の取り扱いに関するお問い合わせは、<br />
+              現状共有フォームまたは指定の連絡方法より受け付けます
             </p>
           </section>
 
