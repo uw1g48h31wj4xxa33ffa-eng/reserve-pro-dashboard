@@ -104,7 +104,7 @@ function LineFlowMockup() {
         <div className="flex flex-col gap-3">
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
             <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
-            <span className="text-xs font-medium text-gray-700">最終来院から半年後</span>
+            <span className="text-xs font-medium text-gray-700">最終来院から●●日後</span>
           </div>
           <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
           <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
