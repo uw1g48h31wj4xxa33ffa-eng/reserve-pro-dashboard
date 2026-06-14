@@ -1,14 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { useInView } from "react-intersection-observer";
+import { motion, useInView } from "framer-motion";
+import { useState, useRef } from "react";
 
 export function ContactSection() {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   const [formState, setFormState] = useState({
     clinicName: "",
