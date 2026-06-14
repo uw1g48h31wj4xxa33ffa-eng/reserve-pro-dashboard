@@ -74,10 +74,10 @@ export function ContactSection() {
           className="text-center mb-16 space-y-6"
         >
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            まず状況を聞く
+            まず状況をお聞かせください
           </p>
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            その上で、できることから考える
+            整理しながら、できることから考えていきます
           </p>
           <p className="text-xl md:text-2xl font-bold text-teal-600 leading-relaxed tracking-wide pt-4">
             まずは状況を聞かせてください
@@ -251,7 +251,7 @@ export function ContactSection() {
 
                 <div className="pt-4 text-center space-y-2">
                   <p className="text-[11px] md:text-xs text-sky-700/80 font-medium">
-                    ※ 患者様の個人情報などの記載はお控えください
+                    ※ 患者様の個人情報は記載しないようお願いいたします
                   </p>
                   <p className="text-[11px] text-gray-400">
                     いただいた内容は、内容確認およびご連絡のためにのみ利用いたします
