@@ -90,10 +90,10 @@ function LineFlowMockup() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-30" />
         <div className="w-full h-full rounded-2xl overflow-y-auto custom-scrollbar relative bg-gray-100 flex flex-col gap-2 p-2 pt-8 pb-4">
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
+            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
+            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
         </div>
       </div>
