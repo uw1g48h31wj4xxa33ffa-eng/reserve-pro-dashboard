@@ -55,10 +55,10 @@ export function ContactSection() {
             状況を整理しながら、
           </p>
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            より良い方向を考える。
+            より良い方向を考える
           </p>
           <p className="text-xl md:text-2xl font-bold text-teal-600 leading-relaxed tracking-wide pt-4">
-            まずは状況を聞かせてください。
+            まずは状況を聞かせてください
           </p>
         </motion.div>
 

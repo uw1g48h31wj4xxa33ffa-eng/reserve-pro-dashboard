@@ -24,11 +24,11 @@ export function CtaSection() {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-5">
             予約を逃している原因が、<br />
-            今日、わかります。
+            今日、わかります
           </h2>
           <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
             無料相談では、貴院のLINE対応状況を確認し、
-            どこで予約が止まっているかをその場でお伝えします。
+            どこで予約が止まっているかをその場でお伝えします
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
@@ -51,7 +51,7 @@ export function CtaSection() {
             </Button>
           </div>
           <p className="mt-5 text-white/60 text-sm">
-            相談・資料請求は無料です。しつこい営業は行いません。
+            相談・資料請求は無料ですしつこい営業は行いません
           </p>
         </motion.div>
       </div>

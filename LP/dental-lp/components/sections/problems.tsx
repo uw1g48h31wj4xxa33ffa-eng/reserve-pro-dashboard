@@ -64,8 +64,8 @@ export function ProblemsSection() {
           className="mt-16 text-center"
         >
           <p className="text-xl md:text-2xl font-black text-gray-900 leading-relaxed">
-            現場の課題は、机上のシステム導入だけでは解決しません。<br />
-            <span className="text-teal-600">現場を理解した「運営改善パートナー」</span>が必要です。
+            現場の課題は、机上のシステム導入だけでは解決しません<br />
+            <span className="text-teal-600">現場を理解した「運営改善パートナー」</span>が必要です
           </p>
         </motion.div>
       </div>

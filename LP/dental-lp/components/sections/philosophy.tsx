@@ -18,21 +18,10 @@ export function PhilosophySection() {
         >
           <div className="space-y-6">
             <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              現場には現場の状況があります。
+              現場には現場の状況があります
             </p>
             <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              人には人の考えがあります。
-            </p>
-          </div>
-
-          <div className="w-8 h-px bg-gray-300 mx-auto" />
-
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              まず状況を整理する。
-            </p>
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              必要に応じて<br className="md:hidden" />仕組みやAIも活用する。
+              人には人の考えがあります
             </p>
           </div>
 
@@ -40,7 +29,18 @@ export function PhilosophySection() {
 
           <div className="space-y-6">
             <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              ただし、<br className="md:hidden" />仕組みやAIが目的ではありません。
+              まず状況を整理する
+            </p>
+            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
+              必要に応じて<br className="md:hidden" />仕組みやAIも活用する
+            </p>
+          </div>
+
+          <div className="w-8 h-px bg-gray-300 mx-auto" />
+
+          <div className="space-y-6">
+            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
+              ただし、<br className="md:hidden" />仕組みやAIが目的ではありません
             </p>
           </div>
         </motion.div>

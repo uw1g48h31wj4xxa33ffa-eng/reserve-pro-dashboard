@@ -10,7 +10,7 @@ const screens = [
     id: "dashboard",
     label: "ダッシュボード",
     icon: <LayoutDashboard size={16} />,
-    description: "予約数・予約率・掘り起こし数をリアルタイムで把握。医院全体の状態を一目で確認できます。",
+    description: "予約数・予約率・掘り起こし数をリアルタイムで把握医院全体の状態を一目で確認できます",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-3">
         <div className="grid grid-cols-4 gap-2">
@@ -41,7 +41,7 @@ const screens = [
     id: "reservation",
     label: "予約管理",
     icon: <CalendarDays size={16} />,
-    description: "予約状況をカレンダーとリストで管理。ステータス変更やリマインド送信をワンクリックで完結。",
+    description: "予約状況をカレンダーとリストで管理ステータス変更やリマインド送信をワンクリックで完結",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-2">
         {[
@@ -68,7 +68,7 @@ const screens = [
     id: "patient",
     label: "患者管理",
     icon: <Users size={16} />,
-    description: "患者ごとのLINEやり取り履歴、問い合わせ内容、AIタグを一元管理。担当者が引き継いでも迷わない。",
+    description: "患者ごとのLINEやり取り履歴、問い合わせ内容、AIタグを一元管理担当者が引き継いでも迷わない",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-2">
         {[
@@ -91,7 +91,7 @@ const screens = [
     id: "line",
     label: "LINE管理",
     icon: <MessageSquare size={16} />,
-    description: "患者とのLINEメッセージを一覧管理。テンプレート返信や一括送信でスタッフの負担を大幅削減。",
+    description: "患者とのLINEメッセージを一覧管理テンプレート返信や一括送信でスタッフの負担を大幅削減",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-2">
         <div className="bg-white rounded-lg p-3 border border-gray-100">
@@ -104,7 +104,7 @@ const screens = [
           <div className="flex items-start gap-2 flex-row-reverse">
             <div className="w-7 h-7 rounded-full bg-turquoise-500 flex-shrink-0" />
             <div className="bg-turquoise-50 rounded-lg p-2 text-xs text-turquoise-800 max-w-48 border border-turquoise-100">
-              ご興味を持っていただきありがとうございます。まずは無料カウンセリングはいかがでしょうか？
+              ご興味を持っていただきありがとうございますまずは無料カウンセリングはいかがでしょうか？
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ const screens = [
     id: "followup",
     label: "掘り起こし管理",
     icon: <RefreshCw size={16} />,
-    description: "問い合わせたまま止まっている患者をAIが優先度付けして提示。スタッフはリストに従って声がけするだけ。",
+    description: "問い合わせたまま止まっている患者をAIが優先度付けして提示スタッフはリストに従って声がけするだけ",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-2">
         <div className="text-xs font-medium text-gray-600 mb-1">今月の掘り起こし候補 13件</div>
@@ -146,7 +146,7 @@ const screens = [
     id: "ai",
     label: "AI分析",
     icon: <BarChart3 size={16} />,
-    description: "患者の会話内容をAIが分析し、タイプ分類・改善提案を自動生成。スタッフの感覚頼みをデータで補完。",
+    description: "患者の会話内容をAIが分析し、タイプ分類・改善提案を自動生成スタッフの感覚頼みをデータで補完",
     mockup: (
       <div className="bg-gray-50 p-4 rounded-xl space-y-2">
         <div className="text-xs font-medium text-gray-600 mb-1">患者タイプ分布</div>
@@ -170,7 +170,7 @@ const screens = [
         </div>
         <div className="bg-turquoise-50 rounded-lg p-2 border border-turquoise-100">
           <div className="text-xs font-medium text-turquoise-700 mb-0.5">💡 AIからの改善提案</div>
-          <div className="text-xs text-turquoise-600">価格不安型が増加しています。費用についてのFAQページ追加をご検討ください。</div>
+          <div className="text-xs text-turquoise-600">価格不安型が増加しています費用についてのFAQページ追加をご検討ください</div>
         </div>
       </div>
     ),
@@ -198,11 +198,11 @@ export function FeaturesSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             すべての管理を、
             <br />
-            <span className="gradient-text">ひとつの画面から。</span>
+            <span className="gradient-text">ひとつの画面から</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            複数のシステムを行き来する必要はありません。
-            予約・患者・LINE・分析をすべて一元管理。
+            複数のシステムを行き来する必要はありません
+            予約・患者・LINE・分析をすべて一元管理
           </p>
         </motion.div>
 

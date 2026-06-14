@@ -45,11 +45,11 @@ export default function ImprovementPage() {
           <span className="hero-badge">歯科医院向け LINE予約導線改善サポート</span>
           <h1 className="hero-title">
             問い合わせを<br />
-            <span>予約につなげる</span>仕組みを。
+            <span>予約につなげる</span>仕組みを
           </h1>
           <p className="hero-subtitle">
-            問い合わせから予約確定、掘り起こしまで。<br />
-            現場に合わせた運用をご提案します。
+            問い合わせから予約確定、掘り起こしまで<br />
+            現場に合わせた運用をご提案します
           </p>
           <div className="hero-cta">
             <a href="#contact" className="btn btn-primary">無料相談を予約する</a>
@@ -116,7 +116,7 @@ export default function ImprovementPage() {
         <div className="container">
           <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>提供内容</h2>
           <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--color-text-muted)', fontSize: '1.1rem' }} className="animate-on-scroll" style={{ opacity: 0 }}>
-            <p>システムを導入するだけではありません。個人事業主ならではの細やかなサポートで、<br />貴院の現場に合わせた最適な仕組みづくりから日々の運用まで支援します。</p>
+            <p>システムを導入するだけではありません個人事業主ならではの細やかなサポートで、<br />貴院の現場に合わせた最適な仕組みづくりから日々の運用まで支援します</p>
           </div>
           <div className="system-content">
             <div className="system-features" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
@@ -188,8 +188,8 @@ export default function ImprovementPage() {
         <div className="container animate-on-scroll" style={{ opacity: 0 }}>
           <h2 className="cta-title">システムだけではなく、運用までサポートします</h2>
           <p className="cta-desc">
-            まずは貴院の現状のお悩みをお聞かせください。<br />
-            個人事業主ならではの、現場に寄り添った柔軟なサポートをご提案いたします。
+            まずは貴院の現状のお悩みをお聞かせください<br />
+            個人事業主ならではの、現場に寄り添った柔軟なサポートをご提案いたします
           </p>
           <div className="cta-buttons">
             <a href="#" className="btn btn-primary" style={{ padding: '1.2rem 3rem', fontSize: '1.2rem' }}>無料相談受付中</a>

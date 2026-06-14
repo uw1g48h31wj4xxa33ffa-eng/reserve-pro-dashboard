@@ -26,7 +26,7 @@ export function WhySection() {
 
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[2rem] p-8 md:p-12 shadow-2xl">
             <p className="text-xl md:text-2xl font-bold leading-loose mb-8">
-              実際に以下の実務に<br className="md:hidden" />深く携わってきたからです。
+              実際に以下の実務に<br className="md:hidden" />深く携わってきたからです
             </p>
             
             <div className="flex flex-wrap justify-center gap-3 mb-10">
@@ -40,10 +40,10 @@ export function WhySection() {
             <div className="w-16 h-1 bg-teal-400 mx-auto mb-8 rounded-full" />
 
             <p className="text-lg md:text-xl leading-loose font-medium opacity-90">
-              机上の空論や、単なるツールの導入提案ではありません。<br />
+              机上の空論や、単なるツールの導入提案ではありません<br />
               現場のリアルな課題と向き合ってきた<br className="md:hidden" />
               <span className="text-teal-200 font-bold border-b-2 border-teal-300 pb-0.5">現場理解をベースに改善</span>
-              しているため、<br className="md:hidden" />確実な成果に繋がります。
+              しているため、<br className="md:hidden" />確実な成果に繋がります
             </p>
           </div>
         </motion.div>

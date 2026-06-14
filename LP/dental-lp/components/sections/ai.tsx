@@ -8,25 +8,25 @@ import { Badge } from "@/components/ui/badge";
 const patientTypes = [
   {
     type: "即予約型",
-    description: "費用・日程の質問が少なく、来院意欲が高い。スピーディーな予約確定が重要。",
+    description: "費用・日程の質問が少なく、来院意欲が高いスピーディーな予約確定が重要",
     action: "即日フォロー",
     color: "turquoise",
   },
   {
     type: "価格不安型",
-    description: "費用に関する質問が多く、コスト比較をしている可能性が高い。料金の透明性訴求が有効。",
+    description: "費用に関する質問が多く、コスト比較をしている可能性が高い料金の透明性訴求が有効",
     action: "費用説明を送付",
     color: "sky",
   },
   {
     type: "検討中型",
-    description: "複数のクリニックを比較している段階。差別化ポイントと社会的証明の提示が効果的。",
+    description: "複数のクリニックを比較している段階差別化ポイントと社会的証明の提示が効果的",
     action: "事例・実績を紹介",
     color: "royal",
   },
   {
     type: "日程調整型",
-    description: "来院意欲はあるが予定が合わない状態。選択肢を広げる柔軟な予約提案が必要。",
+    description: "来院意欲はあるが予定が合わない状態選択肢を広げる柔軟な予約提案が必要",
     action: "複数日程を提示",
     color: "turquoise",
   },
@@ -36,22 +36,22 @@ const aiFeatures = [
   {
     icon: <Tag size={20} />,
     title: "患者タイプ自動分類",
-    description: "LINEメッセージの内容からAIが患者を4タイプに分類。スタッフの判断をデータでサポート。",
+    description: "LINEメッセージの内容からAIが患者を4タイプに分類スタッフの判断をデータでサポート",
   },
   {
     icon: <BarChart2 size={20} />,
     title: "予約率リアルタイム分析",
-    description: "どの導線で予約につながっているかをリアルタイムで可視化。改善ポイントを即座に特定。",
+    description: "どの導線で予約につながっているかをリアルタイムで可視化改善ポイントを即座に特定",
   },
   {
     icon: <Target size={20} />,
     title: "掘り起こし優先順位付け",
-    description: "「今アプローチすれば予約につながる確率が高い患者」をAIがランキング表示。",
+    description: "「今アプローチすれば予約につながる確率が高い患者」をAIがランキング表示",
   },
   {
     icon: <Lightbulb size={20} />,
     title: "改善提案の自動生成",
-    description: "データを元にした具体的な改善施策をAIが毎月レポートとして提供。",
+    description: "データを元にした具体的な改善施策をAIが毎月レポートとして提供",
   },
 ];
 
@@ -88,11 +88,11 @@ export function AiSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             患者の「温度感」を、
             <br />
-            <span className="gradient-text">AIが見える化する。</span>
+            <span className="gradient-text">AIが見える化する</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto">
             感覚や経験に頼らず、データに基づいたアプローチで
-            予約率を継続的に改善し続けます。
+            予約率を継続的に改善し続けます
           </p>
         </motion.div>
 

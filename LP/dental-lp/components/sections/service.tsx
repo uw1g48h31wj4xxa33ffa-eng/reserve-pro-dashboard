@@ -36,7 +36,7 @@ export function ServicesSection() {
             多角的な<span className="text-teal-600">支援内容</span>
           </h2>
           <p className="section-subheading">
-            単なるツール導入ではなく、現場の状況に合わせて実務をサポートします。
+            単なるツール導入ではなく、現場の状況に合わせて実務をサポートします
           </p>
         </div>
 

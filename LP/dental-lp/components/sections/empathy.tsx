@@ -17,13 +17,13 @@ export function EmpathySection() {
           className="text-center space-y-10"
         >
           <p className="text-2xl md:text-3xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            改善したいことはある。
+            改善したいことはある
           </p>
           <p className="text-2xl md:text-3xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            でも日々の業務もある。
+            でも日々の業務もある
           </p>
           <p className="text-2xl md:text-3xl font-bold text-teal-600 leading-relaxed tracking-wide">
-            だからまず状況を整理する。
+            だからまず状況を整理する
           </p>
         </motion.div>
       </div>

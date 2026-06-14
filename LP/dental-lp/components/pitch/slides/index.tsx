@@ -203,7 +203,7 @@ export function Slide5() {
           <motion.p variants={textAnim} className="text-2xl text-gray-600 leading-relaxed mb-12">
             システムを提供するだけではなく、<br/>
             <strong className="text-teal-600 font-black">現場のリアルな課題</strong>に直接触れてきた<br/>
-            経験があるからです。
+            経験があるからです
           </motion.p>
           <motion.div variants={textAnim} className="inline-block px-8 py-4 bg-teal-600 text-white rounded-2xl font-bold text-xl shadow-lg shadow-teal-600/30">
             圧倒的な現場理解
@@ -330,7 +330,7 @@ export function Slide8() {
               </span>
             </motion.h2>
             <motion.p variants={textAnim} className="text-xl text-gray-500 leading-relaxed mb-8">
-              日々の運用で蓄積されるデータをAIで分析し、より精度が高く、属人化しない改善提案を自動化していく仕組みを構想しています。
+              日々の運用で蓄積されるデータをAIで分析し、より精度が高く、属人化しない改善提案を自動化していく仕組みを構想しています
             </motion.p>
           </div>
 
@@ -416,7 +416,7 @@ export function Slide10() {
         
         <motion.p variants={textAnim} className="text-2xl text-gray-600 leading-relaxed font-medium mb-16">
           現在の運用状況をヒアリングし<br/>
-          貴院に最適な改善ポイントをご提案いたします。
+          貴院に最適な改善ポイントをご提案いたします
         </motion.p>
         
         <motion.div variants={textAnim}>
