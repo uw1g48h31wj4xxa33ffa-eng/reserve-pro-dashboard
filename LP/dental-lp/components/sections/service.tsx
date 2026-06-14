@@ -4,13 +4,12 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const SERVICES = [
-  { icon: "📅", title: "予約導線改善" },
-  { icon: "💬", title: "LINE運用改善" },
-  { icon: "🔄", title: "掘り起こし支援" },
-  { icon: "👩‍⚕️", title: "採用支援" },
+  { icon: "📅", title: "予約導線" },
+  { icon: "💬", title: "LINE運用" },
+  { icon: "🔄", title: "掘り起こし" },
+  { icon: "👩‍⚕️", title: "採用" },
   { icon: "📊", title: "数値管理" },
   { icon: "⚙️", title: "業務改善" },
-  { icon: "💡", title: "改善提案" },
 ];
 
 export function ServicesSection() {

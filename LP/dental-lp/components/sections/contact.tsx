@@ -107,7 +107,7 @@ export function ContactSection() {
               <div className="space-y-10 text-gray-600 leading-loose tracking-wide text-sm md:text-base">
                 <p>いただいた内容を確認いたします</p>
                 <p>
-                  まずは内容を拝見しながら、<br />
+                  まずは内容を拝読しながら、<br />
                   状況を整理した上でご連絡いたします
                 </p>
                 <p>
@@ -115,6 +115,13 @@ export function ContactSection() {
                   順次確認しておりますので<br />
                   お待ちいただけますと幸いです
                 </p>
+                <div className="pt-8 text-xs text-gray-400 leading-relaxed border-t border-gray-100">
+                  <p>
+                    内容によっては、<br />
+                    ご希望に添えない場合がございます
+                  </p>
+                  <p className="mt-2">あらかじめご了承ください</p>
+                </div>
               </div>
             </motion.div>
           ) : (

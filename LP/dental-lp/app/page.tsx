@@ -6,6 +6,8 @@ import { ResultsSection } from "@/components/sections/results";
 import { PhilosophySection } from "@/components/sections/philosophy";
 import { SystemSection } from "@/components/sections/system";
 import { ContactSection } from "@/components/sections/contact";
+import { ProfileSection } from "@/components/sections/profile";
+import { ServicesSection } from "@/components/sections/service";
 
 export default function Home() {
   return (
@@ -13,10 +15,12 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <ProfileSection />
         <EmpathySection />
         <ResultsSection />
-        <PhilosophySection />
         <SystemSection />
+        <PhilosophySection />
+        <ServicesSection />
         <ContactSection />
       </main>
       <Footer />
