@@ -48,11 +48,12 @@ export function Header() {
                 <circle cx="12" cy="9" r="2.5" fill="white" opacity="0.6" />
               </svg>
             </div>
-            <div className="text-left">
+            <div className="text-left flex flex-col justify-center">
+              <div className="text-[10px] md:text-[11px] text-gray-500 font-bold mb-0.5">現場改善の窓口</div>
               <div
                 className={cn(
-                  "font-bold leading-none transition-colors text-[clamp(13px,3.5vw,16px)]",
-                  scrolled ? "text-gray-900" : "text-gray-900"
+                  "font-bold leading-none transition-colors text-[clamp(12px,3vw,14px)]",
+                  scrolled ? "text-gray-700" : "text-gray-700"
                 )}
               >
                 DentalConnect

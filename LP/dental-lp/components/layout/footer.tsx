@@ -19,8 +19,8 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-8 border-b border-gray-800">
           {/* Brand */}
           <div>
-            <div className="text-white font-bold text-lg mb-1">DentalConnect</div>
-            <div className="text-teal-400 text-sm">歯科医院向け 運営改善パートナー</div>
+            <div className="text-teal-400 font-bold text-[13px] md:text-sm mb-1">歯科医院向け 現場改善窓口</div>
+            <div className="text-gray-300 text-[15px] md:text-base font-medium">DentalConnect</div>
           </div>
 
           {/* Links */}

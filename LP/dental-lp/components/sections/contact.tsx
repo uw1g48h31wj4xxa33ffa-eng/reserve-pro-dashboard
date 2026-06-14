@@ -26,7 +26,7 @@ export function ContactSection() {
     "業務改善",
     "ホームページ",
     "SNS運用",
-    "AI活用",
+    "AI活用等のご相談",
     "その他",
   ];
 
@@ -256,15 +256,12 @@ export function ContactSection() {
                   )}
                 </div>
 
-                <div className="pt-4 text-center space-y-2">
-                  <p className="text-xs text-red-400 font-bold">
-                    患者様の個人情報などの記載はお控えください
+                <div className="pt-6 text-center space-y-3">
+                  <p className="text-[11px] md:text-xs text-sky-700/80 font-medium">
+                    ※ 患者様の個人情報などの記載はお控えください
                   </p>
-                  <p className="text-xs text-gray-400">
-                    いただいた内容は、内容確認およびご連絡のために利用いたします
-                  </p>
-                  <p className="text-[10px] text-gray-400 pt-2 border-t border-gray-100 inline-block px-4">
-                    内容によっては、ご希望に添えない場合がございます。<br />あらかじめご了承ください。
+                  <p className="text-[11px] text-gray-400">
+                    いただいた内容は、内容確認およびご連絡のためにのみ利用いたします
                   </p>
                 </div>
 
@@ -276,6 +273,12 @@ export function ContactSection() {
                   >
                     {submitting ? "送信中..." : "状況を共有する"}
                   </button>
+                </div>
+                
+                <div className="text-center pt-2">
+                  <p className="text-[10px] text-gray-400">
+                    内容によっては、ご希望に添えない場合がございます。あらかじめご了承ください。
+                  </p>
                 </div>
               </form>
             </div>

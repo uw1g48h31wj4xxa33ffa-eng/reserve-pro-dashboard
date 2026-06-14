@@ -9,7 +9,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-white">
+    <section className="relative min-h-[85vh] md:min-h-[90vh] flex items-center pt-12 md:pt-20 overflow-hidden bg-white">
       <div className="absolute inset-0 bg-gradient-to-b from-sky-50 via-white to-white" />
       <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-teal-50 to-transparent rounded-full blur-3xl opacity-60 translate-x-1/3 -translate-y-1/3 pointer-events-none" />
 
@@ -27,17 +27,10 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 text-sm md:text-base font-bold text-gray-400 mb-16">
-              <span>予約</span>
-              <span className="text-gray-200">/</span>
-              <span>LINE運用</span>
-              <span className="text-gray-200">/</span>
-              <span>掘り起こし</span>
-              <span className="text-gray-200">/</span>
-              <span>採用</span>
-              <span className="text-gray-200">/</span>
-              <span>業務改善</span>
-            </div>
+            <p className="text-sm md:text-base font-bold text-gray-500 mb-10 leading-relaxed md:tracking-wide">
+              予約・LINE運用・掘り起こし・採用など、<br />
+              現場に合わせて整理します。
+            </p>
 
             <div className="flex flex-col items-center justify-center">
               <button
