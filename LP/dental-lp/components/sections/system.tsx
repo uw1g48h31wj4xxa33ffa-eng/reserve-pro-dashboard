@@ -126,65 +126,21 @@ function LineFlowMockup() {
 // Booking App Mockup
 function AppMockup() {
   return (
-    <div className="w-[280px] bg-gray-50 rounded-[3rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[8px] border-gray-900 relative overflow-hidden h-[480px] flex flex-col shrink-0">
+    <div className="w-[280px] bg-white rounded-[3rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[8px] border-gray-900 relative overflow-hidden h-[480px] flex flex-col shrink-0">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-2xl z-20" />
       
-      {/* App Header */}
-      <div className="bg-white px-4 pt-10 pb-4 border-b border-gray-100 shadow-sm relative z-10 flex justify-between items-center">
-        <div className="font-bold text-gray-800 text-sm">予約管理</div>
-        <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center text-[10px]">⚙️</div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-6 relative z-10">
-        {/* Calendar Mini */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-          <div className="text-xs font-bold text-gray-600 mb-3 flex justify-between">
-            <span>2024年 5月</span>
-            <span className="text-teal-600">今日</span>
-          </div>
-          <div className="grid grid-cols-7 gap-1 text-center text-[9px] text-gray-400 mb-2">
-            <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
-          </div>
-          <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-medium text-gray-700">
-            {[...Array(14)].map((_, i) => (
-              <div key={i} className={`aspect-square flex items-center justify-center rounded-full ${i === 4 ? 'bg-teal-500 text-white font-bold shadow-sm' : ''}`}>
-                {i + 1}
-              </div>
-            ))}
-          </div>
+      <div className="flex-1 overflow-y-auto bg-gray-50 p-3 pt-8 flex flex-col gap-3 relative z-10">
+        <div className="w-full rounded-xl overflow-hidden shadow-sm">
+          <img src="/uploads/app-1.jpg" alt="App Screen 1" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
         </div>
-
-        {/* 申請一覧 */}
-        <div className="flex flex-col gap-3">
-          <div className="text-xs font-bold text-gray-800 flex items-center gap-2">
-            <span>申請一覧</span>
-            <span className="bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded-full">2</span>
-          </div>
-          
-          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 flex flex-col gap-2 relative overflow-hidden">
-            <div className="flex justify-between items-start">
-              <div className="w-16 h-3 bg-gray-200 rounded-full blur-[2px]" />
-              <div className="text-[9px] text-gray-400">10:30</div>
-            </div>
-            <div className="w-24 h-3 bg-gray-100 rounded-full blur-[1px]" />
-            <div className="flex gap-2 mt-1">
-              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">確定済</div>
-              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">詳細</div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 flex flex-col gap-2 relative overflow-hidden">
-            <div className="flex justify-between items-start">
-              <div className="w-12 h-3 bg-gray-200 rounded-full blur-[2px]" />
-              <div className="text-[9px] text-gray-400">14:00</div>
-            </div>
-            <div className="w-20 h-3 bg-gray-100 rounded-full blur-[1px]" />
-            <div className="flex gap-2 mt-1">
-              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">確定済</div>
-              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">詳細</div>
-            </div>
-          </div>
-
+        <div className="w-full rounded-xl overflow-hidden shadow-sm">
+          <img src="/uploads/app-2.jpg" alt="App Screen 2" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+        </div>
+        <div className="w-full rounded-xl overflow-hidden shadow-sm">
+          <img src="/uploads/app-3.jpg" alt="App Screen 3" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+        </div>
+        <div className="w-full rounded-xl overflow-hidden shadow-sm">
+          <img src="/uploads/app-4.jpg" alt="App Screen 4" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
         </div>
       </div>
     </div>
