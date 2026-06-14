@@ -26,7 +26,7 @@ const SUPPORT_FEATURES = [
   {
     icon: "🤝",
     title: "定期ミーティングの実施",
-    tag: "伴走支援",
+    tag: "定期的な共有",
     desc: "院長先生やスタッフの皆様と定期的にミーティングを行い、現場の声を吸い上げながら改善の軌道修正を行います",
   },
   {
@@ -55,14 +55,14 @@ export function FutureSection() {
     <section className="section-py relative bg-white">
       <div className="container-lg">
         <div className="text-center mb-20">
-          <span className="section-eyebrow">Continuous Support</span>
+          <span className="section-eyebrow">Continuous Improvement</span>
           <h2 className="section-heading">
             データに基づく<br />
             <span className="text-teal-600">継続的な業務改善</span>
           </h2>
           <p className="section-subheading">
             仕組みを作って終わりではありません<br className="hidden md:block" />
-            数字と現場の声を拾い上げ、医院の成長を長期的にサポートします
+            数字と現場の声を拾い上げ、医院の成長を長期的に一緒に考えます
           </p>
         </div>
 

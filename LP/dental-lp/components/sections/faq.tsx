@@ -8,11 +8,11 @@ import { Badge } from "@/components/ui/badge";
 const faqs = [
   {
     q: "導入にどのくらい時間がかかりますか？",
-    a: "ご契約から最短2週間での稼働が可能です既存のLINE公式アカウントへの接続と初期設定をサポートスタッフが全面的にサポートします",
+    a: "ご契約から最短2週間での稼働が可能です既存のLINE公式アカウントへの接続と初期設定を専任担当が一緒に進めます",
   },
   {
     q: "ITに詳しくないスタッフでも使えますか？",
-    a: "はい直感的なUIで設計されており、初回の操作研修（オンライン30分）を受ければすぐに使い始めていただけます操作でわからないことはチャットサポートでいつでも対応します",
+    a: "はい直感的なUIで設計されており、初回の操作研修（オンライン30分）を受ければすぐに使い始めていただけます操作でわからないことはチャットでいつでも対応します",
   },
   {
     q: "既存の予約システムと連携できますか？",
@@ -84,7 +84,7 @@ export function FaqSection() {
           <Badge variant="sky" className="mb-4">よくある質問</Badge>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
             ご不明な点は<br />
-            <span className="gradient-text">こちらで解決を</span>
+            <span className="gradient-text">こちらでご確認を</span>
           </h2>
         </motion.div>
 

@@ -27,7 +27,7 @@ const STEPS = [
   {
     num: "05",
     title: "掘り起こし・採用支援の開始",
-    desc: "土台が整った段階で、休眠患者へのアプローチや、求人媒体の見直しなど、より高度な課題解決へと進みます",
+    desc: "土台が整った段階で、休眠患者へのアプローチや、求人媒体の見直しなど、より具体的な改善へと進みます",
   },
   {
     num: "06",
@@ -36,8 +36,8 @@ const STEPS = [
   },
   {
     num: "07",
-    title: "継続的な業務改善の伴走",
-    desc: "月に1回のミーティング等を通じて、新たな課題の発見や運用改善を繰り返し、貴院の発展を継続的にサポートします",
+    title: "継続的な状況の共有と改善",
+    desc: "月に1回のミーティング等を通じて、新たな課題の発見や運用改善を繰り返し、貴院の発展を着実に進めていきます",
   },
 ];
 
@@ -59,10 +59,10 @@ export function FlowSection() {
     <section id="flow" className="section-py bg-gray-50 overflow-hidden">
       <div className="container-md">
         <div className="text-center mb-20">
-          <span className="section-eyebrow">Support Flow</span>
-          <h2 className="section-heading">伴走サポートの流れ</h2>
+          <span className="section-eyebrow">Flow</span>
+          <h2 className="section-heading">現状共有から改善までの流れ</h2>
           <p className="section-subheading">
-            システムの導入で終わらせず、<br className="md:hidden" />着実な改善まで寄り添います
+            システムの導入で終わらせず、<br className="md:hidden" />現場の状況に合わせて進めます
           </p>
         </div>
 
