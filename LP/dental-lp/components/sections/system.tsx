@@ -13,7 +13,7 @@ function DashboardMockup() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 font-bold text-lg">A</div>
           <div>
-            <h4 className="font-bold text-gray-900 text-base">A歯科医院 様</h4>
+            <h4 className="font-bold text-gray-900 text-base">A医院</h4>
             <p className="text-[10px] text-gray-500">予約確定率推移</p>
           </div>
         </div>
@@ -47,7 +47,7 @@ function DashboardMockup() {
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-600 font-bold text-lg">B</div>
           <div>
-            <h4 className="font-bold text-gray-900 text-base">B歯科医院 様</h4>
+            <h4 className="font-bold text-gray-900 text-base">B医院</h4>
             <p className="text-[10px] text-gray-500">休眠患者掘り起こし（月間）</p>
           </div>
         </div>
@@ -160,9 +160,13 @@ export function SystemSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <h2 className="text-xl md:text-2xl font-bold tracking-widest text-gray-800">
+          <h2 className="text-xl md:text-2xl font-bold tracking-widest text-gray-800 mb-4">
             実際に運用している一例
           </h2>
+          <p className="text-[11px] md:text-xs text-gray-400 leading-relaxed">
+            ※ 実際の運用例の一部です。内容は医院ごとの状況により異なります。<br className="md:hidden" />
+            ※ 個人情報・医院情報を伏せた実績表示です。
+          </p>
         </motion.div>
 
         <div className="flex flex-col items-center gap-16 max-w-3xl mx-auto relative">

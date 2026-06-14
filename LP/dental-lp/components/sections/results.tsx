@@ -58,6 +58,9 @@ export function ResultsSection() {
             </motion.div>
           ))}
         </div>
+        <div className="text-center mt-12">
+          <p className="text-[11px] text-gray-400">※ 個人情報・医院情報を伏せた実績表示です</p>
+        </div>
       </div>
     </section>
   );

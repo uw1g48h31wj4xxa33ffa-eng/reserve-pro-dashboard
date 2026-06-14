@@ -17,24 +17,19 @@ export function ProfileSection() {
           transition={{ duration: 0.8 }}
           className="bg-white rounded-3xl p-10 md:p-16 shadow-sm border border-gray-100 text-center"
         >
-          <span className="section-eyebrow">Background</span>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10 tracking-wider">
             現場には現場の<span className="text-teal-600">状況</span>があります
           </h2>
           
           <div className="text-base md:text-lg text-gray-600 leading-loose space-y-6">
-            <p>前職は医療従事者として勤務していました</p>
+            <p>前職は医療従事者として勤務</p>
             <p>
-              現在は歯科医院の<br className="md:hidden" />
-              <span className="font-bold text-gray-800">予約導線</span> / 
-              <span className="font-bold text-gray-800"> LINE運用</span> / 
-              <span className="font-bold text-gray-800"> 掘り起こし</span> / 
-              <span className="font-bold text-gray-800"> 数値管理</span> / 
-              <span className="font-bold text-gray-800"> 採用</span><br className="hidden md:block" />
-              などの実務に携わっています
+              現在は歯科医院の<br />
+              予約導線、LINE運用、掘り起こし、<br className="md:hidden" />
+              数値管理、採用などの実務に携わっています
             </p>
             <p className="pt-4">
-              だからこそ<br />
+              だからこそ、<br />
               まず状況を知ることを大切にしています
             </p>
           </div>

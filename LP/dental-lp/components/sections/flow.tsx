@@ -59,7 +59,7 @@ export function FlowSection() {
     <section id="flow" className="section-py bg-gray-50 overflow-hidden">
       <div className="container-md">
         <div className="text-center mb-20">
-          <span className="section-eyebrow">Flow</span>
+
           <h2 className="section-heading">現状共有から改善までの流れ</h2>
           <p className="section-subheading">
             システムの導入で終わらせず、<br className="md:hidden" />現場の状況に合わせて進めます

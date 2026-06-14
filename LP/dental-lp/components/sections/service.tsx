@@ -30,9 +30,8 @@ export function ServicesSection() {
     <section id="services" className="section-py bg-gray-50">
       <div className="container-lg max-w-5xl">
         <div className="text-center mb-16">
-          <span className="section-eyebrow">Services</span>
           <h2 className="section-heading">
-            多角的な<span className="text-teal-600">支援内容</span>
+            主に扱う<span className="text-teal-600">領域</span>
           </h2>
           <p className="section-subheading">
             単なるツール導入ではなく、現場の状況に合わせて実務の改善を進めます

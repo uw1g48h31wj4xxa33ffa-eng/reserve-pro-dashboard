@@ -16,7 +16,6 @@ export function PhilosophySection() {
           transition={{ duration: 0.8 }}
           className="max-w-2xl mx-auto text-center"
         >
-          <span className="section-eyebrow">Philosophy</span>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12 tracking-wider">
             まず状況を知る
           </h2>

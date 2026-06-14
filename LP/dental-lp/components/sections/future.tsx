@@ -55,7 +55,7 @@ export function FutureSection() {
     <section className="section-py relative bg-white">
       <div className="container-lg">
         <div className="text-center mb-20">
-          <span className="section-eyebrow">Continuous Improvement</span>
+
           <h2 className="section-heading">
             データに基づく<br />
             <span className="text-teal-600">継続的な業務改善</span>

@@ -30,7 +30,7 @@ export function ProblemsSection() {
     <section id="problems" className="section-py bg-gray-50">
       <div className="container-lg">
         <div className="text-center mb-16">
-          <span className="section-eyebrow">Current Issues</span>
+
           <h2 className="section-heading">
             こんな<span className="text-teal-600">お悩み</span>はありませんか？
           </h2>
