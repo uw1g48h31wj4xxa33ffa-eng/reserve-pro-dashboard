@@ -26,7 +26,6 @@ export function ContactSection() {
     "業務改善",
     "ホームページ",
     "SNS運用",
-    "AI活用等のご相談",
     "その他",
   ];
 
@@ -65,7 +64,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-32 bg-white relative overflow-hidden" ref={ref}>
+    <section id="contact" className="py-24 md:py-32 bg-white relative overflow-hidden" ref={ref}>
       <div className="container-lg max-w-4xl relative z-10">
         
         <motion.div
@@ -75,13 +74,10 @@ export function ContactSection() {
           className="text-center mb-16 space-y-6"
         >
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            何かを押し付けるのではなく、
+            まず状況を聞く。
           </p>
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            状況を整理しながら、
-          </p>
-          <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            より良い方向を考える
+            その上で、できることから考える。
           </p>
           <p className="text-xl md:text-2xl font-bold text-teal-600 leading-relaxed tracking-wide pt-4">
             まずは状況を聞かせてください
@@ -122,14 +118,14 @@ export function ContactSection() {
               </div>
             </motion.div>
           ) : (
-            <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 p-8 md:p-12 border border-gray-100">
-              <div className="mb-10 text-center">
-                <h3 className="text-xl font-bold text-gray-900">現在の状況をお聞かせください</h3>
+            <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 p-6 md:p-10 border border-gray-100">
+              <div className="mb-8 text-center">
+                <h3 className="text-lg md:text-xl font-bold text-gray-900">現在の状況をお聞かせください</h3>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
                     <label htmlFor="clinicName" className="block text-sm font-bold text-gray-700">
                       医院名 <span className="text-teal-600 text-xs ml-1">必須</span>
                     </label>
@@ -140,7 +136,7 @@ export function ContactSection() {
                       required
                       value={formState.clinicName}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
+                      className="w-full px-4 py-2.5 md:py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none text-sm"
                     />
                   </div>
 
@@ -155,13 +151,13 @@ export function ContactSection() {
                       required
                       value={formState.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
+                      className="w-full px-4 py-2.5 md:py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none text-sm"
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
                     <label htmlFor="email" className="block text-sm font-bold text-gray-700">
                       メールアドレス <span className="text-teal-600 text-xs ml-1">必須</span>
                     </label>
@@ -172,7 +168,7 @@ export function ContactSection() {
                       required
                       value={formState.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
+                      className="w-full px-4 py-2.5 md:py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none text-sm"
                     />
                   </div>
 
@@ -186,23 +182,23 @@ export function ContactSection() {
                       name="phone"
                       value={formState.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none"
+                      className="w-full px-4 py-2.5 md:py-3 rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-gray-50 focus:bg-white text-gray-900 outline-none text-sm"
                     />
                   </div>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <div className="flex justify-between items-end">
                     <label className="block text-sm font-bold text-gray-700">
                       気になる項目 <span className="text-gray-400 text-xs ml-1 font-normal">複数選択可</span>
                     </label>
                   </div>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
                     {interestOptions.map((option) => (
                       <label
                         key={option}
                         onClick={() => handleCheckboxChange(option)}
-                        className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
+                        className={`flex items-center gap-2.5 p-2.5 md:p-3 rounded-xl border cursor-pointer transition-colors ${
                           formState.interests.includes(option)
                             ? "border-teal-400 bg-teal-50"
                             : "border-gray-200 bg-gray-50 hover:bg-gray-100"
@@ -247,13 +243,13 @@ export function ContactSection() {
                         placeholder="その他の内容をご記入ください"
                         value={formState.otherInterest}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 text-sm rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-white text-gray-900 outline-none"
+                        className="w-full px-4 py-2.5 md:py-3 text-sm rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-white text-gray-900 outline-none"
                       />
                     </div>
                   )}
                 </div>
 
-                <div className="pt-6 text-center space-y-3">
+                <div className="pt-4 text-center space-y-2">
                   <p className="text-[11px] md:text-xs text-sky-700/80 font-medium">
                     ※ 患者様の個人情報などの記載はお控えください
                   </p>
@@ -262,11 +258,11 @@ export function ContactSection() {
                   </p>
                 </div>
 
-                <div className="pt-2">
+                <div className="pt-1">
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full py-4 px-8 text-base font-bold text-white gradient-brand rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-3.5 md:py-4 px-8 text-base font-bold text-white gradient-brand rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {submitting ? "送信中..." : "状況を共有する"}
                   </button>
