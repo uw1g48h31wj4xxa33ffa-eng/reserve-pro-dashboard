@@ -22,7 +22,7 @@ export function ContactSection() {
     "LINE運用",
     "掘り起こし",
     "採用",
-    "数値管理",
+    "集計・数値管理",
     "業務改善",
     "ホームページ",
     "SNS運用",
@@ -64,7 +64,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-white relative overflow-hidden" ref={ref}>
+    <section id="contact" className="pt-24 pb-16 md:pt-32 md:pb-24 bg-white relative overflow-hidden" ref={ref}>
       <div className="container-lg max-w-4xl relative z-10">
         
         <motion.div
