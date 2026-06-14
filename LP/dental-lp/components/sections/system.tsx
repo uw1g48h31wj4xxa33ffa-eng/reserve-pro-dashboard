@@ -127,8 +127,8 @@ function AppMockup() {
             </div>
             <div className="w-24 h-3 bg-gray-100 rounded-full blur-[1px]" />
             <div className="flex gap-2 mt-1">
-              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">承認</div>
-              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">却下</div>
+              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">確定済</div>
+              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">詳細</div>
             </div>
           </div>
 
@@ -139,8 +139,8 @@ function AppMockup() {
             </div>
             <div className="w-20 h-3 bg-gray-100 rounded-full blur-[1px]" />
             <div className="flex gap-2 mt-1">
-              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">承認</div>
-              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">却下</div>
+              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">確定済</div>
+              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">詳細</div>
             </div>
           </div>
 
