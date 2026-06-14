@@ -116,11 +116,8 @@ export function ContactSection() {
                   お待ちいただけますと幸いです
                 </p>
                 <div className="pt-8 text-xs text-gray-400 leading-relaxed border-t border-gray-100">
-                  <p>
-                    内容によっては、<br />
-                    ご希望に添えない場合がございます
-                  </p>
-                  <p className="mt-2">あらかじめご了承ください</p>
+                  <p>内容によっては、ご希望に添えない場合がございます</p>
+                  <p className="mt-1">あらかじめご了承ください</p>
                 </div>
               </div>
             </motion.div>
@@ -277,7 +274,8 @@ export function ContactSection() {
                 
                 <div className="text-center pt-2">
                   <p className="text-[10px] text-gray-400">
-                    内容によっては、ご希望に添えない場合がございます。あらかじめご了承ください。
+                    内容によっては、ご希望に添えない場合がございます<br />
+                    あらかじめご了承ください
                   </p>
                 </div>
               </form>
