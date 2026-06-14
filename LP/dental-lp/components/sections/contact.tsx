@@ -69,17 +69,28 @@ export function ContactSection() {
           className="max-w-2xl mx-auto"
         >
           {submitted ? (
-            <div className="bg-white rounded-[2rem] p-12 text-center shadow-xl shadow-gray-200/50 border border-gray-100">
-              <div className="w-16 h-16 bg-teal-50 text-teal-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-8">
-                ✓
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="bg-white rounded-[3rem] p-16 md:p-24 text-center shadow-[0_20px_60px_-15px_rgba(14,165,233,0.1)] border border-sky-50/50 mx-auto max-w-2xl"
+            >
+              <h3 className="text-xl md:text-2xl font-bold text-sky-900 mb-12 tracking-[0.2em]">
+                ご共有ありがとうございます
+              </h3>
+              <div className="space-y-10 text-gray-600 leading-loose tracking-wide text-sm md:text-base">
+                <p>いただいた内容を確認いたします</p>
+                <p>
+                  まずは内容を拝見しながら、<br />
+                  状況を整理した上でご連絡いたします
+                </p>
+                <p>
+                  少々お時間をいただく場合がございますが、<br />
+                  順次確認しておりますので<br />
+                  お待ちいただけますと幸いです
+                </p>
               </div>
-              <div className="space-y-6 text-gray-700 leading-loose">
-                <p>ご共有ありがとうございます。</p>
-                <p>いただいた内容を確認し、<br />改めてご連絡いたします。</p>
-                <p>まずは現状を理解した上で<br />お話をお伺いしたいと考えております。</p>
-                <p>順次確認しておりますので、<br />少々お待ちいただけますと幸いです。</p>
-              </div>
-            </div>
+            </motion.div>
           ) : (
             <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 p-8 md:p-12 border border-gray-100">
               <div className="mb-10 text-center">
