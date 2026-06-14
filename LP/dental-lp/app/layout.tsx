@@ -28,8 +28,8 @@ export const metadata: Metadata = {
     description: "予約改善から採用まで歯科医院の運営改善を現場目線でサポートします",
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
   },
 };
 
