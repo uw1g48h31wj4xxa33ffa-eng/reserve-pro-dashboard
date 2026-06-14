@@ -77,7 +77,7 @@ export function ContactSection() {
             まず状況を聞く。
           </p>
           <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-            その上で、できることから考える。
+            その上で、できることから考える
           </p>
           <p className="text-xl md:text-2xl font-bold text-teal-600 leading-relaxed tracking-wide pt-4">
             まずは状況を聞かせてください
