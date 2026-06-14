@@ -51,7 +51,7 @@ export function Header() {
             <div className="text-left">
               <div
                 className={cn(
-                  "text-sm md:text-base font-bold leading-none transition-colors",
+                  "font-bold leading-none transition-colors text-[clamp(13px,3.5vw,16px)]",
                   scrolled ? "text-gray-900" : "text-gray-900"
                 )}
               >
@@ -64,7 +64,7 @@ export function Header() {
           <div>
             <button
               onClick={() => handleNav("#contact")}
-              className="whitespace-nowrap px-3 py-2 md:px-5 md:py-2 text-[10px] sm:text-xs md:text-sm font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+              className="whitespace-nowrap py-2 font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-[clamp(10px,3vw,14px)] px-[clamp(12px,4vw,20px)]"
             >
               状況を聞かせてください
             </button>
