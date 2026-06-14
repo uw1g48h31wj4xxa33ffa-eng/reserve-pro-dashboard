@@ -69,23 +69,24 @@ export function SystemSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-24"
+          className="text-center mb-20"
         >
           <h2 className="text-xl md:text-2xl font-bold tracking-widest text-gray-800">
             実際に運用している一例
           </h2>
         </motion.div>
 
-        <div className="space-y-32">
+        {/* Balanced Grid Layout */}
+        <div className="flex flex-wrap justify-center items-start gap-12 md:gap-16 max-w-6xl mx-auto">
           
-          {/* 実績データ */}
+          {/* 実績データ (Wide, Top) */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center w-full lg:w-auto"
           >
-            <div className="text-sm font-bold tracking-wider text-teal-600 mb-8 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
+            <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
               実績データの可視化
             </div>
             <div className="group transition-transform duration-700 hover:scale-105">
@@ -93,43 +94,46 @@ export function SystemSection() {
             </div>
           </motion.div>
 
-          {/* LINE配信 */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center"
-          >
-            <div className="text-sm font-bold tracking-wider text-teal-600 mb-8 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
-              LINE配信・改善フロー
-            </div>
-            <div className="group transition-transform duration-700 hover:scale-105">
-              <LineMockup />
-            </div>
-          </motion.div>
-
-          {/* 予約アプリ */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col items-center"
-          >
-            <div className="text-sm font-bold tracking-wider text-teal-600 mb-8 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
-              予約管理アプリ
-            </div>
-            <div className="group transition-transform duration-700 hover:scale-105 w-full max-w-3xl flex justify-center">
-              <div className="relative overflow-hidden rounded-[2rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-gray-100 bg-gray-50 flex justify-center">
-                <Image
-                  src="/uploads/app-1.jpg"
-                  alt="予約管理アプリ"
-                  width={800}
-                  height={600}
-                  className="w-full h-auto object-cover object-top"
-                />
+          <div className="flex flex-wrap justify-center gap-12 md:gap-16 w-full lg:w-auto">
+            {/* LINE配信 (Tall) */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col items-center"
+            >
+              <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
+                LINE配信・改善フロー
               </div>
-            </div>
-          </motion.div>
+              <div className="group transition-transform duration-700 hover:scale-105">
+                <LineMockup />
+              </div>
+            </motion.div>
+
+            {/* 予約アプリ (Tall/Small) */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex flex-col items-center"
+            >
+              <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
+                予約管理アプリ
+              </div>
+              <div className="group transition-transform duration-700 hover:scale-105">
+                <div className="relative overflow-hidden w-[280px] h-[480px] rounded-[3rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[8px] border-gray-900 bg-gray-50 flex justify-center shrink-0">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-2xl z-20" />
+                  <Image
+                    src="/uploads/app-1.jpg"
+                    alt="予約管理アプリ"
+                    width={400}
+                    height={800}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            </motion.div>
+          </div>
 
         </div>
       </div>
