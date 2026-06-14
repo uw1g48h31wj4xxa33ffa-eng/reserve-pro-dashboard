@@ -90,10 +90,13 @@ function LineFlowMockup() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-30" />
         <div className="w-full h-full rounded-2xl overflow-hidden relative bg-gray-100 flex flex-col gap-2 p-2 pt-8">
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[1.5px] opacity-90 object-cover" />
+            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
           </div>
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[1.5px] opacity-90 object-cover" />
+            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+          </div>
+          <div className="w-full rounded-xl overflow-hidden shadow-sm">
+            <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
           </div>
         </div>
       </div>
@@ -131,16 +134,16 @@ function AppMockup() {
       
       <div className="flex-1 overflow-y-auto bg-gray-50 p-3 pt-8 flex flex-col gap-3 relative z-10">
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-1.jpg" alt="App Screen 1" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+          <img src="/uploads/app-1.jpg" alt="App Screen 1" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-2.jpg" alt="App Screen 2" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+          <img src="/uploads/app-2.jpg" alt="App Screen 2" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-3.jpg" alt="App Screen 3" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+          <img src="/uploads/app-3.jpg" alt="App Screen 3" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-4.jpg" alt="App Screen 4" className="w-full h-auto blur-[1px] opacity-95 object-cover" />
+          <img src="/uploads/app-4.jpg" alt="App Screen 4" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
         </div>
       </div>
     </div>
