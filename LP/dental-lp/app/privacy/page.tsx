@@ -26,7 +26,7 @@ export default function PrivacyPage() {
               <li>ご担当者様名</li>
               <li>メールアドレス</li>
               <li>電話番号（任意）</li>
-              <li>現在のお悩み・課題</li>
+              <li>気になる項目</li>
               <li>その他フォームに入力された内容</li>
             </ul>
           </section>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
               <li>お問い合わせへの対応</li>
               <li>内容確認</li>
               <li>ご連絡</li>
-              <li>サービスに関するご案内</li>
+              <li>状況確認に関するご連絡</li>
               <li>必要に応じた提案内容の検討</li>
             </ul>
           </section>
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-4">
-            <h2 className="text-lg font-bold text-sky-900 border-b border-sky-50 pb-2">7. お問い合わせ</h2>
+            <h2 className="text-lg font-bold text-sky-900 border-b border-sky-50 pb-2">7. 個人情報に関するご連絡</h2>
             <p className="text-sm md:text-base text-gray-600 pl-2">
               個人情報の取り扱いに関するお問い合わせは、<br />
               現状共有フォームまたは指定の連絡方法より受け付けます

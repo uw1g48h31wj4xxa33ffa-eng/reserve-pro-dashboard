@@ -101,15 +101,13 @@ export function ContactSection() {
                 ご共有ありがとうございます
               </h3>
               <div className="space-y-10 text-gray-600 leading-loose tracking-wide text-sm md:text-base">
-                <p>いただいた内容を確認いたします</p>
                 <p>
-                  まずは内容を拝読しながら、<br />
+                  いただいた内容を確認し、<br />
                   状況を整理した上でご連絡いたします
                 </p>
                 <p>
                   少々お時間をいただく場合がございますが、<br />
-                  順次確認しておりますので<br />
-                  お待ちいただけますと幸いです
+                  順次確認しております
                 </p>
                 <div className="pt-8 text-xs text-gray-400 leading-relaxed border-t border-gray-100">
                   <p>内容によっては、ご希望に添えない場合がございます</p>
