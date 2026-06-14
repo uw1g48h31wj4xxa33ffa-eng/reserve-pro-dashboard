@@ -90,24 +90,24 @@ function LineFlowMockup() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-30" />
         <div className="w-full h-full rounded-2xl overflow-hidden relative bg-gray-100 flex flex-col gap-2 p-2 pt-8">
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+            <img src="/uploads/line-campaign.jpg" alt="LINE Campaign" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+            <img src="/uploads/line-flow.jpg" alt="LINE Flow 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
           <div className="w-full rounded-xl overflow-hidden shadow-sm">
-            <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+            <img src="/uploads/line-followup.jpg" alt="LINE Flow 2" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
           </div>
         </div>
       </div>
 
       {/* ② 改善フロー (Front Right) */}
       <div className="absolute right-0 bottom-6 w-[220px] bg-white/95 backdrop-blur-sm rounded-3xl p-5 shadow-2xl border border-gray-100 z-20 rotate-2">
-        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">配信自動化フロー</div>
+        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">LINE配信・改善フロー①</div>
         <div className="flex flex-col gap-3">
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
             <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
-            <span className="text-xs font-medium text-gray-700">最終来院から半年後</span>
+            <span className="text-xs font-medium text-gray-700">最終来院から●●日後</span>
           </div>
           <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
           <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
@@ -134,16 +134,16 @@ function AppMockup() {
       
       <div className="flex-1 overflow-y-auto bg-gray-50 p-3 pt-8 flex flex-col gap-3 relative z-10">
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-1.jpg" alt="App Screen 1" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+          <img src="/uploads/app-1.jpg" alt="App Screen 1" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-2.jpg" alt="App Screen 2" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+          <img src="/uploads/app-2.jpg" alt="App Screen 2" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-3.jpg" alt="App Screen 3" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+          <img src="/uploads/app-3.jpg" alt="App Screen 3" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
         </div>
         <div className="w-full rounded-xl overflow-hidden shadow-sm">
-          <img src="/uploads/app-4.jpg" alt="App Screen 4" className="w-full h-auto blur-[0.8px] opacity-95 object-cover" />
+          <img src="/uploads/app-4.jpg" alt="App Screen 4" className="w-full h-auto blur-[0.5px] opacity-95 object-cover" />
         </div>
       </div>
     </div>
