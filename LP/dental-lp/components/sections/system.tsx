@@ -67,72 +67,44 @@ export function SystemSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
-  const tools = [
-    {
-      icon: "📱",
-      title: "LINE公式アカウント",
-      desc: "患者様へのリマインド・掘り起こし・情報配信に活用。設定から運用まで代行します。",
-    },
-    {
-      icon: "📋",
-      title: "予約管理システム",
-      desc: "既存の予約システムの見直しや、より使いやすいツールへの移行をサポートします。",
-    },
-    {
-      icon: "📊",
-      title: "データ集計ツール",
-      desc: "予約率・来院数・キャンセル率などを可視化し、改善の進捗を数字で確認できます。",
-    },
-    {
-      icon: "👤",
-      title: "採用・求人ページ",
-      desc: "貴院の強みが伝わる採用ページを制作し、歯科医師・衛生士の採用を支援します。",
-    },
-  ];
-
   return (
-    <section id="system" className="section-py bg-white">
+    <section id="system" className="py-24 bg-white">
       <div className="container-lg">
-        <div className="text-center mb-20">
-          <span className="section-eyebrow">Case Study</span>
-          <h2 className="section-heading">
-            実際の<span className="text-teal-600">運用例</span>
+        <div className="text-center mb-24">
+          <h2 className="text-2xl font-bold tracking-widest text-gray-800">
+            実際に運用している一例
           </h2>
-          <p className="section-subheading">
-            ※当サービスはシステム販売ではありません。<br className="hidden md:block" />
-            これらは、現場改善の結果として必要に応じて構築している仕組みの一例です。
-          </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="flex justify-center items-center">
           {/* Images / UI Mockups */}
           <motion.div
             ref={ref}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative h-[500px] flex items-center justify-center"
+            className="relative w-full max-w-3xl h-[500px] flex items-center justify-center"
           >
             {/* Base Background Blob */}
             <div className="absolute inset-0 bg-gradient-to-tr from-sky-50 to-teal-50 rounded-full blur-3xl opacity-50" />
             
             {/* Raw App Image */}
             <motion.div 
-              initial={{ x: -20, y: -20, opacity: 0, rotate: -5 }}
-              animate={isInView ? { x: 0, y: 0, opacity: 1, rotate: -5 } : {}}
+              initial={{ x: -40, y: -20, opacity: 0, rotate: -5 }}
+              animate={isInView ? { x: -60, y: -40, opacity: 1, rotate: -5 } : {}}
               transition={{ delay: 0.2 }}
-              className="absolute top-10 left-0 w-[240px] h-[180px] rounded-2xl shadow-xl border-4 border-white overflow-hidden bg-gray-50 z-10 hover:z-50 hover:scale-105 transition-all"
+              className="absolute w-[300px] h-[220px] rounded-2xl shadow-xl border-4 border-white overflow-hidden bg-gray-50 z-10 hover:z-50 hover:scale-105 transition-all"
             >
-              <Image src="/uploads/app-1.jpg" alt="予約管理アプリ" fill className="object-cover object-top" />
+              <Image src="/uploads/app-1.jpg" alt="運用画面" fill className="object-cover object-top" />
               <PrivacyMask className="top-2 left-2 w-[90%] h-[30%]" />
             </motion.div>
 
             {/* Dashboard Mockup */}
             <motion.div
-              initial={{ x: 20, y: 0, opacity: 0, rotate: 3 }}
-              animate={isInView ? { x: 0, y: 0, opacity: 1, rotate: 3 } : {}}
+              initial={{ x: 40, y: 0, opacity: 0, rotate: 3 }}
+              animate={isInView ? { x: 80, y: 0, opacity: 1, rotate: 3 } : {}}
               transition={{ delay: 0.4 }}
-              className="absolute top-1/3 right-0 z-20 hover:z-50 hover:scale-105 transition-all"
+              className="absolute z-20 hover:z-50 hover:scale-105 transition-all"
             >
               <DashboardMockup />
             </motion.div>
@@ -140,44 +112,13 @@ export function SystemSection() {
             {/* LINE Mockup */}
             <motion.div
               initial={{ y: 20, opacity: 0, rotate: -2 }}
-              animate={isInView ? { y: 0, opacity: 1, rotate: -2 } : {}}
+              animate={isInView ? { y: 60, opacity: 1, rotate: -2 } : {}}
               transition={{ delay: 0.6 }}
-              className="absolute bottom-4 left-10 z-30 hover:z-50 hover:scale-105 transition-all"
+              className="absolute bottom-0 z-30 hover:z-50 hover:scale-105 transition-all"
             >
               <LineMockup />
             </motion.div>
 
-          </motion.div>
-
-          {/* Explanation */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ staggerChildren: 0.1 }}
-            className="space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 border border-amber-100 text-amber-700 text-sm font-bold mb-4">
-              <span>⚠️</span> 独自ツールやAIは主役ではありません
-            </div>
-            <p className="text-base text-gray-600 leading-relaxed mb-8">
-              当サービスの主役は「現場の改善」です。
-              予約アプリや高度なLINE構築、独自ツールなどは最初から売り込むものではありません。現場理解をベースに、課題解決のために必要だと判断した場合のみ構築・運用いたします。
-            </p>
-            {tools.map((tool, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex items-start gap-4 bg-gray-50 rounded-2xl p-6 border border-gray-100"
-              >
-                <span className="text-2xl flex-shrink-0">{tool.icon}</span>
-                <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{tool.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{tool.desc}</p>
-                </div>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </div>

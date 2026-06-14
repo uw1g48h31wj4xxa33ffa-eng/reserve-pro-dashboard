@@ -34,7 +34,7 @@ export function Footer() {
 
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
           <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
-          <p>個人事業主による歯科医院運営改善サポート</p>
+          <p>現場を知る個人事業主としての運営改善</p>
         </div>
       </div>
     </footer>

@@ -1,10 +1,9 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { HeroSection } from "@/components/sections/hero";
-import { ProblemsSection } from "@/components/sections/problems";
+import { EmpathySection } from "@/components/sections/empathy";
 import { ResultsSection } from "@/components/sections/results";
-import { ServicesSection } from "@/components/sections/service";
-import { WhySection } from "@/components/sections/why";
+import { PhilosophySection } from "@/components/sections/philosophy";
 import { SystemSection } from "@/components/sections/system";
 import { ContactSection } from "@/components/sections/contact";
 
@@ -13,19 +12,11 @@ export default function Home() {
     <>
       <Header />
       <main>
-        {/* TOP */}
         <HeroSection />
-        {/* 運営課題 */}
-        <ProblemsSection />
-        {/* 実績 */}
+        <EmpathySection />
         <ResultsSection />
-        {/* なぜ改善できるのか */}
-        <WhySection />
-        {/* 支援内容 */}
-        <ServicesSection />
-        {/* システム紹介 */}
+        <PhilosophySection />
         <SystemSection />
-        {/* お問い合わせ */}
         <ContactSection />
       </main>
       <Footer />
