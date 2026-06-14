@@ -34,11 +34,11 @@ export default function PrivacyPage() {
           <section className="space-y-4">
             <h2 className="text-lg font-bold text-sky-900 border-b border-sky-50 pb-2">2. 利用目的</h2>
             <ul className="list-disc list-inside space-y-2 text-sm md:text-base text-gray-600 pl-2">
-              <li>お問い合わせへの対応</li>
+              <li>いただいた内容への対応</li>
               <li>内容確認</li>
               <li>ご連絡</li>
               <li>状況確認に関するご連絡</li>
-              <li>必要に応じた提案内容の検討</li>
+              <li>必要に応じた対応内容の検討</li>
             </ul>
           </section>
 
