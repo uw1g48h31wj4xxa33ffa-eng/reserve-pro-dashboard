@@ -103,7 +103,7 @@ function LineFlowMockup() {
 
       {/* ② 改善フロー (Front Right) */}
       <div className="absolute right-0 bottom-6 w-[220px] bg-white/95 backdrop-blur-sm rounded-3xl p-5 shadow-2xl border border-gray-100 z-20 rotate-2">
-        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">LINE配信・改善フロー①</div>
+        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">配信自動化フロー</div>
         <div className="flex flex-col gap-3">
           <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
             <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
