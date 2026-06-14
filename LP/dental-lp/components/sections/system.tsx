@@ -2,12 +2,6 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import Image from "next/image";
-
-// Privacy mask
-const PrivacyMask = ({ className }: { className?: string }) => (
-  <div className={`absolute backdrop-blur-md bg-white/60 border border-white/40 shadow-sm rounded-md z-10 ${className}`} />
-);
 
 // Dashboard Mockup
 function DashboardMockup() {
@@ -57,6 +51,74 @@ function LineMockup() {
             <button className="bg-gray-50 text-xs py-2.5 px-3 rounded-lg border border-gray-200 hover:bg-gray-100">予約する</button>
             <button className="bg-gray-50 text-xs py-2.5 px-3 rounded-lg border border-gray-200 hover:bg-gray-100">詳細を見る</button>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Booking App Mockup
+function AppMockup() {
+  return (
+    <div className="w-[280px] bg-gray-50 rounded-[3rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[8px] border-gray-900 relative overflow-hidden h-[480px] flex flex-col shrink-0">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-2xl z-20" />
+      
+      {/* App Header */}
+      <div className="bg-white px-4 pt-10 pb-4 border-b border-gray-100 shadow-sm relative z-10 flex justify-between items-center">
+        <div className="font-bold text-gray-800 text-sm">予約管理</div>
+        <div className="w-6 h-6 rounded-full bg-teal-50 flex items-center justify-center text-[10px]">⚙️</div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-6 relative z-10">
+        {/* Calendar Mini */}
+        <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+          <div className="text-xs font-bold text-gray-600 mb-3 flex justify-between">
+            <span>2024年 5月</span>
+            <span className="text-teal-600">今日</span>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-center text-[9px] text-gray-400 mb-2">
+            <div>日</div><div>月</div><div>火</div><div>水</div><div>木</div><div>金</div><div>土</div>
+          </div>
+          <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-medium text-gray-700">
+            {[...Array(14)].map((_, i) => (
+              <div key={i} className={`aspect-square flex items-center justify-center rounded-full ${i === 4 ? 'bg-teal-500 text-white font-bold shadow-sm' : ''}`}>
+                {i + 1}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 申請一覧 */}
+        <div className="flex flex-col gap-3">
+          <div className="text-xs font-bold text-gray-800 flex items-center gap-2">
+            <span>申請一覧</span>
+            <span className="bg-red-500 text-white text-[8px] px-1.5 py-0.5 rounded-full">2</span>
+          </div>
+          
+          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 flex flex-col gap-2 relative overflow-hidden">
+            <div className="flex justify-between items-start">
+              <div className="w-16 h-3 bg-gray-200 rounded-full blur-[2px]" />
+              <div className="text-[9px] text-gray-400">10:30</div>
+            </div>
+            <div className="w-24 h-3 bg-gray-100 rounded-full blur-[1px]" />
+            <div className="flex gap-2 mt-1">
+              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">承認</div>
+              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">却下</div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl p-3 shadow-sm border border-gray-100 flex flex-col gap-2 relative overflow-hidden">
+            <div className="flex justify-between items-start">
+              <div className="w-12 h-3 bg-gray-200 rounded-full blur-[2px]" />
+              <div className="text-[9px] text-gray-400">14:00</div>
+            </div>
+            <div className="w-20 h-3 bg-gray-100 rounded-full blur-[1px]" />
+            <div className="flex gap-2 mt-1">
+              <div className="px-2 py-1 bg-teal-50 text-teal-600 text-[8px] rounded font-bold">承認</div>
+              <div className="px-2 py-1 bg-gray-50 text-gray-500 text-[8px] rounded">却下</div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -126,19 +188,7 @@ export function SystemSection() {
                 予約管理アプリ
               </div>
               <div className="group transition-transform duration-700 hover:scale-105">
-                <div className="relative overflow-hidden w-[280px] h-[480px] rounded-[3rem] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[8px] border-gray-900 bg-gray-50 flex justify-center shrink-0">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-2xl z-20" />
-                  <Image
-                    src="/uploads/app-1.jpg"
-                    alt="予約管理アプリ"
-                    width={400}
-                    height={800}
-                    className="w-full h-full object-cover object-top"
-                  />
-                  {/* 「申請一覧のテスト」などが入っている部分をぼかす */}
-                  <PrivacyMask className="top-[25%] left-[5%] w-[90%] h-[20%]" />
-                  <PrivacyMask className="top-[50%] left-[5%] w-[90%] h-[20%]" />
-                </div>
+                <AppMockup />
               </div>
             </motion.div>
           </div>
