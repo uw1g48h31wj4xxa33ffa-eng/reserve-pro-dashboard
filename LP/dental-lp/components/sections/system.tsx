@@ -85,29 +85,8 @@ function LineFlowMockup() {
   return (
     <div className="relative w-[340px] h-[480px] flex items-center justify-center shrink-0">
       
-      {/* ② 改善フロー (Back Right) */}
-      <div className="absolute right-0 top-6 w-[220px] bg-white rounded-3xl p-5 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-gray-100 z-10 rotate-3">
-        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">配信自動化フロー</div>
-        <div className="flex flex-col gap-3">
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
-            <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
-            <span className="text-xs font-medium text-gray-700">最終来院から半年後</span>
-          </div>
-          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
-          <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
-            <span className="font-bold text-teal-600 text-[10px]">Step 2</span><br/>
-            <span className="text-xs font-medium text-teal-800">検診案内を自動送信</span>
-          </div>
-          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
-          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
-            <span className="font-bold text-teal-600 text-[10px]">Step 3</span><br/>
-            <span className="text-xs font-medium text-gray-700">予約システムと連携</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ① LINE Phone (Front Left) */}
-      <div className="absolute left-0 bottom-6 w-[240px] bg-[#86afcb] rounded-[2.5rem] p-3 shadow-2xl border-[6px] border-gray-900 overflow-hidden h-[400px] z-20 -rotate-2">
+      {/* ① LINE Phone (Back Left) */}
+      <div className="absolute left-2 top-4 w-[240px] bg-[#86afcb] rounded-[2.5rem] p-3 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border-[6px] border-gray-900 overflow-hidden h-[400px] z-10 -rotate-3">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-gray-900 rounded-b-xl z-30" />
         <div className="bg-[#273246] text-white text-center py-2 rounded-t-xl font-bold text-xs shadow-sm relative z-20 pt-6">
           DentalConnect
@@ -125,6 +104,27 @@ function LineFlowMockup() {
             <div className="p-1.5 flex flex-col gap-1.5">
               <button className="bg-gray-50 text-[10px] py-2 px-2 rounded-lg border border-gray-200 font-bold text-gray-700">予約する</button>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ② 改善フロー (Front Right) */}
+      <div className="absolute right-0 bottom-6 w-[220px] bg-white/95 backdrop-blur-sm rounded-3xl p-5 shadow-2xl border border-gray-100 z-20 rotate-2">
+        <div className="text-xs font-bold text-gray-800 mb-4 text-center border-b border-gray-100 pb-3">配信自動化フロー</div>
+        <div className="flex flex-col gap-3">
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 1</span><br/>
+            <span className="text-xs font-medium text-gray-700">最終来院から半年後</span>
+          </div>
+          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
+          <div className="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 2</span><br/>
+            <span className="text-xs font-medium text-teal-800">検診案内を自動送信</span>
+          </div>
+          <div className="w-0.5 h-4 bg-teal-200 mx-auto" />
+          <div className="bg-gray-50 border border-gray-200 rounded-2xl p-3 text-center shadow-sm">
+            <span className="font-bold text-teal-600 text-[10px]">Step 3</span><br/>
+            <span className="text-xs font-medium text-gray-700">予約システムと連携</span>
           </div>
         </div>
       </div>
