@@ -115,7 +115,7 @@ export default function ImprovementPage() {
       <section className="section system">
         <div className="container">
           <h2 className="section-title animate-on-scroll" style={{ opacity: 0 }}>提供内容</h2>
-          <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--color-text-muted)', fontSize: '1.1rem' }} className="animate-on-scroll" style={{ opacity: 0 }}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem', color: 'var(--color-text-muted)', fontSize: '1.1rem', opacity: 0 }} className="animate-on-scroll">
             <p>システムを導入するだけではありません個人事業主ならではの細やかなサポートで、<br />貴院の現場に合わせた最適な仕組みづくりから日々の運用まで支援します</p>
           </div>
           <div className="system-content">
