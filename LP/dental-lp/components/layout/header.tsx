@@ -60,7 +60,7 @@ export function Header() {
           <div>
             <button
               onClick={() => handleNav("#contact")}
-              className="px-5 py-2 text-sm font-bold text-teal-700 bg-teal-50 border border-teal-100 rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+              className="px-5 py-2 text-sm font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
             >
               状況を聞かせてください
             </button>
