@@ -11,7 +11,8 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-white">
       <Header />
       
-      <div className="pt-32 pb-24 container-lg max-w-3xl">
+      <div className="h-24 md:h-32"></div>
+      <div className="pb-24 container-lg max-w-3xl">
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-16 text-center">
           プライバシーポリシー
         </h1>
