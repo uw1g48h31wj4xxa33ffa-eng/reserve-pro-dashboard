@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       <Header />
       
       <div className="pt-32 pb-24 container-lg max-w-3xl">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-16 text-center tracking-widest">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-16 text-center">
           プライバシーポリシー
         </h1>
 
