@@ -256,12 +256,15 @@ export function ContactSection() {
                   )}
                 </div>
 
-                <div className="pt-4 text-center space-y-1">
+                <div className="pt-4 text-center space-y-2">
                   <p className="text-xs text-red-400 font-bold">
                     患者様の個人情報などの記載はお控えください
                   </p>
                   <p className="text-xs text-gray-400">
                     いただいた内容は、内容確認およびご連絡のために利用いたします
+                  </p>
+                  <p className="text-[10px] text-gray-400 pt-2 border-t border-gray-100 inline-block px-4">
+                    内容によっては、ご希望に添えない場合がございます。<br />あらかじめご了承ください。
                   </p>
                 </div>
 

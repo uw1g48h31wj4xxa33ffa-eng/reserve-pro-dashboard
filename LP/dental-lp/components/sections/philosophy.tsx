@@ -14,33 +14,33 @@ export function PhilosophySection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="max-w-2xl mx-auto text-center space-y-12"
+          className="max-w-2xl mx-auto text-center"
         >
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              現場には現場の状況があります
-            </p>
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              人には人の考えがあります
-            </p>
-          </div>
+          <span className="section-eyebrow">Philosophy</span>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-12 tracking-wider">
+            まず状況を知る
+          </h2>
 
-          <div className="w-8 h-px bg-gray-300 mx-auto" />
-
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              まず状況を整理する
+          <div className="space-y-8 text-lg md:text-xl text-gray-700 leading-loose">
+            <p>
+              状況が分からないまま<br className="md:hidden" />
+              何かを決めることはありません
             </p>
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              必要に応じて<br className="md:hidden" />仕組みやAIも活用する
+            <p>
+              まず状況を知る<br />
+              その上で考える
             </p>
-          </div>
-
-          <div className="w-8 h-px bg-gray-300 mx-auto" />
-
-          <div className="space-y-6">
-            <p className="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed tracking-wide">
-              ただし、<br className="md:hidden" />仕組みやAIが目的ではありません
+            <div className="w-8 h-px bg-gray-300 mx-auto my-8" />
+            <p>
+              必要に応じて<br className="md:hidden" />
+              仕組みやAIも活用する
+            </p>
+            <p>
+              人が主体<br />
+              仕組みやAIは手段
+            </p>
+            <p className="pt-4 font-bold text-gray-900">
+              そう考えています
             </p>
           </div>
         </motion.div>

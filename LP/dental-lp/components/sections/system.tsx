@@ -219,55 +219,56 @@ export function SystemSection() {
           </h2>
         </motion.div>
 
-        {/* Balanced Grid Layout */}
-        <div className="flex flex-wrap justify-center items-start gap-12 md:gap-16 max-w-6xl mx-auto">
+        <div className="flex flex-col items-center gap-16 max-w-3xl mx-auto relative">
           
-          {/* 実績データ (Wide, Top) */}
+          {/* ② 実際の集計画像 */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center w-full lg:w-auto"
+            className="flex flex-col items-center w-full"
           >
-            <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
-              実績データの可視化
+            <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full shadow-sm">
+              実際の集計画像
             </div>
-            <div className="group transition-transform duration-700 hover:scale-105">
+            <div className="group transition-transform duration-700 hover:scale-105 w-full flex justify-center">
               <DashboardMockup />
             </div>
           </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-12 md:gap-16 w-full lg:w-auto">
-            {/* LINE配信 (Tall) */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-center"
-            >
-              <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
-                LINE配信・改善フロー
-              </div>
-              <div className="group transition-transform duration-700 hover:scale-105">
-                <LineFlowMockup />
-              </div>
-            </motion.div>
+          <div className="text-gray-300 text-3xl">↓</div>
 
-            {/* 予約アプリ (Tall/Small) */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col items-center"
-            >
-              <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full">
-                予約管理アプリ
-              </div>
-              <div className="group transition-transform duration-700 hover:scale-105">
-                <AppMockup />
-              </div>
-            </motion.div>
-          </div>
+          {/* ③ 実際の運用画面 */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full shadow-sm">
+              実際の運用画面
+            </div>
+            <div className="group transition-transform duration-700 hover:scale-105">
+              <AppMockup />
+            </div>
+          </motion.div>
+
+          <div className="text-gray-300 text-3xl">↓</div>
+
+          {/* ④ 実際の運用例 */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex flex-col items-center w-full"
+          >
+            <div className="text-sm font-bold tracking-wider text-teal-600 mb-6 border border-teal-200 bg-teal-50 px-6 py-2 rounded-full shadow-sm">
+              実際の運用例
+            </div>
+            <div className="group transition-transform duration-700 hover:scale-105">
+              <LineFlowMockup />
+            </div>
+          </motion.div>
 
         </div>
       </div>
