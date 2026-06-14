@@ -6,25 +6,76 @@ import { useRef } from "react";
 // Dashboard Mockup
 function DashboardMockup() {
   return (
-    <div className="bg-white rounded-[2rem] p-8 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-gray-100 flex flex-col h-full w-full max-w-[500px]">
-      <div className="flex items-center gap-4 mb-8">
-        <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 font-bold text-xl">A</div>
-        <div>
-          <h4 className="font-bold text-gray-900 text-lg">A歯科医院 様</h4>
-          <p className="text-sm text-gray-500">月間予約推移</p>
+    <div className="bg-white rounded-[2rem] p-6 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] border border-gray-100 flex flex-col gap-6 w-full max-w-[500px]">
+      
+      {/* A歯科医院 */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-gray-50/50">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 font-bold text-lg">A</div>
+          <div>
+            <h4 className="font-bold text-gray-900 text-base">A歯科医院 様</h4>
+            <p className="text-[10px] text-gray-500">予約確定率推移</p>
+          </div>
+        </div>
+        <div className="space-y-4">
+          {/* 改善前 */}
+          <div>
+            <div className="flex justify-between text-xs mb-1 font-bold">
+              <span className="text-gray-500">改善前</span>
+              <span className="text-gray-400">28.5%</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="bg-gray-400 h-2 rounded-full" style={{ width: '28.5%' }}></div>
+            </div>
+          </div>
+          {/* 改善後 */}
+          <div className="relative">
+            <div className="absolute -top-4 -right-1 text-xl drop-shadow-sm z-10">✨</div>
+            <div className="flex justify-between text-xs mb-1 font-bold">
+              <span className="text-teal-600">改善後</span>
+              <span className="text-teal-700 text-lg">52.0%</span>
+            </div>
+            <div className="w-full bg-teal-100 rounded-full h-2">
+              <div className="bg-teal-500 h-2 rounded-full" style={{ width: '52%' }}></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col items-center justify-center">
-          <div className="text-sm font-bold text-gray-500 mb-2">改善前</div>
-          <div className="text-3xl font-medium text-gray-400 line-through">28.5%</div>
+
+      {/* B歯科医院 */}
+      <div className="border border-gray-100 rounded-2xl p-5 bg-gray-50/50">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full bg-sky-50 flex items-center justify-center text-sky-600 font-bold text-lg">B</div>
+          <div>
+            <h4 className="font-bold text-gray-900 text-base">B歯科医院 様</h4>
+            <p className="text-[10px] text-gray-500">休眠患者掘り起こし（月間）</p>
+          </div>
         </div>
-        <div className="bg-teal-50/50 rounded-2xl p-6 border border-teal-100 relative flex flex-col items-center justify-center">
-          <div className="absolute -top-3 -right-3 text-3xl drop-shadow-md">✨</div>
-          <div className="text-sm font-bold text-teal-600 mb-2">改善後</div>
-          <div className="text-4xl font-black text-teal-700">52.0%</div>
+        <div className="space-y-4">
+          {/* 改善前 */}
+          <div>
+            <div className="flex justify-between text-xs mb-1 font-bold">
+              <span className="text-gray-500">改善前</span>
+              <span className="text-gray-400">0件</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="bg-gray-400 h-2 rounded-full" style={{ width: '2%' }}></div>
+            </div>
+          </div>
+          {/* 改善後 */}
+          <div className="relative">
+            <div className="absolute -top-4 -right-1 text-xl drop-shadow-sm z-10">✨</div>
+            <div className="flex justify-between text-xs mb-1 font-bold">
+              <span className="text-sky-600">改善後</span>
+              <span className="text-sky-700 text-lg">13件</span>
+            </div>
+            <div className="w-full bg-sky-100 rounded-full h-2">
+              <div className="bg-sky-500 h-2 rounded-full" style={{ width: '85%' }}></div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   );
 }
