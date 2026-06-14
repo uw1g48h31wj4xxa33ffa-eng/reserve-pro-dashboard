@@ -176,7 +176,11 @@ export function ContactSection() {
                   />
                 </div>
 
-                <div className="pt-6">
+                <div className="pt-2 text-center text-xs text-gray-500 mb-6">
+                  いただいた内容は、<br className="md:hidden" />内容確認およびご連絡のために利用いたします
+                </div>
+
+                <div className="pt-2">
                   <button
                     type="submit"
                     disabled={submitting}

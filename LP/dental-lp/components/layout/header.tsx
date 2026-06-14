@@ -13,8 +13,12 @@ export function Header() {
   }, []);
 
   const handleNav = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.location.pathname === '/') {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.href = `/${href}`;
+    }
   };
 
   return (

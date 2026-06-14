@@ -4,8 +4,13 @@ import Link from "next/link";
 
 export function Footer() {
   const handleNav = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Top page logic
+    if (window.location.pathname === '/') {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.href = `/${href}`;
+    }
   };
 
   return (
@@ -24,7 +29,7 @@ export function Footer() {
               onClick={() => handleNav("#contact")}
               className="text-sm hover:text-white transition-colors"
             >
-              現状共有
+              状況を聞かせてください
             </button>
             <Link href="/privacy" className="text-sm hover:text-white transition-colors">
               プライバシーポリシー
