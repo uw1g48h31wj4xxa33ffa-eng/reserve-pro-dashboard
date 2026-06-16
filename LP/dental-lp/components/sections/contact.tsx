@@ -35,11 +35,23 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState)
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        alert("送信に失敗しました。恐れ入りますが、時間をおいて再度お試しください。");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("通信エラーが発生しました。");
+    } finally {
       setSubmitting(false);
-      setSubmitted(true);
-    }, 1500);
+    }
   };
 
   const handleChange = (
