@@ -6,8 +6,14 @@ export async function POST(req: Request) {
     const data = await req.json();
     const { clinicName, name, email, phone, interests, otherInterest } = data;
 
-    if (!email) {
-      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    if (!clinicName || !name || !email) {
+      return NextResponse.json({ error: 'Required fields are missing' }, { status: 400 });
+    }
+    
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json({ error: 'Invalid email format' }, { status: 400 });
     }
 
     // Set up the transporter using Gmail SMTP
