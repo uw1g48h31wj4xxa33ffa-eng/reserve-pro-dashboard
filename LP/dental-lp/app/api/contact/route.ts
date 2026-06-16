@@ -6,7 +6,7 @@ export async function POST(req: Request) {
     const data = await req.json();
     const { clinicName, name, email, phone, interests, otherInterest } = data;
 
-    if (!clinicName || !name || !email) {
+    if (!clinicName || !name || !email || !interests || interests.length === 0) {
       return NextResponse.json({ error: 'Required fields are missing' }, { status: 400 });
     }
     
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     });
 
     // Format interests list
-    let interestStr = interests?.join('、 ') || 'なし';
+    let interestStr = interests?.length > 0 ? interests.join('、 ') : '未取得';
     if (interests?.includes('その他') && otherInterest) {
       interestStr += `\nその他の内容：\n${otherInterest}`;
     }

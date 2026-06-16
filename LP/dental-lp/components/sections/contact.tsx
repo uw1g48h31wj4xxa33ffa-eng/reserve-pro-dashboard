@@ -31,9 +31,17 @@ export function ContactSection() {
 
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [interestError, setInterestError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (formState.interests.length === 0) {
+      setInterestError(true);
+      return;
+    }
+    setInterestError(false);
+
     setSubmitting(true);
     try {
       const res = await fetch('/api/contact', {
@@ -64,6 +72,7 @@ export function ContactSection() {
   };
 
   const handleCheckboxChange = (option: string) => {
+    setInterestError(false);
     setFormState((prev) => {
       const isSelected = prev.interests.includes(option);
       return {
@@ -200,7 +209,7 @@ export function ContactSection() {
                 <div className="space-y-3">
                   <div className="flex justify-between items-end">
                     <label className="block text-sm font-bold text-gray-700">
-                      気になる項目 <span className="text-gray-400 text-xs ml-1 font-normal">複数選択可</span>
+                      気になる項目 <span className="text-teal-600 text-xs ml-1">必須</span><span className="text-gray-400 text-xs ml-1 font-normal">（複数選択可）</span>
                     </label>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
@@ -256,6 +265,9 @@ export function ContactSection() {
                         className="w-full px-4 py-2.5 md:py-3 text-sm rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-white text-gray-900 outline-none"
                       />
                     </div>
+                  )}
+                  {interestError && (
+                    <p className="text-rose-500 text-xs font-bold pt-1">気になる項目を1つ以上選択してください。</p>
                   )}
                 </div>
 
