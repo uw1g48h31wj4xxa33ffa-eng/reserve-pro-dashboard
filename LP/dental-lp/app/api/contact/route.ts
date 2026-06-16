@@ -6,6 +6,10 @@ export async function POST(req: Request) {
     const data = await req.json();
     const { clinicName, name, email, phone, interests, otherInterest } = data;
 
+    if (!email) {
+      return NextResponse.json({ error: 'Email is required' }, { status: 400 });
+    }
+
     // Set up the transporter using Gmail SMTP
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -36,7 +40,7 @@ export async function POST(req: Request) {
     const sentAt = formatter.format(now);
 
     const mailOptions = {
-      from: `"DentalConnect" <${process.env.GMAIL_USER}>`,
+      from: `"Dental Route" <${process.env.GMAIL_USER}>`,
       to: process.env.CONTACT_TO_EMAIL,
       replyTo: email,
       subject: '【Dental Route】現状共有フォームが送信されました',
