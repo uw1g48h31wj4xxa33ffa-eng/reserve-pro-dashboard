@@ -644,6 +644,58 @@
         .input-group input { width: 100%; padding: 14px; border: 1px solid #e2e8f0; border-radius: 12px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s; }
         .input-group input:focus { border-color: #3a7bd5; }
         .error-msg { color: var(--accent-red); font-size: 0.8rem; margin-top: 5px; display: none; }
+    
+        /* カスタムモーダル */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.show {
+            display: flex;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            padding: 32px 24px;
+            border-radius: 24px;
+            width: 85%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        .modal-message {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+        .modal-close-btn {
+            background: #3a7bd5;
+            color: white;
+            border: none;
+            padding: 14px 0;
+            width: 100%;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-close-btn:hover {
+            background: #2d62ac;
+        }
+        .modal-close-btn:active {
+            transform: scale(0.98);
+        }
+
     </style>
 </head>
 
@@ -1137,7 +1189,7 @@
             const isAlreadyChosen = currentState.choices.some(c => c && c.date.split(' ')[0] === dateStr);
 
             if (isAlreadyChosen) {
-                alert("その日付は既に選択されています。");
+                openDupModal();
                 return;
             }
 
@@ -1165,7 +1217,7 @@
             const alreadyUsed = currentState.choices.some(c => c && c.date.split(' ')[0] === dateStr);
 
             if (alreadyUsed) {
-                alert("その日付は既に選択されています。別の日にちを選択してください。");
+                openDupModal();
                 currentSelectedPeriod = "";
                 currentSelectedTimeSlot = "";
                 currentSelectedHour = "";
@@ -1595,7 +1647,24 @@ ${policyLabel}
             }
         }
     setInterval(refreshBookedSlots, 3000);
+    
+    function openDupModal() {
+        document.getElementById('dup-modal-overlay').classList.add('show');
+    }
+    function closeDupModal() {
+        document.getElementById('dup-modal-overlay').classList.remove('show');
+    }
+
     </script>
+
+    <!-- カスタムモーダル（同じ日付重複・警告） -->
+    <div id="dup-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <p class="modal-message"><span style="display:inline-block;">その日付は既に選択されています</span><br><span style="display:inline-block;">別の日にちを選択してください</span></p>
+            <button type="button" class="modal-close-btn" onclick="closeDupModal()">閉じる</button>
+        </div>
+    </div>
+
 </body>
 
 </html>
