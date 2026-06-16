@@ -38,7 +38,10 @@ export function Footer() {
         </div>
 
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
-          <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
+          <div className="flex flex-col gap-1 items-center md:items-start">
+            <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
+            <p className="text-[10px] text-gray-600">※検証用ページです</p>
+          </div>
           <p>現場を知る個人事業主としての運営改善</p>
         </div>
       </div>
