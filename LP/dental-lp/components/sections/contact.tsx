@@ -255,11 +255,15 @@ export function ContactSection() {
                     ))}
                   </div>
                   {formState.interests.includes("その他") && (
-                    <div className="pt-2">
+                    <div className="pt-3 space-y-2">
+                      <p className="text-[11px] md:text-xs text-rose-600/90 font-medium">
+                        ※患者様のお名前・症状・治療内容・予約日時など、患者様を特定できる情報は記載しないでください
+                      </p>
                       <input
                         type="text"
                         name="otherInterest"
-                        placeholder="その他の内容をご記入ください"
+                        maxLength={100}
+                        placeholder="例：受付対応の整理、職場環境、院内フローなど ※患者様情報は記載しないでください"
                         value={formState.otherInterest}
                         onChange={handleChange}
                         className="w-full px-4 py-2.5 md:py-3 text-sm rounded-xl border border-gray-200 focus:border-teal-400 focus:ring-2 focus:ring-teal-100 transition-colors bg-white text-gray-900 outline-none"
