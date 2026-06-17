@@ -24,7 +24,7 @@ export function ContactSection() {
     "採用",
     "集計・数値管理",
     "業務改善",
-    "ホームページ",
+    "ホームページ・LP",
     "SNS運用",
     "その他",
   ];
@@ -217,40 +217,47 @@ export function ContactSection() {
                       <label
                         key={option}
                         onClick={() => handleCheckboxChange(option)}
-                        className={`flex items-center gap-2.5 p-2.5 md:p-3 rounded-xl border cursor-pointer transition-colors ${
+                        className={`flex flex-col justify-center p-2.5 md:p-3 rounded-xl border cursor-pointer transition-colors ${
                           formState.interests.includes(option)
                             ? "border-teal-400 bg-teal-50"
                             : "border-gray-200 bg-gray-50 hover:bg-gray-100"
                         }`}
                       >
-                        <div
-                          className={`w-4 h-4 rounded-[4px] border flex items-center justify-center transition-colors ${
-                            formState.interests.includes(option)
-                              ? "bg-teal-500 border-teal-500"
-                              : "bg-white border-gray-300"
-                          }`}
-                        >
-                          {formState.interests.includes(option) && (
-                            <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                              <path
-                                d="M2 6L5 9L10 3"
-                                stroke="white"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          )}
+                        <div className="flex items-center gap-2.5">
+                          <div
+                            className={`w-4 h-4 shrink-0 rounded-[4px] border flex items-center justify-center transition-colors ${
+                              formState.interests.includes(option)
+                                ? "bg-teal-500 border-teal-500"
+                                : "bg-white border-gray-300"
+                            }`}
+                          >
+                            {formState.interests.includes(option) && (
+                              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                                <path
+                                  d="M2 6L5 9L10 3"
+                                  stroke="white"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            )}
+                          </div>
+                          <span
+                            className={`text-sm ${
+                              formState.interests.includes(option)
+                                ? "text-teal-800 font-bold"
+                                : "text-gray-600"
+                            }`}
+                          >
+                            {option}
+                          </span>
                         </div>
-                        <span
-                          className={`text-sm ${
-                            formState.interests.includes(option)
-                              ? "text-teal-800 font-bold"
-                              : "text-gray-600"
-                          }`}
-                        >
-                          {option}
-                        </span>
+                        {option === "ホームページ・LP" && (
+                          <div className="text-[10px] text-gray-400 mt-1.5 ml-6 leading-tight">
+                            ホームページや、問い合わせにつなげる1ページ型の案内ページなど
+                          </div>
+                        )}
                       </label>
                     ))}
                   </div>

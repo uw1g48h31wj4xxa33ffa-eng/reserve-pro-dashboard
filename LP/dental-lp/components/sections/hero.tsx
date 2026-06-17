@@ -39,6 +39,13 @@ export function HeroSection() {
               >
                 状況を聞かせてください
               </button>
+              
+              <button
+                onClick={() => handleNav("#services")}
+                className="mt-5 text-[11px] md:text-xs text-gray-400 hover:text-gray-600 underline underline-offset-4 decoration-gray-300 transition-colors"
+              >
+                主に扱う領域を見る
+              </button>
             </div>
           </motion.div>
         </div>
