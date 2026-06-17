@@ -21,6 +21,14 @@ export function Header() {
     }
   };
 
+  const handleLogoClick = () => {
+    if (window.location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.location.href = '/';
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -34,7 +42,7 @@ export function Header() {
         <div className="flex items-center justify-between h-14 md:h-20">
           {/* Logo */}
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={handleLogoClick}
             className="flex items-center gap-2 md:gap-3 group"
             aria-label="トップへ戻る"
           >
