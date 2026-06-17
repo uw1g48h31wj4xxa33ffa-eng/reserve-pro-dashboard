@@ -29,7 +29,7 @@ export default function ImprovementPage() {
           <div className="logo">
             <div className="logo-icon">D</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-              <span>DentalConnect</span>
+              <span>Dental Route</span>
               <span style={{ fontSize: '0.7rem', color: 'var(--color-primary)', fontWeight: 600 }}>予約導線改善サポート</span>
             </div>
           </div>
@@ -200,7 +200,7 @@ export default function ImprovementPage() {
       {/* Footer */}
       <footer className="footer">
         <div className="container">
-          <p>&copy; {new Date().getFullYear()} DentalConnect 予約導線改善サポート. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Dental Route 予約導線サポート. All rights reserved.</p>
         </div>
       </footer>
     </div>

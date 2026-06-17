@@ -20,7 +20,7 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="text-teal-400 font-bold text-[13px] md:text-sm mb-1">歯科医院向け 現場改善窓口</div>
-            <div className="text-gray-300 text-[15px] md:text-base font-medium">DentalConnect</div>
+            <div className="text-gray-300 text-[15px] md:text-base font-medium">Dental Route</div>
           </div>
 
           {/* Links */}
@@ -39,7 +39,7 @@ export function Footer() {
 
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs">
           <div className="flex flex-col gap-1 items-center md:items-start">
-            <p>&copy; {new Date().getFullYear()} DentalConnect. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Dental Route. All rights reserved.</p>
             <p className="text-[10px] text-gray-600">※検証用ページです</p>
           </div>
           <p>現場を知る個人事業主としての運営改善</p>

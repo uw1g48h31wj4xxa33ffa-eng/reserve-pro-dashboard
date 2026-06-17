@@ -68,7 +68,7 @@ export function ServicesSection() {
             主に扱う<span className="text-teal-600">領域</span>
           </h2>
           <p className="section-subheading">
-            単なるツール導入ではなく、現場の状況に合わせて実務の改善を進めます
+            ツールありきではなく、現場の状況に合わせて実務の流れを整理します
           </p>
         </div>
 

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "歯科医院向け 運営改善パートナー | DentalConnect",
+  title: "歯科医院向け 運営改善パートナー | Dental Route",
   description:
     "予約改善・LINE運用・掘り起こしから、採用・業務改善まで歯科医院の運営課題を現場目線で解決する、個人事業主の伴走支援パートナーです",
   keywords: [
@@ -14,9 +14,9 @@ export const metadata: Metadata = {
     "業務改善",
     "伴走支援",
   ],
-  authors: [{ name: "DentalConnect" }],
+  authors: [{ name: "Dental Route" }],
   openGraph: {
-    title: "歯科医院向け 運営改善パートナー | DentalConnect",
+    title: "歯科医院向け 運営改善パートナー | Dental Route",
     description:
       "予約・LINE運用から採用・業務改善まで医院ごとに最適な仕組みづくりをサポートします",
     type: "website",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "歯科医院向け 運営改善パートナー | DentalConnect",
+    title: "歯科医院向け 運営改善パートナー | Dental Route",
     description: "予約改善から採用まで歯科医院の運営改善を現場目線でサポートします",
   },
   robots: {

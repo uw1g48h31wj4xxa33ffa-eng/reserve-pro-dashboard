@@ -56,7 +56,7 @@ export function Header() {
                   scrolled ? "text-gray-700" : "text-gray-700"
                 )}
               >
-                DentalConnect
+                Dental Route
               </div>
             </div>
           </button>

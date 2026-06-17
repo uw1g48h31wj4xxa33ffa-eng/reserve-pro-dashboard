@@ -426,7 +426,7 @@ export function Slide10() {
         </motion.div>
 
         <motion.div variants={textAnim} className="mt-20 text-gray-400 font-bold tracking-widest text-sm uppercase">
-          DentalConnect - 運営改善パートナー
+          Dental Route - 運営改善パートナー
         </motion.div>
       </motion.div>
     </div>

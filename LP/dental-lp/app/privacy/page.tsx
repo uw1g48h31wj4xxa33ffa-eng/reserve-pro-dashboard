@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
 export const metadata = {
-  title: "プライバシーポリシー | DentalConnect",
+  title: "プライバシーポリシー | Dental Route",
   description: "取得する情報の取り扱いについて",
 };
 
