@@ -132,19 +132,19 @@ export function ContactSection() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="bg-white rounded-[3rem] p-16 md:p-24 text-center shadow-[0_20px_60px_-15px_rgba(14,165,233,0.1)] border border-sky-50/50 mx-auto max-w-2xl"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-sky-900 mb-12 tracking-[0.2em]">
+              <h3 className="fade-up-0 text-xl md:text-2xl font-bold text-sky-900 mb-12 tracking-[0.2em]">
                 ご共有ありがとうございます
               </h3>
               <div className="space-y-10 text-gray-600 leading-loose tracking-wide text-sm md:text-base">
-                <p>
+                <p className="fade-up-1">
                   いただいた内容を確認し、<br />
                   状況を整理した上でご連絡いたします
                 </p>
-                <p>
+                <p className="fade-up-2">
                   少々お時間をいただく場合がございますが、<br />
                   順次確認しております
                 </p>
-                <div className="pt-8 text-xs text-gray-400 leading-relaxed border-t border-gray-100">
+                <div className="fade-up-3 pt-8 text-xs text-gray-400 leading-relaxed border-t border-gray-100">
                   <p>内容によっては、ご希望に添えない場合がございます</p>
                   <p className="mt-1">あらかじめご了承ください</p>
                 </div>
