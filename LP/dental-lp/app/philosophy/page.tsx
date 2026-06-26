@@ -64,9 +64,9 @@ export default function PhilosophyPage() {
               <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3">
                 {value.heading}
               </h2>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 {value.body.split("\n").map((line, j) => (
-                  <p key={j} className="text-sm md:text-base text-gray-600 leading-relaxed">
+                  <p key={j} className="text-sm md:text-base text-gray-600 leading-loose">
                     {line}
                   </p>
                 ))}

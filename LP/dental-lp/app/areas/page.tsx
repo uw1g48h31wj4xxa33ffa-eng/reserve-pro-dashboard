@@ -108,11 +108,11 @@ export default function AreasPage() {
                   <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3">
                     {area.title}
                   </h2>
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     {area.lines.map((line, j) => (
                       <p
                         key={j}
-                        className="text-sm text-gray-600 leading-relaxed"
+                        className="text-sm text-gray-600 leading-loose"
                       >
                         {line}
                       </p>

@@ -121,7 +121,7 @@ export function Header() {
               {/* CTA：スマホでも常時表示 */}
               <button
                 onClick={handleCtaClick}
-                className="whitespace-nowrap py-2 font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-[clamp(10px,3vw,14px)] px-[clamp(10px,3.5vw,18px)]"
+                className="whitespace-nowrap py-2.5 font-bold text-white gradient-brand rounded-full shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 text-[clamp(10px,3vw,14px)] px-[clamp(14px,4vw,20px)]"
               >
                 状況を聞かせてください
               </button>
