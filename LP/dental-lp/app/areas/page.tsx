@@ -82,7 +82,7 @@ export default function AreasPage() {
 
       <div className="h-24 md:h-32" />
 
-      <div className="container-lg max-w-4xl pb-24">
+      <div className="container-lg max-w-4xl pb-32 md:pb-48">
         {/* ページヘッダー */}
         <div className="text-center mb-16">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
