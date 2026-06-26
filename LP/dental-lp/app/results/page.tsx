@@ -88,13 +88,13 @@ export default function ResultsPage() {
           <h2 className="text-base font-bold text-gray-800 mb-4">運用例について</h2>
           <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
             <p>
-              数値の変化は、状況確認・整理・試行錯誤の積み重ねの結果です。
+              数値の変化は、状況確認・整理・試行錯誤の積み重ねの結果です
             </p>
             <p>
-              同じ方法が必ずしも他の医院に合うとは限りません。
+              同じ方法が必ずしも他の医院に合うとは限りません
             </p>
             <p>
-              まず現在の状況を聞かせていただき、その上で何ができるかを一緒に考えます。
+              まず現在の状況を聞かせていただき、その上で何ができるかを一緒に考えます
             </p>
           </div>
         </div>
