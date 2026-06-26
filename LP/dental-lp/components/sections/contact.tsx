@@ -51,6 +51,7 @@ export function ContactSection() {
       });
       if (res.ok) {
         setSubmitted(true);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         alert("送信に失敗しました。恐れ入りますが、時間をおいて再度お試しください。");
       }
