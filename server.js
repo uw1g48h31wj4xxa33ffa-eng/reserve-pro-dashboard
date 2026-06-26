@@ -203,8 +203,8 @@ app.get('/api/all', authenticateToken, async (req, res) => {
         const data = await getHolidaysData();
         const holidays = data.holidays || {};
         
-        // モバイル版のフォーマットに合わせて整形して返す
-        res.json({ appts, holidays, customers });
+        // モバイル版のフォーマットに合わせて整形して返す（blockedSlotsを追加）
+        res.json({ appts, holidays, blockedSlots: data.blockedSlots || [], customers });
     } catch (e) {
         console.error("Error fetching all data:", e);
         res.status(500).json({ error: "Internal Server Error" });
