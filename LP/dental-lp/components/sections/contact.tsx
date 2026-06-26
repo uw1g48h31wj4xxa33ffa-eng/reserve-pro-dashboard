@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useInView } from "framer-motion";
 
 export function ContactSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const thankYouRef = useRef<HTMLDivElement>(null);
 
   const [formState, setFormState] = useState({
     clinicName: "",
@@ -33,6 +34,18 @@ export function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [interestError, setInterestError] = useState(false);
 
+  // 送信完了後、完了カードの先頭へスクロール（固定ヘッダー分を考慮）
+  useEffect(() => {
+    if (submitted && thankYouRef.current) {
+      const headerHeight = 72; // 固定ヘッダーの高さ（px）
+      const top =
+        thankYouRef.current.getBoundingClientRect().top +
+        window.scrollY -
+        headerHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  }, [submitted]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -51,7 +64,6 @@ export function ContactSection() {
       });
       if (res.ok) {
         setSubmitted(true);
-        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         alert("送信に失敗しました。恐れ入りますが、時間をおいて再度お試しください。");
       }
@@ -113,7 +125,8 @@ export function ContactSection() {
           className="max-w-2xl mx-auto"
         >
           {submitted ? (
-            <motion.div 
+            <motion.div
+              ref={thankYouRef}
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
