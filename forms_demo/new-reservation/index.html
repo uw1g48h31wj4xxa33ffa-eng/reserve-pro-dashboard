@@ -1669,7 +1669,7 @@
             if (!v) return false;
             // 日本語文字のみ（漢字・ひらがな・カタカナ・々・ーなど）、2文字以上
             // 英数字・記号は不可
-            return /^[一-龥々ぁ-んァ-ヶー]{2,}$/.test(v);
+            return /^[\u4e00-\u9fff\u3005\u3040-\u309f\u30a0-\u30ff\u30fc]{2,}$/.test(v);
         }
 
         function validateKana(val) {
@@ -1677,7 +1677,7 @@
             const v = val.trim().replace(/[\s\u3000]+/g, '');
             if (!v) return false;
             // ひらがな（長音「ー」も許可）、2文字以上
-            return /^[ぁ-んー]{2,}$/.test(v);
+            return /^[\u3040-\u309f\u30fc]{2,}$/.test(v);
         }
 
         function validateTel(val) {
