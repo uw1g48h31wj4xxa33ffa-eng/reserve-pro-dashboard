@@ -21,10 +21,20 @@ export function Footer() {
       <div className="container-lg py-12">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 pb-8 border-b border-gray-800">
           {/* Brand */}
-          <div className="shrink-0">
-            <div className="text-teal-400 font-bold text-[13px] md:text-sm mb-1">歯科医院向け 現場改善窓口</div>
-            <div className="text-gray-300 text-[15px] md:text-base font-medium">Dental Route</div>
-          </div>
+          <button
+            onClick={() => {
+              if (pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                router.push("/");
+              }
+            }}
+            className="shrink-0 text-left group"
+            aria-label="トップページへ戻る"
+          >
+            <div className="text-teal-400 font-bold text-[13px] md:text-sm mb-1 group-hover:opacity-70 transition-opacity">歯科医院向け 現場改善窓口</div>
+            <div className="text-gray-300 text-[15px] md:text-base font-medium group-hover:opacity-70 transition-opacity">Dental Route</div>
+          </button>
 
           {/* Links */}
           <div className="flex flex-col md:flex-row gap-6 md:gap-8">
