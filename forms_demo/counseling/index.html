@@ -1484,8 +1484,8 @@
                 renderCalendar();
 
                 // カレンダーへ自動スクロールして次の選択を促す
-                const allFilled = userData.choices.every(c => c !== null);
-                if (!allFilled) {
+                const canProceed = canProceedWithChoices(userData.choices);
+                if (!canProceed) {
                     setTimeout(() => {
                         document.getElementById('step-calendar').scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }, 300);
@@ -1528,10 +1528,10 @@
                 }
             }
 
-            const allSelected = userData.choices.every(c => c !== null);
+            const canProceed = canProceedWithChoices(userData.choices);
             const nextBtn = document.getElementById('nextToInfo');
-            nextBtn.disabled = !allSelected;
-            nextBtn.style.opacity = allSelected ? "1" : "0.5";
+            nextBtn.disabled = !canProceed;
+            nextBtn.style.opacity = canProceed ? "1" : "0.5";
         }
 
         function validateChoices() {
@@ -1539,6 +1539,23 @@
         }
 
         // --- 情報入力 ---
+        // ===== 広めの時間帯判定ヘルパー =====
+        const WIDE_TIME_SLOTS = ['午前', '午後', '終日'];
+        function isWideTimeSlot(choice) {
+            return choice && WIDE_TIME_SLOTS.includes(choice.time);
+        }
+        function canProceedWithChoices(choices) {
+            const allFilled = choices.every(c => c !== null);
+            if (allFilled) return true;
+            // 新条件: 第1・第2希望が別日かつ両方とも広めの時間帯
+            const c1 = choices[0], c2 = choices[1];
+            if (!c1 || !c2) return false;
+            const date1 = c1.date.split(' ')[0];
+            const date2 = c2.date.split(' ')[0];
+            return date1 !== date2 && isWideTimeSlot(c1) && isWideTimeSlot(c2);
+        }
+        // ===== ここまで =====
+
         
         // ===== 入力バリデーション関数 =====
         function validateName(val) {
@@ -1698,7 +1715,7 @@ ${telLabel}：${userData.tel}
 ■希望日時
 第1希望：${userData.choices[0].date} ${userData.choices[0].time}
 第2希望：${userData.choices[1].date} ${userData.choices[1].time}
-第3希望：${userData.choices[2].date} ${userData.choices[2].time}
+第3希望：(userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）')
 ${paymentLine}
 ※このメッセージを送信し、当院からの返信をお待ちください`;
 
@@ -1732,7 +1749,7 @@ ${paymentLine}
             <div style="margin-top: 10px; border-top: 1px solid #edf2f7; padding-top: 10px;">
                 <strong>第1希望：</strong> ${userData.choices[0].date} ${userData.choices[0].time}<br>
                 <strong>第2希望：</strong> ${userData.choices[1].date} ${userData.choices[1].time}<br>
-                <strong>第3希望：</strong> ${userData.choices[2].date} ${userData.choices[2].time}
+                <strong>第3希望：</strong> (userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）')
             </div>
             ${paymentHtml}
         `;
