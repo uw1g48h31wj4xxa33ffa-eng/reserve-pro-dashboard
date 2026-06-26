@@ -1642,42 +1642,26 @@ ${policyLabel}
         // ===== 入力バリデーション関数 =====
         function validateName(val) {
             // スペースを除去してから判定
-            const v = val.replace(/[\s\u3000]/g, '');
+            const v = val.trim().replace(/[\s\u3000]+/g, '');
             if (!v) return false;
-            // 3文字以上の日本語文字（漢字・ひらがな・カタカナ）を含む
-            const jpChars = v.match(/[\u3000-\u303f\u3040-\u309f\u30a0-\u30ff\u4e00-\u9fff\uff66-\uff9f]/g);
-            if (!jpChars || jpChars.length < 3) return false;
-            // 英字のみ・数字のみ・記号のみは弾く
-            if (/^[a-zA-Z0-9\W]+$/.test(v)) return false;
-            return true;
+            // 日本語文字のみ（漢字・ひらがな・カタカナ・々・ーなど）、2文字以上
+            // 英数字・記号は不可
+            return /^[一-龥々ぁ-んァ-ヶー]{2,}$/.test(v);
         }
 
         function validateKana(val) {
             // スペースを除去してから判定
-            const v = val.replace(/[\s\u3000]/g, '');
+            const v = val.trim().replace(/[\s\u3000]+/g, '');
             if (!v) return false;
-            // ひらがな（長音「ー」も許可）のみで構成されているか
-            if (!/^[\u3041-\u3096ー\u30FC]+$/.test(v)) return false;
-            // 3文字以上
-            if (v.length < 3) return false;
-            return true;
+            // ひらがな（長音「ー」も許可）、2文字以上
+            return /^[ぁ-んー]{2,}$/.test(v);
         }
 
         function validateTel(val) {
             // ハイフン除去
-            const digits = val.replace(/[-ー－\s]/g, '');
-            // 数字のみかチェック
-            if (!/^\d+$/.test(digits)) return false;
-            // 0から始まる
-            if (!digits.startsWith('0')) return false;
-            // 10桁または11桁
-            if (digits.length !== 10 && digits.length !== 11) return false;
-            // すべて同じ数字は無効
-            if (/^(\d)\1+$/.test(digits)) return false;
-            // 明らかな連番は無効（0123456789, 1234567890など）
-            const seqs = ['0123456789','9876543210','1234567890','0987654321'];
-            if (seqs.some(s => digits.includes(s.substring(0, 8)))) return false;
-            return true;
+            const digits = val.replace(/[-ー－\s]/g, '').trim();
+            // 070/080/090で始まる11桁
+            return /^(070|080|090)\d{8}$/.test(digits);
         }
 
         function showError(id, show) {
@@ -1685,16 +1669,14 @@ ${policyLabel}
             if (el) el.style.display = show ? 'block' : 'none';
         }
         // ===== ここまでバリデーション関数 =====
-
-        function checkInputs() {
+function checkInputs() {
             const nameEl = document.getElementById('name');
             const telEl = document.getElementById('tel');
             const btn = document.getElementById('nextToConfirm');
 
             if (nameEl && telEl && btn) {
                 // 電話番号からハイフンを削除（数字以外を削除）
-                let telVal = telEl.value.replace(/[ー－-]/g, '').trim();
-                telEl.value = telVal; // 入力欄自体を数字のみに書き換え
+                 // 入力欄自体を数字のみに書き換え
 
                 const n = nameEl.value.trim();
                 const t = telVal;
