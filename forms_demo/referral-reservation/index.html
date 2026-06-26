@@ -1758,7 +1758,7 @@ ${(userData.classification === 'student' && userData.ageGroup === 'over15') ? '�
 ■希望日時
 第1希望：${userData.choices[0].date} ${userData.choices[0].time}
 第2希望：${userData.choices[1].date} ${userData.choices[1].time}
-第3希望：(userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）')${paymentLine}
+第3希望：${userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）'}${paymentLine}
 
 ※このメッセージを送信し、当院からの返信をお待ちください`;
 
@@ -1792,7 +1792,7 @@ ${(userData.classification === 'student' && userData.ageGroup === 'over15') ? '�
                 <div style="margin-top: 10px; border-top: 1px solid #edf2f7; padding-top: 10px;">
                     <strong>第1希望：</strong> ${userData.choices[0].date} ${userData.choices[0].time}<br>
                     <strong>第2希望：</strong> ${userData.choices[1].date} ${userData.choices[1].time}<br>
-                    <strong>第3希望：</strong> (userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）')
+                    <strong>第3希望：</strong> ${userData.choices[2] ? `${userData.choices[2].date} ${userData.choices[2].time}` : '（未入力）'}
                 </div>
                 ${paymentHtml}
             `;
