@@ -881,7 +881,7 @@
                 <div class="input-group">
                     <label>ご紹介者名 <span class="red-bold" style="font-size: 0.7rem;">必須</span></label>
                     <input type="text" id="input-referral" placeholder="紹介者のお名前" oninput="checkInputs()">
-                    <div class="error-msg" id="error-referral">入力してください</div>
+                    <div class="error-msg" id="error-referral">漢字フルネームで入力してください</div>
                 </div>
                 <div class="input-group">
                     <label>お名前（漢字） <span class="red-bold" style="font-size: 0.7rem;">必須</span></label>
@@ -1650,8 +1650,8 @@ function checkInputs() {
                 const kanaValid = validateKana(kanaEl.value);
                 const telValid = validateTel(telEl.value);
 
-                // 未入力または不正な場合はエラーを表示（ご紹介者名のみ、空欄でもエラー表示する要件あり）
-                showError('error-referral', !refValid);
+                // 未入力または不正な場合はエラーを表示（空欄時は非表示にするよう修正）
+                showError('error-referral', refEl.value.trim() !== '' && !refValid);
                 showError('error-name', nameEl.value.trim() !== '' && !nameValid);
                 showError('error-kana', kanaEl.value.trim() !== '' && !kanaValid);
                 showError('error-tel', telEl.value.trim() !== '' && !telValid);
