@@ -1645,15 +1645,18 @@ function checkInputs() {
                 // 電話番号からハイフンを削除
                 
 
+                const refValid = validateName(refEl.value);
                 const nameValid = validateName(nameEl.value);
                 const kanaValid = validateKana(kanaEl.value);
                 const telValid = validateTel(telEl.value);
 
+                // 未入力または不正な場合はエラーを表示（ご紹介者名のみ、空欄でもエラー表示する要件あり）
+                showError('error-referral', !refValid);
                 showError('error-name', nameEl.value.trim() !== '' && !nameValid);
                 showError('error-kana', kanaEl.value.trim() !== '' && !kanaValid);
                 showError('error-tel', telEl.value.trim() !== '' && !telValid);
 
-                const isValid = nameValid && kanaValid && telValid && refEl.value.trim() !== "";
+                const isValid = refValid && nameValid && kanaValid && telValid;
                 btn.disabled = !isValid;
                 btn.style.opacity = isValid ? "1" : "0.5";
                 btn.style.cursor = isValid ? "pointer" : "not-allowed";
