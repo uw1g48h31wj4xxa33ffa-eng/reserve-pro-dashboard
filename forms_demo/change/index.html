@@ -1533,21 +1533,6 @@
                     el.classList.add('filled');
                 } else {
                     const activeIndex = currentState.choices.findIndex(c => c === null);
-        function updateChoiceDisplay() {
-            const nextBtn = document.getElementById('nextToAgreement');
-
-            for (let i = 1; i <= 3; i++) {
-                const choice = currentState.choices[i - 1];
-                const el = document.getElementById(`choice${i}`);
-                const valEl = document.getElementById(`val${i}`);
-
-                el.classList.remove('active', 'filled');
-
-                if (choice) {
-                    valEl.textContent = `${choice.date} ${choice.time}`;
-                    el.classList.add('filled');
-                } else {
-                    const activeIndex = currentState.choices.findIndex(c => c === null);
                     valEl.textContent = (i === activeIndex + 1) ? "日付を選択する" : "未選択";
                     if (i === activeIndex + 1) el.classList.add('active');
                 }
@@ -1559,6 +1544,23 @@
                 nextBtn.style.opacity = canProceed ? "1" : "0.5";
             }
         }
+
+        // ===== 広めの時間帯判定ヘルパー =====
+        const WIDE_TIME_SLOTS = ['午前', '午後', '終日'];
+        function isWideTimeSlot(choice) {
+            return choice && WIDE_TIME_SLOTS.includes(choice.time);
+        }
+        function canProceedWithChoices(choices) {
+            const allFilled = choices.every(c => c !== null);
+            if (allFilled) return true;
+            // 新条件: 第1・第2希望が別日かつ両方とも広めの時間帯
+            const c1 = choices[0], c2 = choices[1];
+            if (!c1 || !c2) return false;
+            const date1 = c1.date.split(' ')[0];
+            const date2 = c2.date.split(' ')[0];
+            return date1 !== date2 && isWideTimeSlot(c1) && isWideTimeSlot(c2);
+        }
+        // ===== ここまで =====
 
         // --- Step 3: Agreement ---
         function confirmAgreement() {
@@ -1621,7 +1623,6 @@
             html += `</div></div>`;
             container.innerHTML = html;
         }
-
 
 
         function sendToLine() {
