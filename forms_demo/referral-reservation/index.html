@@ -1689,10 +1689,19 @@ function checkInputs() {
         }
 
         function proceedToPayment() {
-            userData.name = document.getElementById('input-name').value.replace(/\s+/g, ""); // スペースを除去
-            userData.kana = document.getElementById('input-kana').value.trim();
-            userData.tel = document.getElementById('input-tel').value.replace(/[^\d]/g, ""); // 数字のみ抽出
-            userData.referral = document.getElementById('input-referral').value.trim();
+            const nameEl = document.getElementById('input-name');
+            userData.name = (nameEl ? nameEl.value : "").replace(/\s+/g, ""); // スペースを除去
+            const kanaEl = document.getElementById('input-kana');
+            userData.kana = (kanaEl ? kanaEl.value : "").trim();
+            const telEl = document.getElementById('input-tel');
+            userData.tel = (telEl ? telEl.value : "").replace(/[^\d]/g, ""); // 数字のみ抽出
+            const refEl = document.getElementById('input-referral');
+            userData.referral = (refEl ? refEl.value : "").trim();
+
+            if (!userData.name || !userData.tel || !userData.referral) {
+                alert("必須項目をすべて入力してください");
+                return;
+            }
 
             checkUserHistory(userData.name, userData.tel);
         }

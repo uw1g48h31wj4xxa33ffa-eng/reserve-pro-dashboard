@@ -1533,88 +1533,48 @@
                     el.classList.add('filled');
                 } else {
                     const activeIndex = currentState.choices.findIndex(c => c === null);
+        function updateChoiceDisplay() {
+            const nextBtn = document.getElementById('nextToAgreement');
+
+            for (let i = 1; i <= 3; i++) {
+                const choice = currentState.choices[i - 1];
+                const el = document.getElementById(`choice${i}`);
+                const valEl = document.getElementById(`val${i}`);
+
+                el.classList.remove('active', 'filled');
+
+                if (choice) {
+                    valEl.textContent = `${choice.date} ${choice.time}`;
+                    el.classList.add('filled');
+                } else {
+                    const activeIndex = currentState.choices.findIndex(c => c === null);
                     valEl.textContent = (i === activeIndex + 1) ? "日付を選択する" : "未選択";
                     if (i === activeIndex + 1) el.classList.add('active');
                 }
             }
 
-            const allSelected = currentState.choices.every(c => c !== null);
+            const canProceed = canProceedWithChoices(currentState.choices);
             if (nextBtn) {
-                nextBtn.disabled = !allSelected;
-                nextBtn.style.opacity = allSelected ? "1" : "0.5";
+                nextBtn.disabled = !canProceed;
+                nextBtn.style.opacity = canProceed ? "1" : "0.5";
             }
         }
 
-        // --- Step 3: Agreement ---
-        function confirmAgreement() {
-            const nameInput = document.getElementById('name');
-            const telInput = document.getElementById('tel');
-            const nameErr = document.getElementById('name-error');
-            const telErr = document.getElementById('tel-error');
-            
-            let isValid = true;
-            
-            if (!nameInput.value.trim()) {
-                nameErr.style.display = 'block';
-                isValid = false;
-            } else {
-                nameErr.style.display = 'none';
-            }
-            
-            if (!telInput.value.trim()) {
-                telErr.style.display = 'block';
-                isValid = false;
-            } else {
-                telErr.style.display = 'none';
-            }
-            
-            if (!isValid) {
-                if (!nameInput.value.trim()) nameInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-                else telInput.scrollIntoView({behavior: 'smooth', block: 'center'});
-                return;
-            }
 
-            // 履歴チェックを実行（お名前のスペース除去と電話番号のクレンジングを事前適用）
-            const cleanedName = nameInput.value.replace(/\s+/g, "");
-            const cleanedTel = telInput.value.replace(/[^\d]/g, "");
-            checkUserHistory(cleanedName, cleanedTel);
-        }
-
-        function checkUserHistory(name, tel) {
-            currentState.agreed = true;
-            goToStep('step-confirm');
-        }
-
-        // --- Step 4: Summary & LINE ---
-        function updateSummary() {
-            const policyLabel = currentState.cancelPolicy === 'cancel' ? 'キャンセルする' : '変更しない';
-            const container = document.getElementById('summary-display');
-
-            let html = `
-                <div class="summary-card">
-                    <div><strong>空きがない場合の希望：</strong> ${policyLabel}</div>
-                    <div style="margin-top: 10px; border-top: 1px solid #edf2f7; padding-top: 10px;">
-            `;
-
-            currentState.choices.forEach((c, i) => {
-                html += `
-                    <div><strong>第${i + 1}希望：</strong> ${c.date} ${c.time}</div>
-                `;
-            });
-
-            html += `</div></div>`;
-            container.innerHTML = html;
-        }
 
         function sendToLine() {
             const policyLabel = currentState.cancelPolicy === 'cancel' ? 'キャンセルする' : '変更しない';
+
+            const thirdChoiceText = currentState.choices[2]
+                ? `${currentState.choices[2].date} ${currentState.choices[2].time}`
+                : '（未入力）';
 
             const message = `【予約変更希望】
 
 ■希望日時
 第1希望：${currentState.choices[0].date} ${currentState.choices[0].time}
 第2希望：${currentState.choices[1].date} ${currentState.choices[1].time}
-第3希望：${currentState.choices[2].date} ${currentState.choices[2].time}
+第3希望：${thirdChoiceText}
 
 ■空きがない場合の希望
 ${policyLabel}
@@ -1675,12 +1635,9 @@ function checkInputs() {
             const btn = document.getElementById('nextToConfirm');
 
             if (nameEl && telEl && btn) {
-                // 電話番号からハイフンを削除（数字以外を削除）
-                 // 入力欄自体を数字のみに書き換え
-
                 const n = nameEl.value.trim();
-                const t = telVal;
-                
+                const t = telEl.value.trim();
+
                 const nameValid = validateName(n);
                 const telValid = validateTel(t);
 

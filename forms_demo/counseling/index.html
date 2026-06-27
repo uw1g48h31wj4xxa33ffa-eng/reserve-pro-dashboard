@@ -1588,42 +1588,39 @@
         }
         // ===== ここまでバリデーション関数 =====
 function checkInputs() {
-            const name = document.getElementById('input-name').value.trim();
-            const kana = document.getElementById('input-kana').value.trim();
-            const tel = document.getElementById('input-tel').value.trim();
+            const nameEl = document.getElementById('input-name');
+            const kanaEl = document.getElementById('input-kana');
+            const telEl = document.getElementById('input-tel');
+            const btn = document.getElementById('nextToPay');
 
-            const nameValid = validateName(name);
-                const kanaValid = validateKana(kana);
-                const telValid = validateTel(tel);
+            if (btn && nameEl && kanaEl && telEl) {
+                const nameValid = validateName(nameEl.value);
+                const kanaValid = validateKana(kanaEl.value);
+                const telValid = validateTel(telEl.value);
 
-                showError('error-name', name !== '' && !nameValid);
-                showError('error-kana', kana !== '' && !kanaValid);
-                showError('error-tel', tel !== '' && !telValid);
+                showError('error-name', nameEl.value.trim() !== '' && !nameValid);
+                showError('error-kana', kanaEl.value.trim() !== '' && !kanaValid);
+                showError('error-tel', telEl.value.trim() !== '' && !telValid);
 
                 const isValid = nameValid && kanaValid && telValid;
-            const nextBtn = document.getElementById('nextToPay');
-            nextBtn.disabled = !isValid;
-            nextBtn.style.opacity = isValid ? "1" : "0.5";
-
-            // エラー表示リセット
-            if (name) document.getElementById('error-name').style.display = 'none';
-            if (kana) document.getElementById('error-kana').style.display = 'none';
-            if (tel) document.getElementById('error-tel').style.display = 'none';
+                btn.disabled = !isValid;
+                btn.style.opacity = isValid ? "1" : "0.5";
+                btn.style.cursor = isValid ? "pointer" : "not-allowed";
+            }
         }
 
         function proceedToPayment() {
-            const name = document.getElementById('input-name').value.replace(/\s+/g, ""); // スペースを完全除去
-            const kana = document.getElementById('input-kana').value.trim();
-            const tel = document.getElementById('input-tel').value.replace(/[^\d]/g, ""); // 数字のみ抽出
+            const nameEl = document.getElementById('input-name');
+            userData.name = (nameEl ? nameEl.value : "").replace(/\s+/g, ""); // スペースを除去
+            const kanaEl = document.getElementById('input-kana');
+            userData.kana = (kanaEl ? kanaEl.value : "").trim();
+            const telEl = document.getElementById('input-tel');
+            userData.tel = (telEl ? telEl.value : "").replace(/[^\d]/g, ""); // 数字のみ抽出
 
-            if (!name) document.getElementById('error-name').style.display = 'block';
-            if (!kana) document.getElementById('error-kana').style.display = 'block';
-            if (!tel) document.getElementById('error-tel').style.display = 'block';
-
-            if (name && kana && tel) {
-                userData.name = name;
-                userData.kana = kana;
-                userData.tel = tel;
+            if (!userData.name || !userData.kana || !userData.tel) {
+                alert("必須項目をすべて入力してください");
+                return;
+            }
 
                 // 日本人判定: ひらがなのみのふりがな、かつ中韓特有の漢字がない場合
                 const isJapanese = detectIsJapanese(userData.name, userData.kana);
