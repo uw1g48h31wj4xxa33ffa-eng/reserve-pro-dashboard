@@ -49,10 +49,16 @@ export default function PhilosophyPage() {
       <div className="container-lg max-w-3xl pb-32 md:pb-48">
         {/* ページヘッダー */}
         <div className="text-center mb-16">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h1
+            className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
+            style={{ animationDelay: "0.05s" }}
+          >
             大切にして<span className="text-teal-600">いること</span>
           </h1>
-          <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+          <p
+            className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
+            style={{ animationDelay: "0.2s" }}
+          >
             押し付けず、一緒に考えていくために
           </p>
         </div>
@@ -60,7 +66,11 @@ export default function PhilosophyPage() {
         {/* 価値観リスト */}
         <div className="space-y-1">
           {VALUES.map((value, i) => (
-            <div key={i} className="py-8 border-b border-gray-100 last:border-b-0">
+            <div
+              key={i}
+              className="fade-up py-8 border-b border-gray-100 last:border-b-0"
+              style={{ animationDelay: `${0.3 + i * 0.08}s` }}
+            >
               <h2 className="text-base md:text-lg font-bold text-gray-900 mb-3">
                 {value.heading}
               </h2>
@@ -76,7 +86,10 @@ export default function PhilosophyPage() {
         </div>
 
         {/* 締めの一言 */}
-        <div className="mt-16 text-center">
+        <div
+          className="fade-up mt-16 text-center"
+          style={{ animationDelay: "0.9s" }}
+        >
           <p className="text-sm text-gray-500 leading-relaxed">
             気になることがあれば、まず状況を聞かせてください
           </p>

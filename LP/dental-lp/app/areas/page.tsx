@@ -85,10 +85,16 @@ export default function AreasPage() {
       <div className="container-lg max-w-4xl pb-32 md:pb-48">
         {/* ページヘッダー */}
         <div className="text-center mb-16">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h1
+            className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
+            style={{ animationDelay: "0.05s" }}
+          >
             対応<span className="text-teal-600">領域</span>
           </h1>
-          <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+          <p
+            className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
+            style={{ animationDelay: "0.2s" }}
+          >
             ツールありきではなく、現場の状況に合わせて実務の流れを整理します
           </p>
         </div>
@@ -98,7 +104,8 @@ export default function AreasPage() {
           {AREAS.map((area, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100"
+              className="fade-up bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100"
+              style={{ animationDelay: `${0.35 + i * 0.07}s` }}
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 shrink-0 rounded-full bg-teal-50 flex items-center justify-center text-2xl">
@@ -125,7 +132,10 @@ export default function AreasPage() {
         </div>
 
         {/* 補足 */}
-        <div className="mt-16 text-center space-y-2">
+        <div
+          className="fade-up mt-16 text-center space-y-2"
+          style={{ animationDelay: "0.9s" }}
+        >
           <p className="text-xs text-gray-400">
             内容によっては、ご希望に添えない場合がございます
           </p>

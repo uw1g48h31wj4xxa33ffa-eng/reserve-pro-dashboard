@@ -39,16 +39,25 @@ export default function ResultsPage() {
       <div className="container-lg max-w-4xl pb-32 md:pb-48">
         {/* ページヘッダー */}
         <div className="text-center mb-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h1
+            className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
+            style={{ animationDelay: "0.05s" }}
+          >
             実績・<span className="text-teal-600">運用例</span>
           </h1>
-          <p className="text-sm md:text-base text-gray-500 leading-relaxed">
+          <p
+            className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
+            style={{ animationDelay: "0.2s" }}
+          >
             実際に関わった医院での運用例の一部です
           </p>
         </div>
 
         {/* 重要な注意書き */}
-        <div className="bg-gray-50 rounded-2xl p-5 md:p-6 mb-12 border border-gray-100">
+        <div
+          className="fade-up bg-gray-50 rounded-2xl p-5 md:p-6 mb-12 border border-gray-100"
+          style={{ animationDelay: "0.35s" }}
+        >
           <div className="space-y-1.5">
             <p className="text-xs text-gray-500">※ 個人情報・医院情報を伏せた実績表示です</p>
             <p className="text-xs text-gray-500">※ 実際の運用例の一部です</p>
@@ -58,12 +67,18 @@ export default function ResultsPage() {
 
         {/* 数値実績 */}
         <div className="mb-16">
-          <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">確認・整理した結果の変化</h2>
+          <h2
+            className="fade-up text-lg font-bold text-gray-800 mb-6 text-center"
+            style={{ animationDelay: "0.45s" }}
+          >
+            確認・整理した結果の変化
+          </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {STATS.map((stat, i) => (
               <div
                 key={i}
-                className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center"
+                className="fade-up bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center"
+                style={{ animationDelay: `${0.55 + i * 0.1}s` }}
               >
                 <p className="text-sm font-bold text-gray-500 mb-6">{stat.label}</p>
 
@@ -84,7 +99,10 @@ export default function ResultsPage() {
         </div>
 
         {/* 運用例の補足説明 */}
-        <div className="bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100">
+        <div
+          className="fade-up bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100"
+          style={{ animationDelay: "0.85s" }}
+        >
           <h2 className="text-base font-bold text-gray-800 mb-4">運用例について</h2>
           <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
             <p>
@@ -100,7 +118,10 @@ export default function ResultsPage() {
         </div>
 
         {/* 補足 */}
-        <div className="mt-12 text-center">
+        <div
+          className="fade-up mt-12 text-center"
+          style={{ animationDelay: "0.95s" }}
+        >
           <p className="text-xs text-gray-400">
             成果を保証するものではありません
           </p>
