@@ -1560,6 +1560,68 @@
             }
         }
 
+        // --- Step 3: Agreement ---
+        function confirmAgreement() {
+            const nameInput = document.getElementById('name');
+            const telInput = document.getElementById('tel');
+            const nameErr = document.getElementById('name-error');
+            const telErr = document.getElementById('tel-error');
+            
+            let isValid = true;
+            
+            if (!nameInput.value.trim()) {
+                if (nameErr) nameErr.style.display = 'block';
+                isValid = false;
+            } else {
+                if (nameErr) nameErr.style.display = 'none';
+            }
+            
+            if (!telInput.value.trim()) {
+                if (telErr) telErr.style.display = 'block';
+                isValid = false;
+            } else {
+                if (telErr) telErr.style.display = 'none';
+            }
+            
+            if (!isValid) {
+                if (!nameInput.value.trim()) nameInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+                else telInput.scrollIntoView({behavior: 'smooth', block: 'center'});
+                return;
+            }
+
+            // 履歴チェックを実行（お名前のスペース除去と電話番号のクレンジングを事前適用）
+            const cleanedName = nameInput.value.replace(/\s+/g, "");
+            const cleanedTel = telInput.value.replace(/[^\d]/g, "");
+            checkUserHistory(cleanedName, cleanedTel);
+        }
+
+        function checkUserHistory(name, tel) {
+            currentState.agreed = true;
+            goToStep('step-confirm');
+        }
+
+        // --- Step 4: Summary & LINE ---
+        function updateSummary() {
+            const policyLabel = currentState.cancelPolicy === 'cancel' ? 'キャンセルする' : '変更しない';
+            const container = document.getElementById('summary-display');
+
+            let html = `
+                <div class="summary-card">
+                    <div><strong>空きがない場合の希望：</strong> ${policyLabel}</div>
+                    <div style="margin-top: 10px; border-top: 1px solid #edf2f7; padding-top: 10px;">
+            `;
+
+            currentState.choices.forEach((c, i) => {
+                const choiceText = c ? `${c.date} ${c.time}` : '（未入力）';
+                html += `
+                    <div><strong>第${i + 1}希望：</strong> ${choiceText}</div>
+                `;
+            });
+
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+
 
 
         function sendToLine() {

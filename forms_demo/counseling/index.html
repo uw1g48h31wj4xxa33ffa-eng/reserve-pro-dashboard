@@ -1622,12 +1622,11 @@ function checkInputs() {
                 return;
             }
 
-                // 日本人判定: ひらがなのみのふりがな、かつ中韓特有の漢字がない場合
-                const isJapanese = detectIsJapanese(userData.name, userData.kana);
+            // 日本人判定: ひらがなのみのふりがな、かつ中韓特有の漢字がない場合
+            const isJapanese = detectIsJapanese(userData.name, userData.kana);
 
-                userData.payment = ""; // 支払い方法は不要になったため空にする
-                goToStep('step-confirm');
-            }
+            userData.payment = ""; // 支払い方法は不要になったため空にする
+            goToStep('step-confirm');
         }
 
         function detectIsJapanese(name, kana) {
