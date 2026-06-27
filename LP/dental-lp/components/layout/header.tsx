@@ -114,6 +114,15 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+              <Link
+                href="/privacy"
+                className={cn(
+                  "text-xs font-medium transition-colors hover:text-teal-600",
+                  pathname === "/privacy" ? "text-teal-600" : "text-gray-400"
+                )}
+              >
+                プライバシーポリシー
+              </Link>
             </nav>
 
             {/* 右側：CTA（常時表示） + スマホ用ハンバーガー */}
