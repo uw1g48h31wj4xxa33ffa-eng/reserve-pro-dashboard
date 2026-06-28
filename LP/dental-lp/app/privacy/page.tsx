@@ -63,7 +63,7 @@ export default function PrivacyPage() {
       <Header />
 
       <div className="h-24 md:h-32"></div>
-      <div className="pb-24 container-lg max-w-3xl">
+      <div className="pb-36 md:pb-56 container-lg max-w-3xl">
         <h1
           className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-16 text-center"
           style={{ animationDelay: "0.05s" }}

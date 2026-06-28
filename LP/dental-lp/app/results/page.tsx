@@ -36,7 +36,7 @@ export default function ResultsPage() {
 
       <div className="h-24 md:h-32" />
 
-      <div className="container-lg max-w-4xl pb-32 md:pb-48">
+      <div className="container-lg max-w-4xl pb-36 md:pb-56">
         {/* ページヘッダー */}
         <div className="text-center mb-4">
           <h1

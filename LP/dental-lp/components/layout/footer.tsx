@@ -18,7 +18,7 @@ export function Footer() {
 
   return (
     <footer className="bg-gray-900 text-gray-400">
-      <div className="container-lg py-12">
+      <div className="container-lg py-14 md:py-16">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 pb-8 border-b border-gray-800">
           {/* Brand */}
           <button
@@ -37,9 +37,9 @@ export function Footer() {
           </button>
 
           {/* Links */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10 md:pt-2">
             {/* サービスナビ */}
-            <nav className="flex flex-col gap-2.5" aria-label="サービスナビゲーション">
+            <nav className="flex flex-col gap-3.5" aria-label="サービスナビゲーション">
               <Link href="/areas" className="text-sm hover:text-white transition-colors">
                 対応領域
               </Link>
@@ -52,7 +52,7 @@ export function Footer() {
             </nav>
 
             {/* その他 */}
-            <nav className="flex flex-col gap-2.5" aria-label="その他ナビゲーション">
+            <nav className="flex flex-col gap-3.5" aria-label="その他ナビゲーション">
               <button
                 onClick={handleContactNav}
                 className="text-sm hover:text-white transition-colors text-left"
