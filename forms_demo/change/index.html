@@ -971,7 +971,7 @@
             step: 'step-policy',
             cancelPolicy: '', // 'cancel' or 'keep'
             choices: [null, null, null], // { date: "YYYY/MM/DD (Day)", time: "HH:00～HH:00" }
-            viewingDate: new Date(),
+            viewingDate: (function(){ let d = new Date(); d.setDate(d.getDate() + 2); return d; })(),
             selectedDate: null,
             activeChoiceIndex: 0, // 現在入力中のインデックス (0, 1, 2)
             agreed: false

@@ -983,6 +983,7 @@
 
         // カレンダー管理
         let viewingDate = new Date();
+        viewingDate.setDate(viewingDate.getDate() + 2);
         let selectedDate = null;
         let holidaysList = [];
         let blockedSlotsList = []; // 追加: 予約不可枠のリスト

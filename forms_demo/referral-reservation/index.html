@@ -1043,6 +1043,7 @@
 
         // カレンダー管理
         let viewingDate = new Date();
+        viewingDate.setDate(viewingDate.getDate() + 2);
         let selectedDate = null;
         function goToStep(stepId) {
             document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
