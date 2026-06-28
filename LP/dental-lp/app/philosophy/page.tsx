@@ -3,39 +3,39 @@ import { Footer } from "@/components/layout/footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "大切にしていること | Dental Route",
-  description: "Dental Routeが大切にしている考え方についてご紹介します。",
+  title: "大刁E��してぁE��こと | Dental Route",
+  description: "Dental Routeが大刁E��してぁE��老E��方につぁE��ご紹介します、E,
   robots: { index: false, follow: false },
 };
 
 const VALUES = [
   {
-    heading: "人が主体",
-    body: "ツールや仕組みは、あくまで手段です\nどんな状況でも、判断するのは人です",
+    heading: "人が主佁E,
+    body: "チE�EルめE��絁E��は、あくまで手段です\nどんな状況でも、判断するのは人でぁE,
   },
   {
-    heading: "まず状況を知る",
-    body: "状況が分からないまま、何かを決めることはありません\nまず現在どうなっているかを確認することから始めます",
+    heading: "まず状況を知めE,
+    body: "状況が刁E��らなぁE��ま、何かを決めることはありません\nまず現在どぁE��ってぁE��かを確認することから始めまぁE,
   },
   {
-    heading: "話してから深く考える",
-    body: "一度話を聞いてみて、その上で何ができるかを考えます\n初回から全てを決める必要はありません",
+    heading: "話してから深く老E��めE,
+    body: "一度話を聞ぁE��みて、その上で何ができるかを老E��ます\n初回から全てを決める忁E���Eありません",
   },
   {
-    heading: "無理に受けない",
-    body: "対応できないと判断した場合は、正直にお伝えします\nお互いの時間を大切にしたいと思っています",
+    heading: "無琁E��受けなぁE,
+    body: "対応できなぁE��判断した場合�E、正直にお伝えします\nお互いの時間を大刁E��したぁE��思ってぁE��ぁE,
   },
   {
-    heading: "患者様情報は取得しない",
-    body: "このサービスでは、患者様の個人情報・医療情報は取得しません\n医院の運営に関わる情報のみを取り扱います",
+    heading: "患老E��情報は取得しなぁE,
+    body: "こ�Eサービスでは、患老E���E個人惁E��・医療情報は取得しません\n医院の運営に関わる惁E��のみを取り扱ぁE��ぁE,
   },
   {
-    heading: "できることを誇張しない",
-    body: "できることとできないことを、正直にお伝えします\n成果を保証する表現は使いません",
+    heading: "できることを誁E��しなぁE,
+    body: "できることとできなぁE��とを、正直にお伝えします\n成果を保証する表現は使ぁE��せん",
   },
   {
-    heading: "AIや仕組みは手段のひとつ",
-    body: "必要な場合には、ツールや自動化の仕組みも活用します\nただし、それが目的になることはありません",
+    heading: "AIめE��絁E��は手段のひとつ",
+    body: "忁E��な場合には、ツールめE�E動化の仕絁E��も活用します\nただし、それが目皁E��なることはありません",
   },
 ];
 
@@ -47,23 +47,23 @@ export default function PhilosophyPage() {
       <div className="h-24 md:h-32" />
 
       <div className="container-lg max-w-3xl pb-36 md:pb-56">
-        {/* ページヘッダー */}
+        {/* ペ�Eジヘッダー */}
         <div className="text-center mb-16">
           <h1
             className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
             style={{ animationDelay: "0.05s" }}
           >
-            大切にして<span className="text-teal-600">いること</span>
+            大刁E��して<span className="text-teal-600">ぁE��こと</span>
           </h1>
           <p
             className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
             style={{ animationDelay: "0.2s" }}
           >
-            押し付けず、一緒に考えていくために
+            押し付けず、一緒に老E��てぁE��ために
           </p>
         </div>
 
-        {/* 価値観リスト */}
+        {/* 価値観リスチE*/}
         <div className="space-y-1">
           {VALUES.map((value, i) => (
             <div
@@ -85,18 +85,18 @@ export default function PhilosophyPage() {
           ))}
         </div>
 
-        {/* 締めの一言 */}
+        {/* 締め�E一言 */}
         <div
           className="fade-up mt-16 text-center"
           style={{ animationDelay: "0.9s" }}
         >
           <p className="text-sm text-gray-500 leading-relaxed">
-            気になることがあれば、まず状況を聞かせてください
+            気になることがあれ�E、まず状況を聞かせてください
           </p>
         </div>
 
         {/* フッターとの余白 */}
-        <div className="h-24 md:h-36" />
+        <div className="h-16 md:h-20" />
       </div>
 
       <Footer />

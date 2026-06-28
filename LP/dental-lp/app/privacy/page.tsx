@@ -3,7 +3,7 @@ import { Footer } from "@/components/layout/footer";
 
 export const metadata = {
   title: "プライバシーポリシー | Dental Route",
-  description: "取得する情報の取り扱いについて",
+  description: "取得する情報の取り扱ぁE��つぁE��",
 };
 
 const SECTIONS = [
@@ -11,49 +11,49 @@ const SECTIONS = [
     title: "1. 取得する情報",
     type: "list" as const,
     items: [
-      "医院名",
-      "ご担当者様名",
+      "医院吁E,
+      "ご担当老E��名",
       "メールアドレス",
-      "電話番号（任意）",
-      "気になる項目",
-      "その他フォームに入力された内容",
+      "電話番号�E�任意！E,
+      "気になる頁E��",
+      "そ�E他フォームに入力された冁E��",
     ],
   },
   {
-    title: "2. 利用目的",
+    title: "2. 利用目皁E,
     type: "list" as const,
     items: [
-      "いただいた内容への対応",
-      "内容確認",
+      "ぁE��だぁE��冁E��への対忁E,
+      "冁E��確誁E,
       "ご連絡",
       "状況確認に関するご連絡",
-      "必要に応じた対応内容の検討",
+      "忁E��に応じた対応�E容の検訁E,
     ],
   },
   {
-    title: "3. 第三者提供について",
+    title: "3. 第三老E��供につぁE��",
     type: "text" as const,
-    text: "取得した情報は、ご本人の同意なく第三者へ提供しません\nただし、法令に基づく場合を除きます",
+    text: "取得した情報は、ご本人の同意なく第三老E��提供しません\nただし、法令に基づく場合を除きまぁE,
   },
   {
-    title: "4. 個人情報の管理",
+    title: "4. 個人惁E��の管琁E,
     type: "text" as const,
-    text: "取得した情報は適切に管理します",
+    text: "取得した情報は適刁E��管琁E��まぁE,
   },
   {
-    title: "5. 開示・訂正・削除について",
+    title: "5. 開示・訂正・削除につぁE��",
     type: "text" as const,
-    text: "ご本人から開示、訂正、削除等の希望があった場合は適切に対応します",
+    text: "ご本人から開示、訂正、削除等�E希望があった場合�E適刁E��対応しまぁE,
   },
   {
-    title: "6. アクセス解析について",
+    title: "6. アクセス解析につぁE��",
     type: "text" as const,
-    text: "Google Analytics等のアクセス解析ツールを使用する場合があります\nその際、Cookie等を利用してサイトの利用状況を取得する場合があります",
+    text: "Google Analytics等�Eアクセス解析ツールを使用する場合があります\nそ�E際、Cookie等を利用してサイト�E利用状況を取得する場合がありまぁE,
   },
   {
-    title: "7. 個人情報に関するご連絡",
+    title: "7. 個人惁E��に関するご連絡",
     type: "text" as const,
-    text: "個人情報の取り扱いに関するお問い合わせは、\n現状共有フォームまたは指定の連絡方法より受け付けます",
+    text: "個人惁E��の取り扱ぁE��関するお問ぁE��わせは、\n現状共有フォームまた�E持E���E連絡方法より受け付けまぁE,
   },
 ];
 
@@ -101,7 +101,7 @@ export default function PrivacyPage() {
           ))}
         </div>
       </div>
-      <div className="h-28 md:h-40"></div>
+      <div className="h-16 md:h-20"></div>
 
       <Footer />
     </main>
