@@ -3,29 +3,29 @@ import { Footer } from "@/components/layout/footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "実績・運用侁E| Dental Route",
-  description: "歯科医院での実際の運用例�E一部をご紹介します。�E容は医院ごとの状況により異なります、E,
+  title: "実績・運用例 | Dental Route",
+  description: "歯科医院での実際の運用例の一部をご紹介します。内容は医院ごとの状況により異なります。",
   robots: { index: false, follow: false },
 };
 
 const STATS = [
   {
-    label: "予紁E��定率",
+    label: "予約確定率",
     before: "30%",
     after: "50%",
-    note: "予紁E��ォームとLINE導線�E整琁E��E,
+    note: "予約フォームとLINE導線の整理後",
   },
   {
-    label: "無断キャンセル�E�月間！E,
-    before: "朁E件",
-    after: "0、E件",
-    note: "リマインド�E信の流れを整琁E��E,
+    label: "無断キャンセル（月間）",
+    before: "月3件",
+    after: "0〜1件",
+    note: "リマインド配信の流れを整理後",
   },
   {
-    label: "掘り起こし�E�月間！E,
+    label: "掘り起こし（月間）",
     before: "0件",
-    after: "平坁E3件",
-    note: "休眠患老E��の再案�Eフローを整琁E��E,
+    after: "平均13件",
+    note: "休眠患者への再案内フローを整理後",
   },
 ];
 
@@ -37,30 +37,31 @@ export default function ResultsPage() {
       <div className="h-24 md:h-32" />
 
       <div className="container-lg max-w-4xl pb-36 md:pb-56">
-        {/* ペ�Eジヘッダー */}
+        {/* ページヘッダー */}
         <div className="text-center mb-4">
           <h1
             className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
             style={{ animationDelay: "0.05s" }}
           >
-            実績・<span className="text-teal-600">運用侁E/span>
+            実績・<span className="text-teal-600">運用例</span>
           </h1>
           <p
             className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
             style={{ animationDelay: "0.2s" }}
           >
-            実際に関わった医院での運用例�E一部でぁE          </p>
+            実際に関わった医院での運用例の一部です
+          </p>
         </div>
 
-        {/* 重要な注意書ぁE*/}
+        {/* 重要な注意書き */}
         <div
           className="fade-up bg-gray-50 rounded-2xl p-5 md:p-6 mb-12 border border-gray-100"
           style={{ animationDelay: "0.35s" }}
         >
           <div className="space-y-1.5">
-            <p className="text-xs text-gray-500">※ 個人惁E��・医院惁E��を伏せた実績表示でぁE/p>
-            <p className="text-xs text-gray-500">※ 実際の運用例�E一部でぁE/p>
-            <p className="text-xs text-gray-500">※ 冁E��は医院ごとの状況により異なりまぁE/p>
+            <p className="text-xs text-gray-500">※ 個人情報・医院情報を伏せた実績表示です</p>
+            <p className="text-xs text-gray-500">※ 実際の運用例の一部です</p>
+            <p className="text-xs text-gray-500">※ 内容は医院ごとの状況により異なります</p>
           </div>
         </div>
 
@@ -70,7 +71,7 @@ export default function ResultsPage() {
             className="fade-up text-lg font-bold text-gray-800 mb-6 text-center"
             style={{ animationDelay: "0.45s" }}
           >
-            確認�E整琁E��た結果の変化
+            確認・整理した結果の変化
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
             {STATS.map((stat, i) => (
@@ -84,7 +85,7 @@ export default function ResultsPage() {
                 <div className="text-xl text-gray-300 font-bold mb-2">
                   {stat.before}
                 </div>
-                <div className="text-xl text-gray-200 mb-2">ↁE/div>
+                <div className="text-xl text-gray-200 mb-2">↓</div>
                 <div className="text-4xl md:text-5xl font-black text-gray-800 tracking-tight mb-4">
                   {stat.after}
                 </div>
@@ -97,20 +98,22 @@ export default function ResultsPage() {
           </div>
         </div>
 
-        {/* 運用例�E補足説昁E*/}
+        {/* 運用例の補足説明 */}
         <div
           className="fade-up bg-gray-50 rounded-2xl p-6 md:p-8 border border-gray-100"
           style={{ animationDelay: "0.85s" }}
         >
-          <h2 className="text-base font-bold text-gray-800 mb-4">運用例につぁE��</h2>
+          <h2 className="text-base font-bold text-gray-800 mb-4">運用例について</h2>
           <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
             <p>
-              数値の変化は、状況確認�E整琁E�E試行錯誤の積み重�Eの結果でぁE            </p>
-            <p>
-              同じ方法が忁E��しも他�E医院に合うとは限りません
+              数値の変化は、状況確認・整理・試行錯誤の積み重ねの結果です
             </p>
             <p>
-              まず現在の状況を聞かせてぁE��だき、その上で何ができるかを一緒に老E��まぁE            </p>
+              同じ方法が必ずしも他の医院に合うとは限りません
+            </p>
+            <p>
+              まず現在の状況を聞かせていただき、その上で何ができるかを一緒に考えます
+            </p>
           </div>
         </div>
 
@@ -120,7 +123,7 @@ export default function ResultsPage() {
           style={{ animationDelay: "0.95s" }}
         >
           <p className="text-xs text-gray-400">
-            成果を保証するも�Eではありません
+            成果を保証するものではありません
           </p>
         </div>
 

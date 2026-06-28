@@ -4,73 +4,73 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "対応領域 | Dental Route",
-  description: "予紁E��線�ELINE運用・掘り起こし・採用・数値管琁E�E業務改喁E��ど、歯科医院の運営で気になってぁE��領域を確認�E整琁E��ます、E,
+  description: "予約導線・LINE運用・掘り起こし・採用・数値管理・業務改善など、歯科医院の運営で気になっている領域を確認・整理します。",
   robots: { index: false, follow: false },
 };
 
 const AREAS = [
   {
     icon: "📅",
-    title: "予紁E��緁E,
+    title: "予約導線",
     lines: [
-      "予紁E��ォーム、LINE導線、予紁E��定までの流れを確認しまぁE,
-      "現場の運用に合わせて、無琁E�EなぁE��線を整琁E��まぁE,
+      "予約フォーム、LINE導線、予約確定までの流れを確認します",
+      "現場の運用に合わせて、無理のない導線を整理します",
     ],
   },
   {
     icon: "💬",
     title: "LINE運用",
     lines: [
-      "リチE��メニュー、E�E信冁E��、問ぁE��わせ対応�E流れを確認しまぁE,
-      "患老E��との接点を�EかりめE��く整琁E��まぁE,
+      "リッチメニュー、配信内容、問い合わせ対応の流れを確認します",
+      "患者様との接点を分かりやすく整理します",
     ],
   },
   {
     icon: "🔄",
     title: "掘り起こし",
     lines: [
-      "休眠顧客への再案�EめE���E来院につながる流れを確認しまぁE,
-      "無琁E��案�Eではなく、状況に合わせた方法を老E��まぁE,
+      "休眠顧客への再案内や、再来院につながる流れを確認します",
+      "無理な案内ではなく、状況に合わせた方法を考えます",
     ],
   },
   {
-    icon: "👩‍⚕�E�E,
+    icon: "👩‍⚕️",
     title: "採用",
     lines: [
-      "求人斁E��、応募導線、媒体ごとの見え方を確認しまぁE,
-      "採用活動�E入り口を整琁E��まぁE,
+      "求人文面、応募導線、媒体ごとの見え方を確認します",
+      "採用活動の入り口を整理します",
     ],
   },
   {
     icon: "📊",
-    title: "雁E���E数値管琁E,
+    title: "集計・数値管理",
     lines: [
-      "問い合わせ数、予紁E��、媒体別の反応などを確認しまぁE,
-      "日、E�E状況を見える形に整琁E��まぁE,
+      "問い合わせ数、予約数、媒体別の反応などを確認します",
+      "日々の状況を見える形に整理します",
     ],
   },
   {
-    icon: "⚙︁E,
-    title: "業務改喁E,
+    icon: "⚙️",
+    title: "業務改善",
     lines: [
-      "手作業、確認漏れ、E��褁E��応などを確認しまぁE,
-      "現場で無琁E��く続けられる形を老E��まぁE,
+      "手作業、確認漏れ、重複対応などを確認します",
+      "現場で無理なく続けられる形を考えます",
     ],
   },
   {
     icon: "🌐",
-    title: "ホ�Eムペ�Eジ・LP",
+    title: "ホームページ・LP",
     lines: [
-      "ホ�Eムペ�EジめE��問ぁE��わせにつなげる1ペ�Eジ型�E案�Eペ�Eジを確認しまぁE,
-      "見え方めE��線を、状況に合わせて整琁E��まぁE,
+      "ホームページや、問い合わせにつなげる1ページ型の案内ページを確認します",
+      "見え方や導線を、状況に合わせて整理します",
     ],
   },
   {
     icon: "📱",
     title: "SNS運用",
     lines: [
-      "投稿冁E��、更新頻度、反応�E傾向を確認しまぁE,
-      "続けめE��ぁE��用の形を一緒に老E��まぁE,
+      "投稿内容、更新頻度、反応の傾向を確認します",
+      "続けやすい運用の形を一緒に考えます",
     ],
   },
 ];
@@ -83,22 +83,23 @@ export default function AreasPage() {
       <div className="h-24 md:h-32" />
 
       <div className="container-lg max-w-4xl pb-36 md:pb-56">
-        {/* ペ�Eジヘッダー */}
+        {/* ページヘッダー */}
         <div className="text-center mb-16">
           <h1
             className="fade-up text-2xl md:text-3xl font-bold text-gray-900 mb-4"
             style={{ animationDelay: "0.05s" }}
           >
-            対忁Espan className="text-teal-600">領域</span>
+            対応<span className="text-teal-600">領域</span>
           </h1>
           <p
             className="fade-up text-sm md:text-base text-gray-500 leading-relaxed"
             style={{ animationDelay: "0.2s" }}
           >
-            チE�Eルありきではなく、現場の状況に合わせて実務の流れを整琁E��まぁE          </p>
+            ツールありきではなく、現場の状況に合わせて実務の流れを整理します
+          </p>
         </div>
 
-        {/* 吁E��域カーチE*/}
+        {/* 各領域カード */}
         <div className="space-y-4 md:space-y-6">
           {AREAS.map((area, i) => (
             <div
@@ -136,9 +137,11 @@ export default function AreasPage() {
           style={{ animationDelay: "0.9s" }}
         >
           <p className="text-xs text-gray-400">
-            冁E��によっては、ご希望に添えなぁE��合がござぁE��ぁE          </p>
+            内容によっては、ご希望に添えない場合がございます
+          </p>
           <p className="text-xs text-gray-400">
-            まず�E状況をお聞かせぁE��だき、その上で一緒に老E��まぁE          </p>
+            まずは状況をお聞かせいただき、その上で一緒に考えます
+          </p>
         </div>
 
         {/* フッターとの余白 */}
