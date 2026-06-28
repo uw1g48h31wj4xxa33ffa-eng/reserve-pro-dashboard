@@ -35,13 +35,25 @@ app.use(express.json());
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     
+    // 環境変数から各アカウントの認証情報を取得
+    const adminUser = process.env.ADMIN_USER;
+    const adminPass = process.env.ADMIN_PASS;
+    
+    const staffUser = process.env.STAFF_USER;
+    const staffPass = process.env.STAFF_PASS;
+
+    // 環境変数が設定されていない場合はログイン不可とする
+    if (!adminUser || !adminPass || !staffUser || !staffPass) {
+        console.warn("警告: 認証用の環境変数が正しく設定されていません。");
+    }
+
     // adminアカウント
-    if (username === 'admin' && password === 'admin123') {
+    if (adminUser && username === adminUser && password === adminPass) {
         const token = jwt.sign({ username, role: 'admin' }, JWT_SECRET, { expiresIn: '12h' });
         return res.json({ token, role: 'admin' });
     }
     // staffアカウント（閲覧のみ）
-    if (username === 'staff' && password === 'staff123') {
+    if (staffUser && username === staffUser && password === staffPass) {
         const token = jwt.sign({ username, role: 'staff' }, JWT_SECRET, { expiresIn: '12h' });
         return res.json({ token, role: 'staff' });
     }
