@@ -101,7 +101,7 @@ export default function PrivacyPage() {
           ))}
         </div>
       </div>
-      <div className="h-24 md:h-32"></div>
+      <div className="h-28 md:h-40"></div>
 
       <Footer />
     </main>

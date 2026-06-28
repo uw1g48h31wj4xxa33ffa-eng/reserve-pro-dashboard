@@ -94,6 +94,9 @@ export default function PhilosophyPage() {
             気になることがあれば、まず状況を聞かせてください
           </p>
         </div>
+
+        {/* フッターとの余白 */}
+        <div className="h-24 md:h-36" />
       </div>
 
       <Footer />

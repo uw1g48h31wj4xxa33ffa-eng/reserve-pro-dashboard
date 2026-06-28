@@ -143,6 +143,9 @@ export default function AreasPage() {
             まずは状況をお聞かせいただき、その上で一緒に考えます
           </p>
         </div>
+
+        {/* フッターとの余白 */}
+        <div className="h-24 md:h-36" />
       </div>
 
       <Footer />

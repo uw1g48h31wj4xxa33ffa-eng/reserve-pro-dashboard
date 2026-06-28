@@ -126,6 +126,9 @@ export default function ResultsPage() {
             成果を保証するものではありません
           </p>
         </div>
+
+        {/* フッターとの余白 */}
+        <div className="h-24 md:h-36" />
       </div>
 
       <Footer />
