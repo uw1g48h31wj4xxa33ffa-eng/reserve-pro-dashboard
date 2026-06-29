@@ -6,7 +6,17 @@ let serviceAccount;
 try {
     serviceAccount = require('./firebase-key.json');
 } catch (e) {
-    serviceAccount = { project_id: "test-mock" }; // CIテスト用のダミー
+    if (process.env.FIREBASE_CREDENTIALS) {
+        try {
+            serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+        } catch (parseError) {
+            console.error("FIREBASE_CREDENTIALS の JSON パースに失敗しました:", parseError);
+            process.exit(1);
+        }
+    } else {
+        console.error("firebase-key.json が見つからず、環境変数 FIREBASE_CREDENTIALS も設定されていません。");
+        process.exit(1);
+    }
 }
 
 admin.initializeApp({
