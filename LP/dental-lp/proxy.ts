@@ -5,9 +5,14 @@ export function proxy(req: NextRequest) {
   const basicAuthUser = process.env.BASIC_AUTH_USER;
   const basicAuthPassword = process.env.BASIC_AUTH_PASSWORD;
 
-  // 環境変数が設定されていない場合はそのまま通す（ローカル開発時の利便性など）
+  // 環境変数が設定されていない場合も401を返す（本番での誤スキップ防止）
   if (!basicAuthUser || !basicAuthPassword) {
-    return NextResponse.next();
+    return new NextResponse('Auth required', {
+      status: 401,
+      headers: {
+        'WWW-Authenticate': 'Basic realm="Secure Area"',
+      },
+    });
   }
 
   const basicAuth = req.headers.get('authorization');
