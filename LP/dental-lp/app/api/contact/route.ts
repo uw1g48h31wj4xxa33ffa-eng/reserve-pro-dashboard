@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { generateInquiryMemo } from '@/lib/inquiryMemo';
 
 export async function POST(req: Request) {
   try {
@@ -69,6 +70,8 @@ ${interestStr}
 
 ・送信日時
 ${sentAt}
+
+${generateInquiryMemo(interests, otherInterest ?? '')}
 `,
     };
 
