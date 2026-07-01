@@ -275,15 +275,23 @@ export function generateReplyMessage(categories: string[]): string {
   const confirmItems: string[] = [];
   if (sorted.includes('予約導線')) confirmItems.push('現在の予約受付方法');
   if (sorted.includes('LINE運用')) confirmItems.push('LINE対応の流れ');
-  if (sorted.includes('数値管理')) confirmItems.push('日々確認している数値');
   if (sorted.includes('業務改善')) confirmItems.push('もっとも負担になっている作業');
   if (sorted.includes('無断キャンセル')) confirmItems.push('現在のリマインド対応の状況');
   if (sorted.includes('掘り起こし')) confirmItems.push('休眠患者への再案内の実施状況');
   if (sorted.includes('採用')) confirmItems.push('求人の現状と応募状況');
 
-  const confirmText = confirmItems.length > 0
+  let confirmText = confirmItems.length > 0
     ? `差し支えなければ、${confirmItems.slice(0, 3).join('、')}について、簡単にお聞かせください。`
     : 'まずは現在の状況について、簡単にお聞かせください。';
+
+  // 数値管理が含まれる場合は、より回答しやすい専用の文言を追加・置換する
+  if (sorted.includes('数値管理')) {
+    if (confirmItems.length === 0) {
+      confirmText = '現在確認されている問い合わせ数や予約数などがあれば、差し支えない範囲でお聞かせください。';
+    } else {
+      confirmText += '\nまた、現在確認されている問い合わせ数や予約数などがあれば、差し支えない範囲でお聞かせください。';
+    }
+  }
 
   return `---
 【返信メッセージ案】
