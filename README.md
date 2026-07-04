@@ -54,7 +54,8 @@ AIを活用し、現場業務の整理、Webフォーム、管理画面、業務
 
 現在、構成・機能・READMEを整理しています。
 
-詳細README：準備中
+詳細：
+[Practice Assistant V2 README](Practice-Assistant-V2/README.md)
 
 ## Development approach
 
